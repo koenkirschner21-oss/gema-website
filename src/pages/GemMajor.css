@@ -1,0 +1,306 @@
+.gem-eyebrow {
+  display: inline-block;
+  margin-bottom: var(--space-4);
+  padding: 0.22rem 0.6rem;
+  background: var(--color-red);
+  color: var(--color-white);
+  font-family: var(--font-heading);
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.gem h1,
+.gem h2,
+.gem h3 {
+  text-wrap: balance;
+}
+
+.gem-hero {
+  padding: 6rem 0;
+}
+
+.gem-hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.48fr) minmax(0, 0.52fr);
+  gap: var(--space-6);
+  align-items: center;
+}
+
+.gem-hero h1 {
+  max-width: 14ch;
+  margin-bottom: var(--space-4);
+  font-size: clamp(1.85rem, 3vw, 2.55rem);
+  line-height: 1.12;
+}
+
+.gem-lede,
+.gem-what__copy p,
+.gem-coop__copy p,
+.gem-official p,
+.gem-cta p {
+  color: var(--color-text-secondary);
+}
+
+.gem-lede {
+  max-width: 36rem;
+  font-size: 1.08rem;
+}
+
+.gem-hero__media,
+.gem-coop__media {
+  position: relative;
+  min-width: 0;
+}
+
+.gem-hero__media {
+  padding: 0 0 0.55rem 0.55rem;
+}
+
+.gem-hero__media::before {
+  content: '';
+  position: absolute;
+  inset: 0.55rem 0 0 0;
+  background: var(--color-gold);
+}
+
+.gem-hero__media .photo-placeholder,
+.gem-coop__media .photo-placeholder {
+  position: relative;
+  z-index: 1;
+}
+
+.gem-what,
+.gem-coop {
+  padding: 6rem 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.gem-what__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: var(--space-8);
+  align-items: start;
+}
+
+.gem-what__copy h2,
+.gem-coop__copy h2,
+.gem-official h2,
+.gem-cta h2 {
+  margin-bottom: var(--space-4);
+  font-size: clamp(1.85rem, 3vw, 2.45rem);
+}
+
+.gem-what__copy p + p {
+  margin-top: var(--space-4);
+}
+
+.gem-what__facets {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.gem-what__facets li {
+  padding: var(--space-4) 0 var(--space-4) var(--space-4);
+  border-left: 5px solid var(--color-red);
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.gem-what__facets li + li {
+  margin-top: var(--space-3);
+}
+
+.gem-what__facets li[data-accent='gold'] {
+  border-left-color: var(--color-gold);
+}
+
+.gem-what__facets li[data-accent='blue'] {
+  border-left-color: var(--color-blue);
+}
+
+.gem-what__facets li[data-accent='dark'] {
+  border-left-color: var(--color-text);
+}
+
+.gem-coop__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.48fr) minmax(0, 0.52fr);
+  gap: var(--space-7);
+  align-items: start;
+}
+
+.gem-coop__media {
+  padding: 0 0 0.55rem 0.55rem;
+}
+
+.gem-coop__media::before {
+  content: '';
+  position: absolute;
+  inset: 0.55rem 0 0 0;
+  background: var(--color-blue);
+}
+
+.gem-coop__copy p + p {
+  margin-top: var(--space-4);
+}
+
+.gem-coop__points {
+  margin: var(--space-5) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.gem-coop__points li {
+  padding: var(--space-3) 0 var(--space-3) var(--space-4);
+  border-left: 3px solid var(--color-gold);
+  color: var(--color-text);
+}
+
+.gem-coop__points li + li {
+  margin-top: var(--space-2);
+}
+
+.gem-official {
+  padding: 4.5rem 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.gem-official__panel {
+  max-width: 40rem;
+  padding-top: var(--space-5);
+  border-top: 5px solid var(--color-red);
+}
+
+.gem-official p {
+  max-width: 36rem;
+  margin: 0 0 var(--space-5);
+}
+
+.gem-cta {
+  padding: 4rem 0;
+  background: var(--color-white);
+  border-top: 5px solid var(--color-gold);
+}
+
+.gem-cta h2 {
+  max-width: 16ch;
+}
+
+.gem-cta p {
+  max-width: 34rem;
+  margin: 0 0 var(--space-5);
+  font-size: 1.08rem;
+}
+
+.gem-cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.gem-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.9rem;
+  padding: 0.7rem 1.35rem;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.gem-button--primary {
+  background: var(--color-red);
+  border: 1px solid var(--color-red);
+  color: var(--color-white);
+}
+
+.gem-button--primary:hover {
+  background: #a30528;
+  border-color: #a30528;
+}
+
+.gem-button--secondary {
+  background: var(--color-white);
+  border: 1px solid var(--color-text);
+  color: var(--color-text);
+}
+
+.gem-button--secondary:hover {
+  border-color: var(--color-red);
+  color: var(--color-red);
+}
+
+.gem-button:focus-visible {
+  outline: 2px solid var(--color-red);
+  outline-offset: 3px;
+}
+
+@media (max-width: 860px) {
+  .gem-hero__grid,
+  .gem-what__grid,
+  .gem-coop__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+  }
+
+  .gem-hero {
+    padding: 3.5rem 0;
+  }
+
+  .gem-hero h1 {
+    font-size: clamp(1.75rem, 6vw, 2.2rem);
+  }
+
+  .gem-what__copy,
+  .gem-coop__copy {
+    order: -1;
+  }
+
+  .gem-what,
+  .gem-coop {
+    padding: 4.5rem 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .gem-what__copy h2,
+  .gem-coop__copy h2,
+  .gem-official h2,
+  .gem-cta h2 {
+    font-size: clamp(1.75rem, 7vw, 2.2rem);
+  }
+
+  .gem-hero__media,
+  .gem-coop__media {
+    padding: 0.5rem;
+  }
+
+  .gem-button {
+    width: 100%;
+  }
+
+  .gem-cta__actions {
+    display: grid;
+  }
+
+  .gem-official,
+  .gem-cta {
+    padding: 3.5rem 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gem-button,
+  .photo-placeholder img {
+    transition: none;
+  }
+}

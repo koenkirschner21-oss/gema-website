@@ -1,0 +1,21 @@
+.page-hero {
+  padding: var(--space-8) 0 var(--space-9);
+}
+
+.page-hero h1 {
+  max-width: 22ch;
+  margin-bottom: var(--space-4);
+  font-size: clamp(2.4rem, 5vw, 3.75rem);
+}
+
+.page-hero p {
+  max-width: 38rem;
+  color: var(--color-text-secondary);
+  font-size: 1.125rem;
+}
+
+@media (max-width: 640px) {
+  .page-hero {
+    padding: var(--space-7) 0 var(--space-8);
+  }
+}

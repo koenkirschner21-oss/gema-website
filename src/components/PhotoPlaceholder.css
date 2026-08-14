@@ -1,0 +1,45 @@
+.photo-placeholder {
+  position: relative;
+  display: grid;
+  place-items: center;
+  margin: 0;
+  overflow: hidden;
+  background: #e6e7ea;
+  border: 1px solid #cfd1d4;
+}
+
+.photo-placeholder--wide {
+  aspect-ratio: 3 / 2;
+}
+
+.photo-placeholder--square {
+  aspect-ratio: 5 / 4;
+}
+
+.photo-placeholder--editorial {
+  aspect-ratio: 4 / 3;
+}
+
+.photo-placeholder img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.45s ease;
+}
+
+.photo-placeholder__label {
+  max-width: 16.5rem;
+  margin: 0;
+  padding: 0.5rem 0.75rem;
+  color: #3d4146;
+  font-size: 0.82rem;
+  line-height: 1.4;
+  text-align: center;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .photo-placeholder:hover img {
+    transform: scale(1.03);
+  }
+}

@@ -1,0 +1,222 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.navbar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+  min-height: var(--nav-height);
+}
+
+.navbar__brand {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 0.7rem;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.navbar__brand img {
+  display: block;
+  width: auto;
+  height: 3.25rem;
+  max-width: none;
+}
+
+.navbar__wordmark {
+  font-family: var(--font-heading);
+  font-size: 1.55rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.navbar__toggle {
+  display: none;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.navbar__icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 1.35rem;
+  margin: 0 auto;
+}
+
+.navbar__icon span {
+  display: block;
+  height: 2px;
+  background: var(--color-text);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.navbar__icon.is-open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.navbar__icon.is-open span:nth-child(2) {
+  opacity: 0;
+}
+
+.navbar__icon.is-open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+.navbar__list {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.navbar__item {
+  position: relative;
+}
+
+.navbar__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.55rem 0.7rem;
+  border: 0;
+  background: transparent;
+  color: var(--color-text);
+  font-size: 0.98rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.navbar__link:hover,
+.navbar__dropdown-link:hover {
+  color: var(--color-red);
+}
+
+.navbar__link:focus-visible,
+.navbar__dropdown-link:focus-visible,
+.navbar__toggle:focus-visible,
+.navbar__brand:focus-visible {
+  outline: 2px solid var(--color-red);
+  outline-offset: 3px;
+}
+
+.navbar__link.is-active {
+  color: var(--color-red);
+  box-shadow: inset 0 -2px 0 var(--color-red);
+}
+
+.navbar__chevron {
+  width: 0.7rem;
+  height: 0.5rem;
+}
+
+.navbar__dropdown {
+  position: absolute;
+  top: calc(100% - 0.15rem);
+  left: 0;
+  min-width: 12.5rem;
+  margin: 0;
+  padding: var(--space-2) 0;
+  list-style: none;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow);
+}
+
+.navbar__dropdown-link {
+  display: block;
+  padding: 0.65rem 1rem;
+  color: var(--color-text);
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.navbar__dropdown-link.is-active {
+  color: var(--color-red);
+  background: var(--color-neutral);
+}
+
+@media (max-width: 960px) {
+  .navbar__toggle {
+    display: block;
+  }
+
+  .navbar__nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    padding-inline: 2rem;
+    background: var(--color-white);
+    border-bottom: 1px solid var(--color-border);
+    max-height: calc(100svh - var(--nav-height));
+    overflow: auto;
+  }
+
+  .navbar__nav.is-open {
+    display: block;
+  }
+
+  .navbar__list {
+    display: block;
+    padding: var(--space-3) 0 var(--space-5);
+  }
+
+  .navbar__link {
+    width: 100%;
+    justify-content: space-between;
+    padding: 0.85rem 0;
+    font-size: 1.05rem;
+    box-shadow: none;
+  }
+
+  .navbar__link.is-active {
+    box-shadow: none;
+  }
+
+  .navbar__dropdown {
+    position: static;
+    min-width: 0;
+    margin: 0 0 var(--space-2);
+    padding: 0 0 0 var(--space-4);
+    border: 0;
+    box-shadow: none;
+    background: transparent;
+  }
+
+  .navbar__dropdown-link {
+    padding: 0.7rem 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .navbar__nav {
+    padding-inline: 1.5rem;
+  }
+
+  .navbar__brand img {
+    height: 2.85rem;
+  }
+
+  .navbar__wordmark {
+    font-size: 1.35rem;
+  }
+}
