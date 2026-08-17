@@ -75,6 +75,13 @@
   z-index: 1;
 }
 
+.home-hero__media .photo-placeholder img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .home-intro,
 .home-do,
 .home-events,
@@ -220,7 +227,17 @@
   padding-bottom: 5rem;
 }
 
+.home-involve__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.52fr) minmax(0, 0.48fr);
+  gap: var(--space-6);
+  align-items: stretch;
+}
+
 .home-involve__panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   padding: var(--space-7) var(--space-6);
   background: var(--color-red);
   color: var(--color-white);
@@ -236,6 +253,32 @@
   max-width: 36rem;
   margin: 0 0 var(--space-5);
   font-size: 1.08rem;
+}
+
+.home-involve__media {
+  position: relative;
+  min-width: 0;
+  padding: 0 0.55rem 0.55rem 0;
+}
+
+.home-involve__media::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 0.55rem 0.55rem;
+  background: var(--color-gold);
+}
+
+.home-involve__media .photo-placeholder {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+}
+
+.home-involve__media .photo-placeholder img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .home-partners__logos {
@@ -396,7 +439,8 @@
 
 @media (max-width: 860px) {
   .home-hero__grid,
-  .home-intro__grid {
+  .home-intro__grid,
+  .home-involve__grid {
     grid-template-columns: 1fr;
     gap: var(--space-5);
   }
@@ -445,7 +489,8 @@
     font-size: clamp(1.75rem, 7vw, 2.2rem);
   }
 
-  .home-hero__media {
+  .home-hero__media,
+  .home-involve__media {
     padding: 0.5rem;
   }
 
