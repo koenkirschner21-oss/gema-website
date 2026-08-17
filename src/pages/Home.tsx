@@ -36,14 +36,21 @@ export function Home() {
                 development, and community.
               </p>
               <div className="home-hero__actions">
-                <Link className="home-button home-button--primary" to="/get-involved">
+                <Link
+                  className="home-button home-button--primary"
+                  to="/get-involved"
+                >
                   Get Involved
                 </Link>
-                <Link className="home-button home-button--secondary" to="/events">
+                <Link
+                  className="home-button home-button--secondary"
+                  to="/events"
+                >
                   Explore Events
                 </Link>
               </div>
             </div>
+
             <div className="home-hero__media">
               <PhotoPlaceholder
                 src={homeMedia.hero.src}
@@ -74,6 +81,7 @@ export function Home() {
                 Learn About GEMA
               </Link>
             </div>
+
             <p className="home-intro__statement">
               A student association for GEM students at Lang.
             </p>
@@ -84,6 +92,7 @@ export function Home() {
       <section className="home-do">
         <Container>
           <h2>What We Do</h2>
+
           <ul className="home-do__grid">
             {aboutValues.map((item, index) => (
               <li key={item.title} data-accent={item.accent}>
@@ -95,6 +104,7 @@ export function Home() {
               </li>
             ))}
           </ul>
+
           <Link className="home-text-link" to="/about">
             Learn More
           </Link>
@@ -106,10 +116,14 @@ export function Home() {
           <Container>
             <div className="home-events__intro">
               <h2>Upcoming Events</h2>
-              <Link className="home-text-link home-text-link--inline" to="/events">
+              <Link
+                className="home-text-link home-text-link--inline"
+                to="/events"
+              >
                 View All Events
               </Link>
             </div>
+
             <div className="home-events__grid">
               {homepageEvents.map((event) => (
                 <EventCard key={event.id} event={event} />
@@ -121,23 +135,40 @@ export function Home() {
 
       <section className="home-involve">
         <Container>
-          <div className="home-involve__panel">
-            <h2>Get involved with GEMA.</h2>
-            <p>
-              Attend events, join initiatives, apply for leadership
-              opportunities when they open, and connect with the broader GEM
-              community.
-            </p>
-            <div className="home-involve__actions">
-              <Link className="home-button home-button--on-red" to="/get-involved">
-                Get Involved
-              </Link>
-              <Link
-                className="home-button home-button--on-red-secondary"
-                to="/get-involved"
-              >
-                Explore Opportunities
-              </Link>
+          <div className="home-involve__grid">
+            <div className="home-involve__panel">
+              <h2>Get involved with GEMA.</h2>
+
+              <p>
+                Attend events, join initiatives, apply for leadership
+                opportunities when they open, and connect with the broader GEM
+                community.
+              </p>
+
+              <div className="home-involve__actions">
+                <Link
+                  className="home-button home-button--on-red"
+                  to="/get-involved"
+                >
+                  Get Involved
+                </Link>
+
+                <Link
+                  className="home-button home-button--on-red-secondary"
+                  to="/get-involved"
+                >
+                  Explore Opportunities
+                </Link>
+              </div>
+            </div>
+
+            <div className="home-involve__media">
+              <PhotoPlaceholder
+                src={homeMedia.getInvolved.src}
+                label={homeMedia.getInvolved.label}
+                alt={homeMedia.getInvolved.alt}
+                ratio="wide"
+              />
             </div>
           </div>
         </Container>
@@ -146,6 +177,7 @@ export function Home() {
       <section className="home-partners">
         <Container>
           <h2>Our Partners</h2>
+
           {partnerLogos.length > 0 ? (
             <>
               <div className="home-partners__logos">
@@ -167,6 +199,7 @@ export function Home() {
                   ),
                 )}
               </div>
+
               <Link className="home-text-link" to="/partners">
                 Explore Partnerships
               </Link>
@@ -174,7 +207,10 @@ export function Home() {
           ) : (
             <div className="home-partners__invite">
               <p>Interested in working with GEMA?</p>
-              <Link className="home-button home-button--primary" to="/partners">
+              <Link
+                className="home-button home-button--primary"
+                to="/partners"
+              >
                 Explore Partnerships
               </Link>
             </div>
@@ -185,10 +221,12 @@ export function Home() {
       <section className="home-cta">
         <Container>
           <h2>Stay connected with GEMA.</h2>
+
           <p>
             Follow GEMA for events, opportunities, announcements, and community
             updates.
           </p>
+
           <div className="home-cta__actions">
             <a
               className="home-button home-button--primary"
@@ -197,8 +235,12 @@ export function Home() {
               rel="noreferrer"
             >
               Instagram
-              <span className="visually-hidden"> (opens in a new tab)</span>
+              <span className="visually-hidden">
+                {' '}
+                (opens in a new tab)
+              </span>
             </a>
+
             <a
               className="home-button home-button--secondary"
               href={site.linkedin.href}
@@ -206,9 +248,13 @@ export function Home() {
               rel="noreferrer"
             >
               LinkedIn
-              <span className="visually-hidden"> (opens in a new tab)</span>
+              <span className="visually-hidden">
+                {' '}
+                (opens in a new tab)
+              </span>
             </a>
           </div>
+
           <Link className="home-text-link" to="/contact">
             Contact GEMA
           </Link>
