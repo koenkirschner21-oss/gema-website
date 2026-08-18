@@ -1,13 +1,13 @@
 export const homeMedia = {
   hero: {
-    src: null as string | null,
-    label: 'Replace with primary GEMA student/event photography',
-    alt: 'GEMA students and events',
+    src: '/home-hero.jpg' as string | null,
+    label: 'Primary GEMA event photography',
+    alt: 'Students attending a GEMA event at the University of Guelph',
   },
   involve: {
-    src: null as string | null,
-    label: 'Replace with GEMA students participating in an event or initiative',
-    alt: 'GEMA students participating',
+    src: '/home-get-involved.jpg' as string | null,
+    label: 'GEMA students participating in an event',
+    alt: 'University of Guelph students participating in the GEMA community',
   },
 }
 

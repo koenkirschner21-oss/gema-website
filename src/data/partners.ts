@@ -48,14 +48,14 @@ export const pastPartnerPagePlaceholderCount = 8
 
 export const partnerMedia = {
   hero: {
-    src: null as string | null,
-    label: 'Replace with students networking with professionals',
-    alt: 'GEMA students networking with professionals',
+    src: '/partners-hero.jpg' as string | null,
+    label: 'GEMA partnership and event photography',
+    alt: 'Students and professionals connecting at a GEMA event',
   },
   why: {
-    src: null as string | null,
-    label: 'Replace with panel, speaker, or employer networking photo',
-    alt: 'GEMA panel, speaker, or employer networking',
+    src: '/partners-why.jpg' as string | null,
+    label: 'GEMA professional event photography',
+    alt: 'Professionals networking at a GEMA panel event',
   },
 }
 

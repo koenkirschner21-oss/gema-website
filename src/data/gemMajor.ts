@@ -6,14 +6,14 @@ export const gemOfficialCoopUrl =
 
 export const gemMedia = {
   hero: {
-    src: null as string | null,
-    label: 'Replace with relevant GEM / University of Guelph photo',
+    src: '/gem-major-hero.webp' as string | null,
+    label: 'GEM major students',
     alt: 'GEM students at the University of Guelph',
   },
   coop: {
-    src: null as string | null,
-    label: 'Replace with co-op / professional development photo',
-    alt: 'GEM co-op and professional development',
+    src: '/gem-major-coop.jpg' as string | null,
+    label: 'GEM co-op and professional development',
+    alt: 'Students participating in a Lang conference or professional development event',
   },
 }
 

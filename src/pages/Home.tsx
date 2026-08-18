@@ -160,7 +160,7 @@ export function Home() {
                 src={homeMedia.involve.src}
                 label={homeMedia.involve.label}
                 alt={homeMedia.involve.alt}
-                ratio="square"
+                ratio="wide"
               />
             </div>
           </div>
