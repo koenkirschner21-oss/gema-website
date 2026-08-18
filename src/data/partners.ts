@@ -112,14 +112,14 @@ export const partnershipPackageUrl: string | null = null
 
 export const partnerMedia = {
   hero: {
-    src: null as string | null,
-    label: 'Replace with GEMA partnership / event photo',
-    alt: 'GEMA partnership or event',
+    src: '/partners-hero.jpg',
+    label: 'GEMA partnership and event photography',
+    alt: 'Students and professionals connecting at a GEMA event',
   },
   why: {
-    src: null as string | null,
-    label: 'Replace with GEMA professional event photography',
-    alt: 'GEMA professional event',
+    src: '/partners-why.jpg',
+    label: 'GEMA professional event photography',
+    alt: 'Professionals networking at a GEMA panel event',
   },
 }
 
