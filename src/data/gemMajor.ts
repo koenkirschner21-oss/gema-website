@@ -3,16 +3,14 @@ export const gemOfficialProgramUrl =
 
 export const gemMedia = {
   hero: {
-    // Replace with relevant GEM / University of Guelph photo
-    src: null as string | null,
-    label: 'Replace with relevant GEM / University of Guelph photo',
+    src: '/gem-major-hero.webp',
+    label: 'GEM major students',
     alt: 'GEM students at the University of Guelph',
   },
   coop: {
-    // Replace with co-op / professional development photo
-    src: null as string | null,
-    label: 'Replace with co-op / professional development photo',
-    alt: 'GEM co-op and professional development',
+    src: '/gem-major-coop.jpg',
+    label: 'GEM co-op and professional development',
+    alt: 'Students participating in a Lang conference or professional development event',
   },
 }
 
