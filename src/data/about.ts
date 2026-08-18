@@ -1,21 +1,18 @@
 export const aboutMedia = {
   hero: {
-    // Replace with current GEMA student/team photo
-    src: null as string | null,
-    label: 'Replace with current GEMA student/team photo',
-    alt: 'GEMA students and team',
+    src: '/about-hero.jpg' as string | null,
+    label: 'GEMA student and team photography',
+    alt: 'GEMA students and team members at an event',
   },
   community: {
-    // Replace with GEMA event or community photo
-    src: null as string | null,
-    label: 'Replace with GEMA event or community photo',
-    alt: 'GEMA event or community',
+    src: '/about-who-we-are.jpg' as string | null,
+    label: 'GEMA event and community photography',
+    alt: 'Students connecting at a GEMA event',
   },
   events: {
-    // Replace with GEMA event photography
-    src: null as string | null,
-    label: 'Replace with GEMA event photography',
-    alt: 'GEMA event',
+    src: '/about-what-we-do.png' as string | null,
+    label: 'GEMA event photography',
+    alt: 'GEMA professional event and panel programming',
   },
 }
 
