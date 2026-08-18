@@ -17,17 +17,24 @@ export function About() {
           <div className="about-hero__grid">
             <div className="about-hero__copy">
               <p className="about-eyebrow">About GEMA</p>
-              <h1>Built to connect, represent, and grow the GEM community.</h1>
+              <h1>About GEMA</h1>
               <p className="about-lede">
-                GEMA is the student association representing students in the
-                Government, Economics and Management major at the Gordon S. Lang
-                School of Business and Economics, University of Guelph. We bring
-                GEM students together, represent their interests, and help build
-                a stronger community around the program.
+                The Government, Economics & Management Association is the
+                student association representing the GEM community at the
+                University of Guelph. GEMA creates opportunities for students to
+                connect, get involved, develop professionally and strengthen
+                their university experience beyond the classroom.
               </p>
+              <div className="about-hero__actions">
+                <Link
+                  className="about-button about-button--primary"
+                  to="/get-involved"
+                >
+                  Get Involved
+                </Link>
+              </div>
             </div>
             <div className="about-hero__media">
-              {/* Replace with current GEMA student/team photo */}
               <PhotoPlaceholder
                 src={aboutMedia.hero.src}
                 label={aboutMedia.hero.label}
@@ -43,7 +50,6 @@ export function About() {
         <Container>
           <div className="about-who__grid">
             <div className="about-who__media">
-              {/* Replace with GEMA event or community photo */}
               <PhotoPlaceholder
                 src={aboutMedia.community.src}
                 label={aboutMedia.community.label}
@@ -54,20 +60,23 @@ export function About() {
             <div className="about-who__copy">
               <h2>Who We Are</h2>
               <p>
-                GEMA represents students in Government, Economics and Management
-                at the Gordon S. Lang School of Business and Economics. We exist
-                so the major feels like a community — a group of people you can
-                meet, learn with, and stay connected to.
+                GEMA represents students in the Government, Economics &
+                Management major within the Gordon S. Lang School of Business
+                and Economics.
               </p>
               <p>
-                That means creating space for students to connect with one
-                another, and supporting professional and personal development
-                alongside coursework.
+                Our role extends beyond organizing events. We help create a
+                stronger GEM community by connecting students with one another,
+                providing opportunities to participate outside the classroom and
+                helping ensure students have a voice within their program.
               </p>
               <p>
-                From events and conversations to student representation, GEMA
-                helps strengthen the GEM experience beyond the classroom.
+                GEMA is led by students and built around the experiences,
+                interests and opportunities that matter to the GEM community.
               </p>
+              <Link className="about-text-link" to="/about/team">
+                Meet the Team
+              </Link>
             </div>
           </div>
         </Container>
@@ -77,7 +86,10 @@ export function About() {
         <Container>
           <div className="about-values__intro">
             <h2>Our Purpose & Values</h2>
-            <p>Four ideas guide how GEMA shows up for students in the major.</p>
+            <p>
+              Everything GEMA does is built around creating a stronger, more
+              connected and more valuable experience for GEM students.
+            </p>
           </div>
           <ul className="about-values__grid">
             {aboutValues.map((item, index) => (
@@ -102,7 +114,6 @@ export function About() {
           <h2>What We Do</h2>
           <div className="about-work__grid">
             <div className="about-work__media">
-              {/* Replace with GEMA event photography */}
               <PhotoPlaceholder
                 src={aboutMedia.events.src}
                 label={aboutMedia.events.label}
@@ -135,8 +146,9 @@ export function About() {
         <Container>
           <h2>Be part of the GEMA community.</h2>
           <p>
-            Attend an event, meet other students in the major, or find a way to
-            get involved with the association.
+            Whether you want to attend an event, meet other GEM students or take
+            on a larger role within the association, there are plenty of ways to
+            get involved.
           </p>
           <div className="about-cta__actions">
             <Link className="about-button about-button--primary" to="/get-involved">

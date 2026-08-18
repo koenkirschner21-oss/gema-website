@@ -1,4 +1,4 @@
-import { formatTeamTitle, type TeamMember } from '../data/team'
+import { formatTeamTitle, isPlaceholderMember, type TeamMember } from '../data/team'
 import './TeamMemberCard.css'
 
 type TeamMemberCardProps = {
@@ -12,16 +12,21 @@ export function TeamMemberCard({
   featured = false,
   compact = false,
 }: TeamMemberCardProps) {
+  const placeholder = isPlaceholderMember(member)
   const className = [
     'team-card',
     featured ? 'team-card--featured' : '',
     compact ? 'team-card--compact' : '',
+    placeholder ? 'team-card--placeholder' : '',
   ]
     .filter(Boolean)
     .join(' ')
 
   return (
-    <article className={className}>
+    <article
+      className={className}
+      aria-label={placeholder ? 'Team member placeholder' : undefined}
+    >
       <div className="team-card__photo">
         {member.image ? (
           <img src={member.image} alt={member.name} />
@@ -42,9 +47,7 @@ export function TeamMemberCard({
             LinkedIn
             <span className="visually-hidden"> (opens in a new tab)</span>
           </a>
-        ) : (
-          <span className="team-card__linkedin is-empty">LinkedIn</span>
-        )}
+        ) : null}
       </div>
     </article>
   )

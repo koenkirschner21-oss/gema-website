@@ -6,11 +6,38 @@ import {
 import './EventCard.css'
 
 type EventCardProps = {
-  event: GemaEvent
+  event?: GemaEvent
   compact?: boolean
+  placeholder?: boolean
 }
 
-export function EventCard({ event, compact = false }: EventCardProps) {
+export function EventCard({
+  event,
+  compact = false,
+  placeholder = false,
+}: EventCardProps) {
+  if (placeholder) {
+    return (
+      <article className="event-card event-card--placeholder" aria-label="Development event placeholder">
+        <div className="event-card__media">
+          <span className="event-card__media-label">Event image</span>
+        </div>
+        <div className="event-card__body">
+          <p className="event-card__date">Date</p>
+          <p className="event-card__category">Category</p>
+          <h3>Event name</h3>
+          <p className="event-card__meta">Time · Location</p>
+          <p className="event-card__copy">Short description</p>
+          <span className="event-card__cta">View Event</span>
+        </div>
+      </article>
+    )
+  }
+
+  if (!event) {
+    return null
+  }
+
   const time = formatEventTime(event)
   const className = ['event-card', compact ? 'event-card--compact' : '']
     .filter(Boolean)
@@ -45,7 +72,7 @@ export function EventCard({ event, compact = false }: EventCardProps) {
         ) : null}
         {event.registrationUrl ? (
           <a
-            className="event-card__register"
+            className="event-card__cta"
             href={event.registrationUrl}
             target="_blank"
             rel="noreferrer"

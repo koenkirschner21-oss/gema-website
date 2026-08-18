@@ -1,9 +1,12 @@
 /**
  * Placeholder team roster for /about/team.
  *
- * Replace every `name: 'Name'`, `image: null`, `linkedin: null`, and
- * generic `portfolio` value with current team details. Photo paths can
- * live in `public/team/` (for example `/team/co-president-1.jpg`).
+ * Replace every `name: 'Name'`, `image: null`, and `linkedin: null`
+ * with current team details. Add a real `portfolio` for directors.
+ * Photo paths can live in `public/team/`.
+ *
+ * `level: 'manager'` is supported for future use and is not rendered
+ * on the public page until that section is approved.
  */
 export type TeamLevel = 'leadership' | 'director' | 'manager'
 
@@ -17,7 +20,6 @@ export type TeamMember = {
   level: TeamLevel
 }
 
-// Replace placeholder entries with current names, photos, roles, and LinkedIn URLs.
 export const team: TeamMember[] = [
   {
     id: 'leadership-1',
@@ -41,7 +43,7 @@ export const team: TeamMember[] = [
     id: 'director-1',
     name: 'Name',
     role: 'Director',
-    portfolio: 'Portfolio',
+    portfolio: null,
     image: null,
     linkedin: null,
     level: 'director',
@@ -50,7 +52,7 @@ export const team: TeamMember[] = [
     id: 'director-2',
     name: 'Name',
     role: 'Director',
-    portfolio: 'Portfolio',
+    portfolio: null,
     image: null,
     linkedin: null,
     level: 'director',
@@ -59,7 +61,7 @@ export const team: TeamMember[] = [
     id: 'director-3',
     name: 'Name',
     role: 'Director',
-    portfolio: 'Portfolio',
+    portfolio: null,
     image: null,
     linkedin: null,
     level: 'director',
@@ -68,7 +70,7 @@ export const team: TeamMember[] = [
     id: 'director-4',
     name: 'Name',
     role: 'Director',
-    portfolio: 'Portfolio',
+    portfolio: null,
     image: null,
     linkedin: null,
     level: 'director',
@@ -77,7 +79,7 @@ export const team: TeamMember[] = [
     id: 'director-5',
     name: 'Name',
     role: 'Director',
-    portfolio: 'Portfolio',
+    portfolio: null,
     image: null,
     linkedin: null,
     level: 'director',
@@ -86,7 +88,7 @@ export const team: TeamMember[] = [
     id: 'director-6',
     name: 'Name',
     role: 'Director',
-    portfolio: 'Portfolio',
+    portfolio: null,
     image: null,
     linkedin: null,
     level: 'director',
@@ -95,7 +97,7 @@ export const team: TeamMember[] = [
     id: 'director-7',
     name: 'Name',
     role: 'Director',
-    portfolio: 'Portfolio',
+    portfolio: null,
     image: null,
     linkedin: null,
     level: 'director',
@@ -104,82 +106,10 @@ export const team: TeamMember[] = [
     id: 'director-8',
     name: 'Name',
     role: 'Director',
-    portfolio: 'Portfolio',
+    portfolio: null,
     image: null,
     linkedin: null,
     level: 'director',
-  },
-  {
-    id: 'manager-1',
-    name: 'Name',
-    role: 'Manager',
-    portfolio: 'Portfolio',
-    image: null,
-    linkedin: null,
-    level: 'manager',
-  },
-  {
-    id: 'manager-2',
-    name: 'Name',
-    role: 'Manager',
-    portfolio: 'Portfolio',
-    image: null,
-    linkedin: null,
-    level: 'manager',
-  },
-  {
-    id: 'manager-3',
-    name: 'Name',
-    role: 'Manager',
-    portfolio: 'Portfolio',
-    image: null,
-    linkedin: null,
-    level: 'manager',
-  },
-  {
-    id: 'manager-4',
-    name: 'Name',
-    role: 'Manager',
-    portfolio: 'Portfolio',
-    image: null,
-    linkedin: null,
-    level: 'manager',
-  },
-  {
-    id: 'manager-5',
-    name: 'Name',
-    role: 'Manager',
-    portfolio: 'Portfolio',
-    image: null,
-    linkedin: null,
-    level: 'manager',
-  },
-  {
-    id: 'manager-6',
-    name: 'Name',
-    role: 'Manager',
-    portfolio: 'Portfolio',
-    image: null,
-    linkedin: null,
-    level: 'manager',
-  },
-  {
-    id: 'manager-7',
-    name: 'Name',
-    role: 'Manager',
-    portfolio: 'Portfolio',
-    image: null,
-    linkedin: null,
-    level: 'manager',
-  },
-  {
-    id: 'manager-8',
-    name: 'Name',
-    role: 'Manager',
-    portfolio: 'Portfolio',
-    image: null,
-    linkedin: null,
-    level: 'manager',
   },
 ]
 
@@ -189,4 +119,8 @@ export function getTeamByLevel(level: TeamLevel) {
 
 export function formatTeamTitle(member: TeamMember) {
   return member.portfolio ? `${member.role}, ${member.portfolio}` : member.role
+}
+
+export function isPlaceholderMember(member: TeamMember) {
+  return member.name === 'Name' && member.image === null
 }

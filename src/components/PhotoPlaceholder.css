@@ -5,7 +5,7 @@
   margin: 0;
   overflow: hidden;
   background: #e6e7ea;
-  border: 1px solid #cfd1d4;
+  border: 1px solid var(--color-border);
 }
 
 .photo-placeholder--wide {

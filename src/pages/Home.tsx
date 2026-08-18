@@ -3,16 +3,19 @@ import { Link } from 'react-router-dom'
 import { Container } from '../components/Container'
 import { EventCard } from '../components/EventCard'
 import { PhotoPlaceholder } from '../components/PhotoPlaceholder'
-import { aboutValues } from '../data/about'
 import { getHomepageEvents } from '../data/events'
-import { homeMedia } from '../data/home'
-import { getPartnersWithLogos } from '../data/partners'
-import { site } from '../data/site'
+import {
+  homeMedia,
+  homePillars,
+  homepageEventPlaceholderCount,
+  pastPartnerPlaceholderCount,
+} from '../data/home'
+import { getPastPartnersWithLogos } from '../data/partners'
 import './Home.css'
 
 export function Home() {
   const homepageEvents = getHomepageEvents()
-  const partnerLogos = getPartnersWithLogos()
+  const pastPartnerLogos = getPastPartnersWithLogos()
 
   useEffect(() => {
     document.title = 'GEMA | Government, Economics & Management Association'
@@ -29,11 +32,12 @@ export function Home() {
               </p>
               <h1>Connecting the GEM community beyond the classroom.</h1>
               <p className="home-lede">
-                GEMA is the student association representing Government,
-                Economics and Management students at the University of
-                Guelph&apos;s Gordon S. Lang School of Business and Economics.
-                We connect students through events, opportunities, professional
-                development, and community.
+                The Government, Economics & Management Association (GEMA)
+                represents GEM students at the University of Guelph’s Gordon S.
+                Lang School of Business and Economics. Through events,
+                professional development, leadership opportunities and community
+                initiatives, GEMA helps students make more of their university
+                experience.
               </p>
               <div className="home-hero__actions">
                 <Link className="home-button home-button--primary" to="/get-involved">
@@ -60,15 +64,14 @@ export function Home() {
         <Container>
           <div className="home-intro__grid">
             <div className="home-intro__copy">
-              <h2>What Is GEMA?</h2>
+              <h2>What is GEMA?</h2>
+              <p>GEMA is where the GEM community comes together outside the classroom.</p>
               <p>
-                GEMA represents students in the Government, Economics and
-                Management major at the Gordon S. Lang School of Business and
-                Economics.
-              </p>
-              <p>
-                We create opportunities for connection, professional growth,
-                and involvement beyond the classroom.
+                We create opportunities for students to meet one another, take
+                part in events, connect with professionals, build experience and
+                have a voice within their program. Whether you want to attend
+                your first event or take on a leadership role, GEMA gives GEM
+                students more ways to make the most of their time at Guelph.
               </p>
               <Link className="home-text-link" to="/about">
                 Learn About GEMA
@@ -85,7 +88,7 @@ export function Home() {
         <Container>
           <h2>What We Do</h2>
           <ul className="home-do__grid">
-            {aboutValues.map((item, index) => (
+            {homePillars.map((item, index) => (
               <li key={item.title} data-accent={item.accent}>
                 <span className="home-do__index" aria-hidden="true">
                   {String(index + 1).padStart(2, '0')}
@@ -96,48 +99,69 @@ export function Home() {
             ))}
           </ul>
           <Link className="home-text-link" to="/about">
-            Learn More
+            Learn More About GEMA
           </Link>
         </Container>
       </section>
 
-      {homepageEvents.length > 0 ? (
-        <section className="home-events">
-          <Container>
-            <div className="home-events__intro">
-              <h2>Upcoming Events</h2>
-              <Link className="home-text-link home-text-link--inline" to="/events">
-                View All Events
-              </Link>
-            </div>
-            <div className="home-events__grid">
-              {homepageEvents.map((event) => (
-                <EventCard key={event.id} event={event} />
-              ))}
-            </div>
-          </Container>
-        </section>
-      ) : null}
+      <section className="home-events">
+        <Container>
+          <div className="home-events__intro">
+            <h2>See what’s happening with GEMA.</h2>
+            <p>
+              From professional development and networking to social and
+              community events, GEMA creates opportunities to connect throughout
+              the year.
+            </p>
+            <Link className="home-text-link home-text-link--inline" to="/events">
+              View All Events
+            </Link>
+          </div>
+          <div className="home-events__grid">
+            {homepageEvents.length > 0
+              ? homepageEvents.map((event) => (
+                  <EventCard key={event.id} event={event} />
+                ))
+              : Array.from({ length: homepageEventPlaceholderCount }, (_, index) => (
+                  <EventCard key={`event-placeholder-${index}`} placeholder />
+                ))}
+          </div>
+        </Container>
+      </section>
 
       <section className="home-involve">
         <Container>
-          <div className="home-involve__panel">
-            <h2>Get involved with GEMA.</h2>
-            <p>
-              Attend events, join initiatives, apply for leadership
-              opportunities when they open, and connect with the broader GEM
-              community.
-            </p>
-            <div className="home-involve__actions">
-              <Link className="home-button home-button--on-red" to="/get-involved">
-                Get Involved
-              </Link>
-              <Link
-                className="home-button home-button--on-red-secondary"
-                to="/get-involved"
-              >
-                Explore Opportunities
-              </Link>
+          <div className="home-involve__grid">
+            <div className="home-involve__panel">
+              <h2>Find out how to get involved with GEMA.</h2>
+              <p>
+                Attend an event. Meet other GEM students. Support an initiative.
+                Apply for a leadership opportunity when positions open.
+              </p>
+              <p>
+                However you choose to participate, getting involved is one of
+                the best ways to become part of the GEM community beyond the
+                classroom.
+              </p>
+              <div className="home-involve__actions">
+                <Link className="home-button home-button--on-red" to="/get-involved">
+                  Get Involved
+                </Link>
+                <Link
+                  className="home-button home-button--on-red-secondary"
+                  to="/get-involved#current-opportunities"
+                >
+                  Explore Opportunities
+                </Link>
+              </div>
+            </div>
+            <div className="home-involve__media">
+              <PhotoPlaceholder
+                src={homeMedia.involve.src}
+                label={homeMedia.involve.label}
+                alt={homeMedia.involve.alt}
+                ratio="square"
+              />
             </div>
           </div>
         </Container>
@@ -145,11 +169,16 @@ export function Home() {
 
       <section className="home-partners">
         <Container>
-          <h2>Our Partners</h2>
-          {partnerLogos.length > 0 ? (
-            <>
-              <div className="home-partners__logos">
-                {partnerLogos.map((partner) =>
+          <h2>Creating more opportunities together.</h2>
+          <p className="home-partners__copy">
+            GEMA has worked with organizations and community partners to support
+            student programming, professional development and experiences for
+            the GEM community. The organizations recognized here are previous
+            partners and sponsors.
+          </p>
+          <div className="home-partners__logos">
+            {pastPartnerLogos.length > 0
+              ? pastPartnerLogos.map((partner) =>
                   partner.url ? (
                     <a
                       key={partner.id}
@@ -159,59 +188,41 @@ export function Home() {
                       rel="noreferrer"
                     >
                       <img src={partner.logo} alt={partner.name} />
+                      <span className="visually-hidden"> (opens in a new tab)</span>
                     </a>
                   ) : (
                     <div key={partner.id} className="home-partners__logo">
                       <img src={partner.logo} alt={partner.name} />
                     </div>
                   ),
-                )}
-              </div>
-              <Link className="home-text-link" to="/partners">
-                Explore Partnerships
-              </Link>
-            </>
-          ) : (
-            <div className="home-partners__invite">
-              <p>Interested in working with GEMA?</p>
-              <Link className="home-button home-button--primary" to="/partners">
-                Explore Partnerships
-              </Link>
-            </div>
-          )}
+                )
+              : Array.from({ length: pastPartnerPlaceholderCount }, (_, index) => (
+                  <div
+                    key={`past-partner-placeholder-${index}`}
+                    className="home-partners__logo is-placeholder"
+                  >
+                    <span>Past partner logo</span>
+                  </div>
+                ))}
+          </div>
+          <Link className="home-button home-button--primary" to="/partners">
+            Partner With GEMA
+          </Link>
         </Container>
       </section>
 
       <section className="home-cta">
         <Container>
-          <h2>Stay connected with GEMA.</h2>
+          <h2>Have a question or want to connect?</h2>
           <p>
-            Follow GEMA for events, opportunities, announcements, and community
-            updates.
+            Whether you’re a student, alumni, organization or member of the
+            University of Guelph community, we’d be happy to hear from you.
           </p>
           <div className="home-cta__actions">
-            <a
-              className="home-button home-button--primary"
-              href={site.instagram.href}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Instagram
-              <span className="visually-hidden"> (opens in a new tab)</span>
-            </a>
-            <a
-              className="home-button home-button--secondary"
-              href={site.linkedin.href}
-              target="_blank"
-              rel="noreferrer"
-            >
-              LinkedIn
-              <span className="visually-hidden"> (opens in a new tab)</span>
-            </a>
+            <Link className="home-button home-button--primary" to="/contact">
+              Contact GEMA
+            </Link>
           </div>
-          <Link className="home-text-link" to="/contact">
-            Contact GEMA
-          </Link>
         </Container>
       </section>
     </article>

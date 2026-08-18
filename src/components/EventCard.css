@@ -8,6 +8,8 @@
 }
 
 .event-card__media {
+  display: grid;
+  place-items: center;
   aspect-ratio: 16 / 10;
   background: #e6e7ea;
   overflow: hidden;
@@ -68,7 +70,7 @@
   color: var(--color-text-secondary);
 }
 
-.event-card__register {
+.event-card__cta {
   display: inline-flex;
   margin-top: 0.9rem;
   color: var(--color-red);
@@ -77,11 +79,28 @@
   text-decoration: none;
 }
 
-.event-card__register:hover {
+a.event-card__cta:hover {
   text-decoration: underline;
 }
 
-.event-card__register:focus-visible {
+a.event-card__cta:focus-visible {
   outline: 2px solid var(--color-red);
   outline-offset: 3px;
+}
+
+.event-card__media-label {
+  max-width: 10rem;
+  color: #3d4146;
+  font-size: 0.82rem;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.event-card--placeholder .event-card__date,
+.event-card--placeholder .event-card__category,
+.event-card--placeholder .event-card__meta,
+.event-card--placeholder .event-card__copy,
+.event-card--placeholder h3,
+.event-card--placeholder .event-card__cta {
+  color: #8b9096;
 }

@@ -11,51 +11,6 @@ import { getActiveOpportunities } from '../data/opportunities'
 import { site } from '../data/site'
 import './GetInvolved.css'
 
-function InstagramIcon() {
-  return (
-    <svg
-      className="involve-connect__icon"
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-    >
-      <rect
-        x="3"
-        y="3"
-        width="18"
-        height="18"
-        rx="5"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-      />
-      <circle
-        cx="12"
-        cy="12"
-        r="4"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-      />
-      <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" />
-    </svg>
-  )
-}
-
-function LinkedInIcon() {
-  return (
-    <svg
-      className="involve-connect__icon"
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-    >
-      <path
-        fill="currentColor"
-        d="M4.98 3.5C4.98 4.88 3.88 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8.5h4V23h-4zM8.5 8.5h3.8v2h.05c.53-1 1.84-2.1 3.78-2.1 4.04 0 4.79 2.66 4.79 6.12V23h-4v-7.7c0-1.84-.03-4.2-2.56-4.2-2.56 0-2.95 2-2.95 4.06V23h-4z"
-      />
-    </svg>
-  )
-}
-
 export function GetInvolved() {
   const activeOpportunities = getActiveOpportunities()
 
@@ -72,11 +27,22 @@ export function GetInvolved() {
               <p className="involve-eyebrow">GET INVOLVED</p>
               <h1>Find your place in the GEMA community.</h1>
               <p className="involve-lede">
-                Students can take part through events, leadership opportunities,
-                initiatives, and the wider GEM community. Whether you want to
-                show up, contribute, or take on more responsibility, there is a
-                place to start.
+                There are plenty of ways to get involved with GEMA throughout
+                the year. Attend an event, meet other GEM students, contribute
+                to an initiative or apply for a leadership opportunity when
+                positions become available.
               </p>
+              <div className="involve-hero__actions">
+                <a
+                  className="involve-button involve-button--primary"
+                  href="#current-opportunities"
+                >
+                  Explore Opportunities
+                </a>
+                <Link className="involve-button involve-button--secondary" to="/events">
+                  View Events
+                </Link>
+              </div>
             </div>
             <div className="involve-hero__media">
               <PhotoPlaceholder
@@ -98,68 +64,92 @@ export function GetInvolved() {
               <li key={item.title} data-accent={item.accent}>
                 <h3>{item.title}</h3>
                 <p>{item.copy}</p>
+                {item.cta ? (
+                  item.cta.to.startsWith('#') ? (
+                    <a className="involve-text-link" href={item.cta.to}>
+                      {item.cta.label}
+                    </a>
+                  ) : (
+                    <Link className="involve-text-link" to={item.cta.to}>
+                      {item.cta.label}
+                    </Link>
+                  )
+                ) : null}
+                {item.social ? (
+                  <div className="involve-ways__social">
+                    <a
+                      className="involve-text-link"
+                      href={site.instagram.href}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {site.instagram.label}
+                      <span className="visually-hidden"> (opens in a new tab)</span>
+                    </a>
+                    <a
+                      className="involve-text-link"
+                      href={site.linkedin.href}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {site.linkedin.label}
+                      <span className="visually-hidden"> (opens in a new tab)</span>
+                    </a>
+                  </div>
+                ) : null}
               </li>
             ))}
           </ul>
         </Container>
       </section>
 
-      <section className="involve-openings">
+      <section className="involve-openings" id="current-opportunities">
         <Container>
-          <h2>Current Opportunities</h2>
           {activeOpportunities.length > 0 ? (
-            <ul className="involve-openings__list">
-              {activeOpportunities.map((item) => (
-                <li key={item.id}>
-                  <p className="involve-openings__category">{item.category}</p>
-                  <h3>{item.title}</h3>
-                  <p>{item.description}</p>
-                  {item.deadline ? (
-                    <p className="involve-openings__deadline">
-                      Apply by {item.deadline}
-                    </p>
-                  ) : null}
-                  {item.applicationUrl ? (
-                    <a
-                      className="involve-button involve-button--primary"
-                      href={item.applicationUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      Apply
-                      <span className="visually-hidden">
-                        {' '}
-                        for {item.title} (opens in a new tab)
-                      </span>
-                    </a>
-                  ) : null}
-                </li>
-              ))}
-            </ul>
+            <>
+              <h2>Current Opportunities</h2>
+              <ul className="involve-openings__list">
+                {activeOpportunities.map((item) => (
+                  <li key={item.id}>
+                    {item.category ? (
+                      <p className="involve-openings__category">{item.category}</p>
+                    ) : null}
+                    <h3>{item.title}</h3>
+                    <p>{item.description}</p>
+                    {item.deadline ? (
+                      <p className="involve-openings__deadline">
+                        Apply by {item.deadline}
+                      </p>
+                    ) : null}
+                    {item.applicationUrl ? (
+                      <a
+                        className="involve-button involve-button--primary"
+                        href={item.applicationUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        Apply Now
+                        <span className="visually-hidden">
+                          {' '}
+                          for {item.title} (opens in a new tab)
+                        </span>
+                      </a>
+                    ) : null}
+                  </li>
+                ))}
+              </ul>
+            </>
           ) : (
             <div className="involve-openings__empty">
-              <p className="involve-openings__empty-title">
-                There are no open applications at the moment.
-              </p>
+              <h2>No applications are currently open.</h2>
               <p>
-                Recruitment is announced when roles open. Follow GEMA for
-                updates, or start by coming to an event.
+                Recruitment opportunities open at different points throughout
+                the year. Stay connected with GEMA to be the first to hear when
+                new positions become available.
               </p>
               <div className="involve-openings__actions">
-                <a
-                  className="involve-button involve-button--primary"
-                  href={site.instagram.href}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Follow GEMA
-                  <span className="visually-hidden">
-                    {' '}
-                    on Instagram (opens in a new tab)
-                  </span>
-                </a>
                 <Link
-                  className="involve-button involve-button--secondary"
+                  className="involve-button involve-button--primary"
                   to="/events"
                 >
                   Explore Events
@@ -197,72 +187,55 @@ export function GetInvolved() {
       <section className="involve-new">
         <Container>
           <div className="involve-new__panel">
-            <div>
-              <h2>New to GEM?</h2>
-              <p>
-                Attending a GEMA event is one of the easiest ways to meet people
-                and get familiar with the community.
-              </p>
+            <h2>New to GEM? You’re in the right place.</h2>
+            <p>
+              You don’t need a title or executive position to be part of the
+              GEMA community. Attend an upcoming event, meet other students and
+              start getting involved at your own pace.
+            </p>
+            <p>
+              Recruitment, events and opportunities change throughout the year,
+              so stay connected with GEMA to keep up with what’s happening and
+              find new ways to get involved.
+            </p>
+            <div className="involve-new__actions">
+              <Link className="involve-button involve-button--primary" to="/events">
+                Explore Events
+              </Link>
+              <Link className="involve-button involve-button--secondary" to="/about">
+                Learn About GEMA
+              </Link>
             </div>
-            <Link className="involve-button involve-button--primary" to="/events">
-              Explore Events
-            </Link>
-          </div>
-        </Container>
-      </section>
-
-      <section className="involve-connect">
-        <Container>
-          <h2>Stay Connected</h2>
-          <div className="involve-connect__grid">
-            <a
-              className="involve-connect__item"
-              href={site.instagram.href}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <InstagramIcon />
-              <div>
-                <h3>Instagram</h3>
-                <p>
-                  Primary channel for event updates, recruitment, and
-                  announcements.
-                </p>
-                <span className="involve-connect__action">
-                  Visit Instagram
-                  <span className="visually-hidden"> (opens in a new tab)</span>
-                </span>
-              </div>
-            </a>
-            <a
-              className="involve-connect__item"
-              href={site.linkedin.href}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <LinkedInIcon />
-              <div>
-                <h3>LinkedIn</h3>
-                <p>
-                  Professional updates, organization news, and community
-                  highlights.
-                </p>
-                <span className="involve-connect__action">
-                  Visit LinkedIn
-                  <span className="visually-hidden"> (opens in a new tab)</span>
-                </span>
-              </div>
-            </a>
+            <div className="involve-new__social">
+              <a
+                className="involve-text-link"
+                href={site.instagram.href}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {site.instagram.label}
+                <span className="visually-hidden"> (opens in a new tab)</span>
+              </a>
+              <a
+                className="involve-text-link"
+                href={site.linkedin.href}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {site.linkedin.label}
+                <span className="visually-hidden"> (opens in a new tab)</span>
+              </a>
+            </div>
           </div>
         </Container>
       </section>
 
       <section className="involve-cta">
         <Container>
-          <h2>Start by showing up.</h2>
+          <h2>Ready to get involved?</h2>
           <p>
-            Come to an event, stay connected for updates, or apply when a role
-            opens.
+            Start by exploring what’s happening with GEMA and find the
+            opportunity that’s right for you.
           </p>
           <div className="involve-cta__actions">
             <Link className="involve-button involve-button--primary" to="/events">

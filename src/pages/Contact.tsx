@@ -1,44 +1,71 @@
 import { useEffect, useState, type FormEvent } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { Container } from '../components/Container'
 import {
+  contactChannels,
+  contactFormCopy,
   contactFormEndpoint,
+  contactHero,
   contactReasons,
   contactRoutes,
+  contactSuccess,
+  getContactReasonFromQuery,
 } from '../data/contact'
 import { site } from '../data/site'
 import './Contact.css'
 
 export function Contact() {
+  const [searchParams] = useSearchParams()
+  const selectedReason = getContactReasonFromQuery(searchParams.get('reason'))
   const [formNotice, setFormNotice] = useState<string | null>(null)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
   const formIsConnected = Boolean(contactFormEndpoint)
 
   useEffect(() => {
     document.title = 'Contact GEMA | GEMA'
   }, [])
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    if (formIsConnected) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+
+    if (!formIsConnected || !contactFormEndpoint) {
+      setFormNotice(contactFormCopy.blockedSubmit)
       return
     }
 
-    event.preventDefault()
-    setFormNotice(
-      'This form is not connected yet. It will be enabled before launch, and your message was not sent.',
-    )
+    setIsSubmitting(true)
+    setFormNotice(null)
+
+    const payload = new FormData(event.currentTarget)
+
+    try {
+      const response = await fetch(contactFormEndpoint, {
+        method: 'POST',
+        body: payload,
+        headers: { Accept: 'application/json' },
+      })
+
+      if (!response.ok) {
+        setFormNotice(contactFormCopy.error)
+        return
+      }
+
+      setSubmitted(true)
+    } catch {
+      setFormNotice(contactFormCopy.error)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
     <article className="contact">
       <section className="contact-hero">
         <Container>
-          <p className="contact-eyebrow">CONTACT</p>
-          <h1>Contact GEMA</h1>
-          <p className="contact-lede">
-            Students, partners, alumni, faculty, and community members are
-            welcome to get in touch. Use the options below to reach the right
-            part of GEMA.
-          </p>
+          <p className="contact-eyebrow">{contactHero.eyebrow}</p>
+          <h1>{contactHero.headline}</h1>
+          <p className="contact-lede">{contactHero.copy}</p>
         </Container>
       </section>
 
@@ -47,174 +74,173 @@ export function Contact() {
           <h2>Get in Touch</h2>
           <ul className="contact-options__grid">
             <li data-accent="red">
-              <h3>General Inquiries</h3>
-              <p>Questions about the association, collaborations, or anything else.</p>
+              <h3>{contactChannels.general.title}</h3>
+              <p>{contactChannels.general.copy}</p>
               {site.email ? (
                 <a className="contact-options__action" href={`mailto:${site.email}`}>
                   {site.email}
                 </a>
               ) : (
                 <p className="contact-options__placeholder">
-                  General GEMA email to be added
+                  {contactChannels.general.emailPlaceholder}
                 </p>
               )}
             </li>
             <li data-accent="gold">
-              <h3>Instagram</h3>
-              <p>Event updates, recruitment, and announcements.</p>
-              <a
-                className="contact-options__action"
-                href={site.instagram.href}
-                target="_blank"
-                rel="noreferrer"
+              <h3>{contactChannels.partnerships.title}</h3>
+              <p>{contactChannels.partnerships.copy}</p>
+              <Link
+                className="contact-button contact-button--primary contact-options__cta"
+                to={contactChannels.partnerships.to}
               >
-                {site.instagram.label}
-                <span className="visually-hidden"> (opens in a new tab)</span>
-              </a>
+                {contactChannels.partnerships.cta}
+              </Link>
             </li>
             <li data-accent="blue">
-              <h3>LinkedIn</h3>
-              <p>Professional updates, organization news, and community highlights.</p>
-              <a
-                className="contact-options__action"
-                href={site.linkedin.href}
-                target="_blank"
-                rel="noreferrer"
-              >
-                {site.linkedin.label}
-                <span className="visually-hidden"> (opens in a new tab)</span>
-              </a>
+              <h3>{contactChannels.social.title}</h3>
+              <p>{contactChannels.social.copy}</p>
+              <div className="contact-options__social">
+                <a
+                  className="contact-options__action"
+                  href={site.instagram.href}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {site.instagram.label}
+                  <span className="visually-hidden"> (opens in a new tab)</span>
+                </a>
+                <a
+                  className="contact-options__action"
+                  href={site.linkedin.href}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {site.linkedin.label}
+                  <span className="visually-hidden"> (opens in a new tab)</span>
+                </a>
+              </div>
             </li>
           </ul>
         </Container>
       </section>
 
-      <section className="contact-form-section">
+      <section className="contact-form-section" id="send-message">
         <Container>
-          <h2>Send Us a Message</h2>
-          <form
-            className="contact-form"
-            action={contactFormEndpoint ?? undefined}
-            method={formIsConnected ? 'POST' : undefined}
-            onSubmit={handleSubmit}
-          >
-            <div className="contact-form__row">
-              <div className="contact-field">
-                <label htmlFor="contact-name">Name</label>
+          {submitted ? (
+            <div className="contact-success">
+              <h2>{contactSuccess.heading}</h2>
+              <p>{contactSuccess.copy}</p>
+            </div>
+          ) : (
+            <>
+              <h2>{contactFormCopy.heading}</h2>
+              <p className="contact-form-intro">{contactFormCopy.copy}</p>
+              <form className="contact-form" onSubmit={handleSubmit}>
+                <div className="contact-form__row">
+                  <div className="contact-field">
+                    <label htmlFor="contact-name">Name</label>
+                    <input
+                      id="contact-name"
+                      name="name"
+                      type="text"
+                      autoComplete="name"
+                      required
+                    />
+                  </div>
+                  <div className="contact-field">
+                    <label htmlFor="contact-email">Email</label>
+                    <input
+                      id="contact-email"
+                      name="email"
+                      type="email"
+                      autoComplete="email"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="contact-field">
+                  <label htmlFor="contact-organization">
+                    Organization
+                    <span className="contact-field__hint">Optional</span>
+                  </label>
+                  <input
+                    id="contact-organization"
+                    name="organization"
+                    type="text"
+                    autoComplete="organization"
+                  />
+                </div>
+
+                <div className="contact-field">
+                  <label htmlFor="contact-subject">Reason for Contact</label>
+                  <select
+                    id="contact-subject"
+                    name="_subject"
+                    required
+                    key={selectedReason || 'default'}
+                    defaultValue={selectedReason}
+                  >
+                    <option value="" disabled>
+                      Select a reason
+                    </option>
+                    {contactReasons.map((reason) => (
+                      <option key={reason} value={reason}>
+                        {reason}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="contact-field">
+                  <label htmlFor="contact-message">Message</label>
+                  <textarea
+                    id="contact-message"
+                    name="message"
+                    rows={6}
+                    required
+                  />
+                </div>
+
                 <input
-                  id="contact-name"
-                  name="name"
+                  className="visually-hidden"
                   type="text"
-                  autoComplete="name"
-                  required
+                  name="_gotcha"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
                 />
-              </div>
-              <div className="contact-field">
-                <label htmlFor="contact-email">Email</label>
-                <input
-                  id="contact-email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  required
-                />
-              </div>
-            </div>
 
-            <div className="contact-field">
-              <label htmlFor="contact-subject">Subject / Reason for Contact</label>
-              <select id="contact-subject" name="_subject" required defaultValue="">
-                <option value="" disabled>
-                  Select a reason
-                </option>
-                {contactReasons.map((reason) => (
-                  <option key={reason} value={reason}>
-                    {reason}
-                  </option>
-                ))}
-              </select>
-            </div>
+                <button
+                  className="contact-button contact-button--primary"
+                  type="submit"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
+                </button>
 
-            <div className="contact-field">
-              <label htmlFor="contact-message">Message</label>
-              <textarea
-                id="contact-message"
-                name="message"
-                rows={6}
-                required
-              />
-            </div>
-
-            <input
-              className="visually-hidden"
-              type="text"
-              name="_gotcha"
-              tabIndex={-1}
-              autoComplete="off"
-              aria-hidden="true"
-            />
-
-            <button className="contact-button contact-button--primary" type="submit">
-              Send Message
-            </button>
-
-            {!formIsConnected ? (
-              <p className="contact-form__note" role="status">
-                {formNotice ??
-                  'Form submissions are not connected yet. This will be enabled before launch.'}
-              </p>
-            ) : null}
-          </form>
+                {!formIsConnected || formNotice ? (
+                  <p className="contact-form__note" role="status">
+                    {formNotice ?? contactFormCopy.disconnected}
+                  </p>
+                ) : null}
+              </form>
+            </>
+          )}
         </Container>
       </section>
 
       <section className="contact-routes">
         <Container>
-          <h2>Looking for Something Specific?</h2>
+          <h2>Looking for something specific?</h2>
           <ul className="contact-routes__list">
             {contactRoutes.map((item) => (
-              <li key={item.to} data-accent={item.accent}>
-                <Link to={item.to}>
-                  <span>
-                    <strong>{item.title}</strong>
-                    <span className="contact-routes__copy">{item.copy}</span>
-                  </span>
-                  <span className="contact-routes__arrow" aria-hidden="true">
-                    →
-                  </span>
-                </Link>
+              <li key={item.to}>
+                <span className="contact-routes__label">{item.title}</span>
+                <Link to={item.to}>{item.cta}</Link>
               </li>
             ))}
           </ul>
-        </Container>
-      </section>
-
-      <section className="contact-cta">
-        <Container>
-          <h2>Stay connected with GEMA.</h2>
-          <p>
-            Follow GEMA for announcements, opportunities, and upcoming events.
-          </p>
-          <div className="contact-cta__actions">
-            <a
-              className="contact-button contact-button--primary"
-              href={site.instagram.href}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Instagram
-              <span className="visually-hidden"> (opens in a new tab)</span>
-            </a>
-            <a
-              className="contact-button contact-button--secondary"
-              href={site.linkedin.href}
-              target="_blank"
-              rel="noreferrer"
-            >
-              LinkedIn
-              <span className="visually-hidden"> (opens in a new tab)</span>
-            </a>
-          </div>
         </Container>
       </section>
     </article>

@@ -21,10 +21,10 @@ export type GemaEvent = {
 /**
  * Featured section mode.
  *
- * - 'orientation' → section title is "Orientation Week"
- *   and featured O-Week events are shown
- * - 'standard' → section title is "Upcoming Events"
- *   and regular featured events are shown
+ * - 'orientation' → heading is "Orientation Week"
+ *   and Orientation Week events are shown
+ * - 'standard' → heading is "Upcoming Events"
+ *   and upcoming events are shown
  *
  * Switch this value only. Do not change page layout.
  */
@@ -36,6 +36,7 @@ export const featuredEventsMode: FeaturedEventsMode = 'standard'
  * Add confirmed events here. Use ISO dates (`YYYY-MM-DD`).
  * Times and locations can be plain display strings.
  * Set `status: 'upcoming'` to publish an event.
+ * Past and cancelled events are excluded from upcoming lists.
  *
  * Example:
  * {
@@ -59,19 +60,44 @@ export const events: GemaEvent[] = []
 export const eventsMedia = {
   hero: {
     src: null as string | null,
-    label: 'Replace with GEMA event photo',
-    alt: 'GEMA event',
+    label: 'Replace with networking, panel, or community event photo',
+    alt: 'GEMA students at an event',
   },
 }
 
+/** Neutral cards shown on /events until confirmed events are added. */
+export const eventsPagePlaceholderCount = 3
+
+export const featuredSectionCopy = {
+  orientation: {
+    heading: 'Orientation Week',
+    copy: 'Start the year with GEMA. Explore our Orientation Week events and find opportunities to meet other students, connect with the GEM community and get involved from the beginning.',
+  },
+  standard: {
+    heading: 'Upcoming Events',
+    copy: 'See what’s coming up with GEMA and find your next opportunity to connect, learn or get involved.',
+  },
+}
+
+export const featuredEmptyState = {
+  heading: 'More events are on the way.',
+  copy: 'GEMA programming is updated throughout the year. Check back soon or stay connected for upcoming events and announcements.',
+}
+
 export function getVisibleEvents() {
-  return events.filter((item) => item.status === 'upcoming')
+  const today = toISODate(new Date())
+
+  return events
+    .filter((item) => item.status === 'upcoming' && item.date >= today)
+    .sort((a, b) => a.date.localeCompare(b.date))
 }
 
 export function getFeaturedSectionTitle() {
-  return featuredEventsMode === 'orientation'
-    ? 'Orientation Week'
-    : 'Upcoming Events'
+  return featuredSectionCopy[featuredEventsMode].heading
+}
+
+export function getFeaturedSectionCopy() {
+  return featuredSectionCopy[featuredEventsMode].copy
 }
 
 export function getFeaturedEvents() {
@@ -86,7 +112,8 @@ export function getFeaturedEvents() {
       : visible.filter((item) => item.orientationWeek)
   }
 
-  return visible.filter((item) => item.featured)
+  const featured = visible.filter((item) => item.featured)
+  return featured.length > 0 ? featured : visible
 }
 
 export function getHomepageEvents(limit = 3) {

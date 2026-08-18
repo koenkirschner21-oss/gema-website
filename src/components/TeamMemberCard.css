@@ -78,9 +78,9 @@
   text-decoration: underline;
 }
 
-.team-card__linkedin.is-empty {
+.team-card--placeholder h3,
+.team-card--placeholder .team-card__body p {
   color: #8b9096;
-  font-weight: 500;
 }
 
 .team-card__linkedin:focus-visible {

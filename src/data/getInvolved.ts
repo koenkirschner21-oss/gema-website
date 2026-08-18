@@ -14,45 +14,50 @@ export const involveMedia = {
 export const involvementPaths = [
   {
     title: 'Attend Events',
-    copy: 'Join professional, social, networking, and community events throughout the year.',
+    copy: 'GEMA hosts professional, networking, social and community-focused events throughout the year. Attending an event is one of the easiest ways to meet other students and become more connected to the GEM community.',
     accent: 'red' as const,
+    cta: { label: 'Explore Events', to: '/events' },
   },
   {
     title: 'Join the Executive Team',
-    copy: 'Apply for leadership roles when recruitment opportunities are available.',
+    copy: "Take on a leadership role and contribute directly to GEMA's programming, operations and student experience. Recruitment opportunities are posted when positions become available.",
     accent: 'gold' as const,
+    cta: { label: 'View Current Opportunities', to: '#current-opportunities' },
   },
   {
     title: 'Support GEMA Initiatives',
-    copy: 'Contribute to events, projects, outreach, and other student-focused initiatives.',
+    copy: 'Get involved with the events, projects and initiatives GEMA runs throughout the year and help contribute to the student experience beyond the classroom.',
     accent: 'blue' as const,
+    cta: null,
   },
   {
     title: 'Stay Connected',
-    copy: 'Follow GEMA and stay aware of upcoming events, opportunities, and announcements.',
+    copy: 'Keep up with GEMA announcements, events, recruitment and other opportunities throughout the academic year.',
     accent: 'dark' as const,
+    cta: null,
+    social: true,
   },
 ]
 
 export const involvementBenefits = [
   {
-    title: 'Leadership Experience',
-    copy: 'Build practical experience by contributing to a student-run organization.',
+    title: 'Build Experience',
+    copy: 'Put skills into practice through real events, projects, responsibilities and student-led initiatives.',
     accent: 'red' as const,
   },
   {
-    title: 'Professional Development',
-    copy: 'Develop skills through events, projects, collaboration, and responsibility.',
+    title: 'Develop as a Leader',
+    copy: 'Take ownership, work with others and build practical leadership experience outside the classroom.',
     accent: 'gold' as const,
   },
   {
-    title: 'Community',
-    copy: 'Meet students across the GEM program and strengthen your campus network.',
+    title: 'Meet Your Community',
+    copy: 'Connect with other GEM students and build relationships with people across the program.',
     accent: 'blue' as const,
   },
   {
-    title: 'Connections',
-    copy: 'Engage with students, faculty, alumni, professionals, and the broader Lang community.',
+    title: 'Expand Your Network',
+    copy: 'Engage with students, faculty, alumni, professionals and organizations through GEMA programming and involvement.',
     accent: 'dark' as const,
   },
 ]

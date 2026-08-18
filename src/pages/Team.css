@@ -39,8 +39,15 @@
 }
 
 .team-section h2 {
-  margin-bottom: var(--space-6);
+  margin-bottom: var(--space-4);
   font-size: clamp(1.85rem, 3vw, 2.45rem);
+}
+
+.team-section__intro {
+  max-width: 40rem;
+  margin: 0 0 var(--space-6);
+  color: var(--color-text-secondary);
+  font-size: 1.08rem;
 }
 
 .team-leadership {

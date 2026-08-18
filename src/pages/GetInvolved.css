@@ -40,18 +40,20 @@
 .involve-openings__empty p,
 .involve-why__benefits p,
 .involve-new__panel p,
-.involve-connect__item p,
 .involve-cta p {
   color: var(--color-text-secondary);
 }
 
-.involve-openings__empty .involve-openings__empty-title {
-  color: var(--color-text);
-}
-
 .involve-lede {
   max-width: 36rem;
+  margin-bottom: var(--space-5);
   font-size: 1.08rem;
+}
+
+.involve-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
 }
 
 .involve-hero__media,
@@ -79,17 +81,19 @@
 
 .involve-ways,
 .involve-openings,
-.involve-why,
-.involve-connect {
+.involve-why {
   padding: 6rem 0;
   border-top: 1px solid var(--color-border);
+}
+
+#current-opportunities {
+  scroll-margin-top: calc(var(--nav-height) + 1rem);
 }
 
 .involve-ways h2,
 .involve-openings h2,
 .involve-why h2,
 .involve-new__panel h2,
-.involve-connect h2,
 .involve-cta h2 {
   margin-bottom: var(--space-4);
   font-size: clamp(1.85rem, 3vw, 2.45rem);
@@ -97,8 +101,7 @@
 
 .involve-ways h2,
 .involve-openings h2,
-.involve-why h2,
-.involve-connect h2 {
+.involve-why h2 {
   margin-bottom: var(--space-6);
 }
 
@@ -139,22 +142,42 @@
   font-size: 1.55rem;
 }
 
+.involve-text-link {
+  display: inline-block;
+  margin-top: var(--space-4);
+  color: var(--color-red);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.involve-text-link:hover {
+  text-decoration: underline;
+}
+
+.involve-text-link:focus-visible {
+  outline: 2px solid var(--color-red);
+  outline-offset: 3px;
+}
+
+.involve-ways__social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
 .involve-openings__empty {
   max-width: 40rem;
   padding-top: var(--space-5);
   border-top: 5px solid var(--color-red);
 }
 
-.involve-openings__empty-title {
-  margin-bottom: var(--space-3);
-  color: var(--color-text);
-  font-family: var(--font-heading);
-  font-size: 1.45rem;
-  font-weight: 700;
+.involve-openings__empty h2 {
+  max-width: 16ch;
+  margin-bottom: var(--space-4);
 }
 
-.involve-openings__empty p + p {
-  margin-bottom: var(--space-5);
+.involve-openings__empty p {
+  margin: 0 0 var(--space-5);
 }
 
 .involve-openings__actions,
@@ -265,16 +288,14 @@
 }
 
 .involve-new__panel {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: var(--space-6);
-  align-items: center;
+  max-width: 40rem;
   padding: var(--space-6) 0;
   border-top: 5px solid var(--color-gold);
   border-bottom: 1px solid var(--color-border);
 }
 
 .involve-new__panel h2 {
+  max-width: 16ch;
   margin-bottom: var(--space-3);
 }
 
@@ -284,51 +305,26 @@
   font-size: 1.08rem;
 }
 
-.involve-connect__grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-5);
-}
-
-.involve-connect__item {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: var(--space-4);
-  min-width: 0;
-  padding: var(--space-5) 0;
-  color: inherit;
-  text-decoration: none;
-  border-top: 1px solid var(--color-border);
-  border-bottom: 1px solid var(--color-border);
-}
-
-.involve-connect__icon {
-  width: 1.5rem;
-  height: 1.5rem;
-  margin-top: 0.2rem;
-  color: var(--color-red);
-}
-
-.involve-connect__item h3 {
-  margin-bottom: var(--space-2);
-  font-size: 1.45rem;
-}
-
-.involve-connect__action {
-  display: inline-block;
+.involve-new__panel p + p {
   margin-top: var(--space-4);
-  color: var(--color-red);
-  font-size: 0.95rem;
-  font-weight: 600;
 }
 
-.involve-connect__item:hover .involve-connect__action {
-  text-decoration: underline;
+.involve-new__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
 }
 
-.involve-connect__item:focus-visible {
-  outline: 2px solid var(--color-red);
-  outline-offset: 4px;
+.involve-new__social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+.involve-new__social .involve-text-link {
+  margin-top: 0;
 }
 
 .involve-cta {
@@ -398,9 +394,7 @@
 @media (max-width: 860px) {
   .involve-hero__grid,
   .involve-ways__grid,
-  .involve-why__grid,
-  .involve-new__panel,
-  .involve-connect__grid {
+  .involve-why__grid {
     grid-template-columns: 1fr;
     gap: var(--space-5);
   }
@@ -425,23 +419,14 @@
     order: -1;
   }
 
-  .involve-connect__item + .involve-connect__item {
-    border-top: none;
-  }
-
   .involve-ways,
   .involve-openings,
-  .involve-why,
-  .involve-connect {
+  .involve-why {
     padding: 4.5rem 0;
   }
 
   .involve-new {
     padding-bottom: 3.5rem;
-  }
-
-  .involve-new__panel {
-    justify-items: start;
   }
 }
 
@@ -454,7 +439,6 @@
   .involve-openings h2,
   .involve-why h2,
   .involve-new__panel h2,
-  .involve-connect h2,
   .involve-cta h2 {
     font-size: clamp(1.75rem, 7vw, 2.2rem);
   }
@@ -469,7 +453,9 @@
   }
 
   .involve-openings__actions,
-  .involve-cta__actions {
+  .involve-cta__actions,
+  .involve-hero__actions,
+  .involve-new__actions {
     display: grid;
   }
 

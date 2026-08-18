@@ -153,7 +153,7 @@
   background: var(--color-neutral);
 }
 
-@media (max-width: 960px) {
+@media (max-width: 1080px) {
   .navbar__toggle {
     display: block;
   }

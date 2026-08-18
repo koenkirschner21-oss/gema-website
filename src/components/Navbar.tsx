@@ -14,6 +14,7 @@ export function Navbar() {
   const location = useLocation()
   const [mobileOpen, setMobileOpen] = useState(false)
   const [aboutOpen, setAboutOpen] = useState(false)
+  const [menuPathname, setMenuPathname] = useState(location.pathname)
   const headerRef = useRef<HTMLElement>(null)
   const aboutItemRef = useRef<HTMLLIElement>(null)
   const aboutButtonRef = useRef<HTMLButtonElement>(null)
@@ -73,6 +74,12 @@ export function Navbar() {
   useEffect(() => {
     return () => window.clearTimeout(closeTimer.current)
   }, [])
+
+  if (location.pathname !== menuPathname) {
+    setMenuPathname(location.pathname)
+    setMobileOpen(false)
+    setAboutOpen(false)
+  }
 
   function openAbout() {
     window.clearTimeout(closeTimer.current)

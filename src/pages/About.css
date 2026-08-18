@@ -29,10 +29,17 @@
 }
 
 .about-hero h1 {
-  max-width: 16ch;
+  max-width: 10ch;
   margin-bottom: var(--space-4);
   font-size: clamp(1.85rem, 3vw, 2.55rem);
   line-height: 1.12;
+}
+
+.about-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
 }
 
 .about-lede,
@@ -100,6 +107,23 @@
 
 .about-who__copy p + p {
   margin-top: var(--space-4);
+}
+
+.about-text-link {
+  display: inline-block;
+  margin-top: var(--space-5);
+  color: var(--color-red);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.about-text-link:hover {
+  text-decoration: underline;
+}
+
+.about-text-link:focus-visible {
+  outline: 2px solid var(--color-red);
+  outline-offset: 3px;
 }
 
 .about-values {
@@ -340,7 +364,7 @@
   }
 
   .about-hero h1 {
-    max-width: 16ch;
+    max-width: 10ch;
     font-size: clamp(1.75rem, 6vw, 2.2rem);
   }
 

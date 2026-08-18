@@ -36,11 +36,13 @@ export function Footer() {
               <li>
                 <a href={site.instagram.href} target="_blank" rel="noreferrer">
                   {site.instagram.label}
+                  <span className="visually-hidden"> (opens in a new tab)</span>
                 </a>
               </li>
               <li>
                 <a href={site.linkedin.href} target="_blank" rel="noreferrer">
                   {site.linkedin.label}
+                  <span className="visually-hidden"> (opens in a new tab)</span>
                 </a>
               </li>
               <li>

@@ -6,15 +6,18 @@ import { EventsCalendar } from '../components/EventsCalendar'
 import { PhotoPlaceholder } from '../components/PhotoPlaceholder'
 import {
   eventsMedia,
+  eventsPagePlaceholderCount,
+  featuredEmptyState,
   getFeaturedEvents,
+  getFeaturedSectionCopy,
   getFeaturedSectionTitle,
 } from '../data/events'
-import { site } from '../data/site'
 import './Events.css'
 
 export function Events() {
   const featuredEvents = getFeaturedEvents()
   const featuredTitle = getFeaturedSectionTitle()
+  const featuredCopy = getFeaturedSectionCopy()
 
   useEffect(() => {
     document.title = 'Events | GEMA'
@@ -27,13 +30,26 @@ export function Events() {
           <div className="events-hero__grid">
             <div className="events-hero__copy">
               <p className="events-eyebrow">EVENTS</p>
-              <h1>Connect, learn, and get involved.</h1>
+              <h1>Events</h1>
               <p className="events-lede">
-                GEMA hosts professional, networking, social, and
-                community-focused programming throughout the academic year.
-                This page is where students can see what is happening now and
-                what is coming next.
+                GEMA hosts events throughout the year that bring students
+                together, create opportunities to learn and connect, and
+                strengthen the GEM community beyond the classroom.
               </p>
+              <div className="events-hero__actions">
+                <a
+                  className="events-button events-button--primary"
+                  href="#featured-events"
+                >
+                  View Upcoming Events
+                </a>
+                <Link
+                  className="events-button events-button--secondary"
+                  to="/get-involved"
+                >
+                  Get Involved
+                </Link>
+              </div>
             </div>
             <div className="events-hero__media">
               <PhotoPlaceholder
@@ -47,9 +63,10 @@ export function Events() {
         </Container>
       </section>
 
-      <section className="events-featured">
+      <section className="events-featured" id="featured-events">
         <Container>
           <h2>{featuredTitle}</h2>
+          <p className="events-section-copy">{featuredCopy}</p>
           {featuredEvents.length > 0 ? (
             <div className="events-featured__grid">
               {featuredEvents.map((event) => (
@@ -57,33 +74,25 @@ export function Events() {
               ))}
             </div>
           ) : (
-            <div className="events-empty">
-              <p className="events-empty__title">New events are on the way.</p>
-              <p>
-                Upcoming GEMA programming will appear here once dates and
-                details are confirmed.
-              </p>
-              <div className="events-empty__actions">
-                <a
-                  className="events-button events-button--primary"
-                  href={site.instagram.href}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Stay Connected
-                  <span className="visually-hidden">
-                    {' '}
-                    on Instagram (opens in a new tab)
-                  </span>
-                </a>
-                <Link
-                  className="events-button events-button--secondary"
-                  to="/get-involved"
-                >
-                  Get Involved
-                </Link>
+            <>
+              <div className="events-featured__grid">
+                {Array.from({ length: eventsPagePlaceholderCount }, (_, index) => (
+                  <EventCard key={`event-placeholder-${index}`} placeholder />
+                ))}
               </div>
-            </div>
+              <div className="events-empty">
+                <p className="events-empty__title">{featuredEmptyState.heading}</p>
+                <p>{featuredEmptyState.copy}</p>
+                <div className="events-empty__actions">
+                  <Link
+                    className="events-button events-button--primary"
+                    to="/get-involved"
+                  >
+                    Get Involved
+                  </Link>
+                </div>
+              </div>
+            </>
           )}
         </Container>
       </section>
@@ -91,6 +100,10 @@ export function Events() {
       <section className="events-calendar">
         <Container>
           <h2>Events Calendar</h2>
+          <p className="events-section-copy">
+            View upcoming GEMA programming at a glance and plan ahead for
+            events throughout the semester.
+          </p>
           <EventsCalendar />
         </Container>
       </section>
@@ -101,8 +114,9 @@ export function Events() {
             <div>
               <h2>New to U of G or GEM?</h2>
               <p>
-                GEMA events are an easy way to meet people, learn more about
-                the community, and start getting involved.
+                Attending a GEMA event is one of the easiest ways to meet other
+                students, learn more about the community and start getting
+                involved.
               </p>
             </div>
             <div className="events-new__actions">
@@ -126,41 +140,40 @@ export function Events() {
       <section className="events-partner">
         <Container>
           <div className="events-partner__panel">
-            <h2>Host or Partner With GEMA</h2>
+            <h2>Interested in hosting or partnering on an event?</h2>
             <p>
-              Organizations, alumni, faculty, professionals, and community
-              partners are invited to collaborate on events, panels, networking
-              opportunities, or student programming.
+              GEMA works with organizations, professionals, alumni, faculty and
+              community partners to create programming that provides meaningful
+              value to students.
             </p>
-            <Link
-              className="events-button events-button--primary"
-              to="/partners"
-            >
-              Explore Partnerships
-            </Link>
+            <div className="events-partner__actions">
+              <Link
+                className="events-button events-button--primary"
+                to="/partners"
+              >
+                Explore Partnerships
+              </Link>
+              <Link
+                className="events-button events-button--secondary"
+                to="/contact?reason=partnership"
+              >
+                Contact GEMA
+              </Link>
+            </div>
           </div>
         </Container>
       </section>
 
       <section className="events-cta">
         <Container>
-          <h2>Stay up to date.</h2>
+          <h2>Find your next GEMA event.</h2>
           <p>
-            Follow GEMA for event announcements, opportunities, and updates
-            throughout the year.
+            Events are one of the easiest ways to connect with other GEM
+            students and become more involved in the community.
           </p>
           <div className="events-cta__actions">
-            <a
-              className="events-button events-button--primary"
-              href={site.instagram.href}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Instagram
-              <span className="visually-hidden"> (opens in a new tab)</span>
-            </a>
             <Link
-              className="events-button events-button--secondary"
+              className="events-button events-button--primary"
               to="/get-involved"
             >
               Get Involved
