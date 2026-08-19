@@ -11,6 +11,29 @@ export const homeMedia = {
   },
 }
 
+export const homeIntroPoints = [
+  {
+    title: 'Student representation',
+    copy: 'Helping make sure GEM students have a voice within their program community.',
+    accent: 'red' as const,
+  },
+  {
+    title: 'Community',
+    copy: 'Creating more opportunities for students to meet, connect and feel part of GEM.',
+    accent: 'gold' as const,
+  },
+  {
+    title: 'Experience beyond the classroom',
+    copy: 'Giving students access to events, initiatives and professional development opportunities.',
+    accent: 'blue' as const,
+  },
+  {
+    title: 'Leadership & involvement',
+    copy: 'Creating ways for students to contribute, take responsibility and build practical experience.',
+    accent: 'dark' as const,
+  },
+]
+
 export const homePillars = [
   {
     title: 'Representation',
@@ -19,17 +42,17 @@ export const homePillars = [
   },
   {
     title: 'Community',
-    copy: 'GEMA creates opportunities for students to connect, build relationships and feel part of the program community.',
+    copy: 'GEMA creates opportunities for students to connect, build relationships, and feel part of the program community.',
     accent: 'gold' as const,
   },
   {
     title: 'Professional Development',
-    copy: 'GEMA connects students with experiences, speakers, events and opportunities that support growth beyond the classroom.',
+    copy: 'GEMA connects students with experiences, speakers, events, and opportunities that support growth beyond the classroom.',
     accent: 'blue' as const,
   },
   {
     title: 'Leadership',
-    copy: 'GEMA gives students opportunities to take responsibility, contribute to the organization and develop practical leadership experience.',
+    copy: 'GEMA gives students opportunities to take responsibility, contribute to the organization, and develop practical leadership experience.',
     accent: 'dark' as const,
   },
 ]

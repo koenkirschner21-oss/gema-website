@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {
   formatEventDate,
   formatEventTime,
@@ -9,6 +10,16 @@ type EventCardProps = {
   event?: GemaEvent
   compact?: boolean
   placeholder?: boolean
+}
+
+function EventPhoto({ src }: { src: string }) {
+  const [failed, setFailed] = useState(false)
+
+  if (failed) {
+    return <span className="visually-hidden">Event photo to be added</span>
+  }
+
+  return <img src={src} alt="" onError={() => setFailed(true)} />
 }
 
 export function EventCard({
@@ -48,7 +59,7 @@ export function EventCard({
       {compact ? null : (
         <div className="event-card__media">
           {event.image ? (
-            <img src={event.image} alt="" />
+            <EventPhoto src={event.image} />
           ) : (
             <span className="visually-hidden">Event photo to be added</span>
           )}

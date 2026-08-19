@@ -1,14 +1,37 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Container } from '../components/Container'
-import { PhotoPlaceholder } from '../components/PhotoPlaceholder'
 import {
+  gemCoopPoints,
   gemFacets,
   gemMedia,
   gemOfficialCoopUrl,
   gemOfficialProgramUrl,
 } from '../data/gemMajor'
 import './GemMajor.css'
+
+function GemMedia({
+  src,
+  alt,
+  ratio,
+}: {
+  src: string | null
+  alt: string
+  ratio: 'wide' | 'editorial'
+}) {
+  const [failed, setFailed] = useState(false)
+  const showImage = Boolean(src) && !failed
+
+  return (
+    <figure className={`photo-placeholder photo-placeholder--${ratio}`}>
+      {showImage ? (
+        <img src={src ?? undefined} alt={alt} onError={() => setFailed(true)} />
+      ) : (
+        <span className="visually-hidden">{alt}</span>
+      )}
+    </figure>
+  )
+}
 
 export function GemMajor() {
   useEffect(() => {
@@ -32,15 +55,21 @@ export function GemMajor() {
                 foundation of a Lang commerce degree.
               </p>
               <div className="gem-hero__actions">
-                <a
-                  className="gem-button gem-button--primary"
-                  href={gemOfficialProgramUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Explore the Official Program
-                  <span className="visually-hidden"> (opens in a new tab)</span>
-                </a>
+                {gemOfficialProgramUrl ? (
+                  <a
+                    className="gem-button gem-button--primary"
+                    href={gemOfficialProgramUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Explore the Official Program
+                    <span className="visually-hidden"> (opens in a new tab)</span>
+                  </a>
+                ) : (
+                  <span className="gem-button gem-button--primary">
+                    Explore the Official Program
+                  </span>
+                )}
                 <Link
                   className="gem-button gem-button--secondary"
                   to="/get-involved"
@@ -50,9 +79,8 @@ export function GemMajor() {
               </div>
             </div>
             <div className="gem-hero__media">
-              <PhotoPlaceholder
+              <GemMedia
                 src={gemMedia.hero.src}
-                label={gemMedia.hero.label}
                 alt={gemMedia.hero.alt}
                 ratio="wide"
               />
@@ -65,7 +93,7 @@ export function GemMajor() {
         <Container>
           <div className="gem-what__grid">
             <div className="gem-what__copy">
-              <h2>What is GEM?</h2>
+              <h2>What Is GEM?</h2>
               <p>
                 GEM combines the core areas of a business education with a
                 deeper understanding of economics, government and public policy.
@@ -97,9 +125,8 @@ export function GemMajor() {
         <Container>
           <div className="gem-coop__grid">
             <div className="gem-coop__media">
-              <PhotoPlaceholder
+              <GemMedia
                 src={gemMedia.coop.src}
-                label={gemMedia.coop.label}
                 alt={gemMedia.coop.alt}
                 ratio="editorial"
               />
@@ -115,15 +142,22 @@ export function GemMajor() {
                 the classroom, develop workplace skills and gain exposure to
                 different organizations and industries before graduating.
               </p>
-              <a
-                className="gem-button gem-button--primary"
-                href={gemOfficialCoopUrl}
-                target="_blank"
-                rel="noreferrer"
-              >
-                Learn About GEM Co-op
-                <span className="visually-hidden"> (opens in a new tab)</span>
-              </a>
+              <ul className="gem-coop__points">
+                {gemCoopPoints.map((point) => (
+                  <li key={point}>{point}</li>
+                ))}
+              </ul>
+              {gemOfficialCoopUrl ? (
+                <a
+                  className="gem-button gem-button--primary"
+                  href={gemOfficialCoopUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Learn About GEM Co-op
+                  <span className="visually-hidden"> (opens in a new tab)</span>
+                </a>
+              ) : null}
             </div>
           </div>
         </Container>
@@ -131,41 +165,55 @@ export function GemMajor() {
 
       <section className="gem-official">
         <Container>
-          <div className="gem-official__panel">
-            <h2>Explore the Official GEM Program</h2>
-            <p>
-              For official information on curriculum, courses, admissions, co-op
-              requirements and program details, visit the University of
-              Guelph’s Government, Economics & Management program page.
-            </p>
-            <a
-              className="gem-button gem-button--primary"
-              href={gemOfficialProgramUrl}
-              target="_blank"
-              rel="noreferrer"
-            >
-              View the Official GEM Program
-              <span className="visually-hidden"> (opens in a new tab)</span>
-            </a>
+          <div className="gem-official__grid">
+            <div className="gem-official__copy">
+              <p className="gem-official__label">Official Program Information</p>
+              <h2>Explore the official GEM program.</h2>
+              <p className="gem-official__body">
+                For curriculum, course requirements, admissions, co-op
+                requirements and other formal academic details, use the
+                University of Guelph’s official Government, Economics &
+                Management program page.
+              </p>
+            </div>
+            <div className="gem-official__action">
+              {gemOfficialProgramUrl ? (
+                <a
+                  className="gem-button gem-button--primary"
+                  href={gemOfficialProgramUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  View Official GEM Program
+                  <span className="visually-hidden"> (opens in a new tab)</span>
+                </a>
+              ) : (
+                <span className="gem-button gem-button--primary">
+                  View Official GEM Program
+                </span>
+              )}
+            </div>
           </div>
         </Container>
       </section>
 
       <section className="gem-cta">
         <Container>
-          <h2>Make the most of your GEM experience.</h2>
-          <p>
-            Your program is only one part of your university experience. GEMA
-            gives GEM students more ways to meet people, attend events, build
-            experience and get involved outside the classroom.
-          </p>
-          <div className="gem-cta__actions">
-            <Link className="gem-button gem-button--primary" to="/get-involved">
-              Get Involved
-            </Link>
-            <Link className="gem-button gem-button--secondary" to="/about">
-              About GEMA
-            </Link>
+          <div className="gem-cta__content">
+            <h2>Make the most of your GEM experience.</h2>
+            <p>
+              Your program is only one part of your university experience. GEMA
+              gives GEM students more ways to meet people, attend events, build
+              experience and get involved outside the classroom.
+            </p>
+            <div className="gem-cta__actions">
+              <Link className="gem-button gem-button--on-red" to="/get-involved">
+                Get Involved
+              </Link>
+              <Link className="gem-button gem-button--on-red-secondary" to="/about">
+                About GEMA
+              </Link>
+            </div>
           </div>
         </Container>
       </section>

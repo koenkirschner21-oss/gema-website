@@ -1,10 +1,10 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Container } from '../components/Container'
 import { EventCard } from '../components/EventCard'
-import { PhotoPlaceholder } from '../components/PhotoPlaceholder'
 import { getHomepageEvents } from '../data/events'
 import {
+  homeIntroPoints,
   homeMedia,
   homePillars,
   homepageEventPlaceholderCount,
@@ -12,6 +12,45 @@ import {
 } from '../data/home'
 import { getPastPartnersWithLogos } from '../data/partners'
 import './Home.css'
+
+function HomeMedia({
+  src,
+  alt,
+  ratio,
+}: {
+  src: string | null
+  alt: string
+  ratio: 'wide'
+}) {
+  const [failed, setFailed] = useState(false)
+  const showImage = Boolean(src) && !failed
+
+  return (
+    <figure className={`photo-placeholder photo-placeholder--${ratio}`}>
+      {showImage ? (
+        <img src={src ?? undefined} alt={alt} onError={() => setFailed(true)} />
+      ) : (
+        <span className="visually-hidden">{alt}</span>
+      )}
+    </figure>
+  )
+}
+
+function HomePartnerLogo({
+  src,
+  name,
+}: {
+  src: string
+  name: string
+}) {
+  const [failed, setFailed] = useState(false)
+
+  if (failed) {
+    return <span className="visually-hidden">{name}</span>
+  }
+
+  return <img src={src} alt={name} onError={() => setFailed(true)} />
+}
 
 export function Home() {
   const homepageEvents = getHomepageEvents()
@@ -49,9 +88,8 @@ export function Home() {
               </div>
             </div>
             <div className="home-hero__media">
-              <PhotoPlaceholder
+              <HomeMedia
                 src={homeMedia.hero.src}
-                label={homeMedia.hero.label}
                 alt={homeMedia.hero.alt}
                 ratio="wide"
               />
@@ -64,22 +102,31 @@ export function Home() {
         <Container>
           <div className="home-intro__grid">
             <div className="home-intro__copy">
-              <h2>What is GEMA?</h2>
-              <p>GEMA is where the GEM community comes together outside the classroom.</p>
+              <h2>What Is GEMA?</h2>
               <p>
-                We create opportunities for students to meet one another, take
-                part in events, connect with professionals, build experience and
-                have a voice within their program. Whether you want to attend
-                your first event or take on a leadership role, GEMA gives GEM
-                students more ways to make the most of their time at Guelph.
+                GEMA is the student association for the Government, Economics
+                & Management major at the University of Guelph.
+              </p>
+              <p>
+                We bring students together, represent the GEM community and
+                create opportunities to connect, develop professionally and get
+                involved beyond the classroom.
               </p>
               <Link className="home-text-link" to="/about">
                 Learn About GEMA
               </Link>
             </div>
-            <p className="home-intro__statement">
-              A student association for GEM students at Lang.
-            </p>
+            <ul className="home-intro__points">
+              {homeIntroPoints.map((item) => (
+                <li key={item.title} data-accent={item.accent}>
+                  <span className="home-intro__mark" aria-hidden="true" />
+                  <div>
+                    <h3>{item.title}</h3>
+                    <p>{item.copy}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
           </div>
         </Container>
       </section>
@@ -88,19 +135,13 @@ export function Home() {
         <Container>
           <h2>What We Do</h2>
           <ul className="home-do__grid">
-            {homePillars.map((item, index) => (
+            {homePillars.map((item) => (
               <li key={item.title} data-accent={item.accent}>
-                <span className="home-do__index" aria-hidden="true">
-                  {String(index + 1).padStart(2, '0')}
-                </span>
                 <h3>{item.title}</h3>
                 <p>{item.copy}</p>
               </li>
             ))}
           </ul>
-          <Link className="home-text-link" to="/about">
-            Learn More About GEMA
-          </Link>
         </Container>
       </section>
 
@@ -109,9 +150,8 @@ export function Home() {
           <div className="home-events__intro">
             <h2>See what’s happening with GEMA.</h2>
             <p>
-              From professional development and networking to social and
-              community events, GEMA creates opportunities to connect throughout
-              the year.
+              From professional development and networking to community events,
+              there are plenty of ways to connect throughout the year.
             </p>
             <Link className="home-text-link home-text-link--inline" to="/events">
               View All Events
@@ -123,7 +163,14 @@ export function Home() {
                   <EventCard key={event.id} event={event} />
                 ))
               : Array.from({ length: homepageEventPlaceholderCount }, (_, index) => (
-                  <EventCard key={`event-placeholder-${index}`} placeholder />
+                  <article
+                    key={`event-placeholder-${index}`}
+                    className="home-event-placeholder"
+                    aria-label="Event placeholder"
+                  >
+                    <div className="home-event-placeholder__media" />
+                    <p>Event details coming soon</p>
+                  </article>
                 ))}
           </div>
         </Container>
@@ -156,9 +203,8 @@ export function Home() {
               </div>
             </div>
             <div className="home-involve__media">
-              <PhotoPlaceholder
+              <HomeMedia
                 src={homeMedia.involve.src}
-                label={homeMedia.involve.label}
                 alt={homeMedia.involve.alt}
                 ratio="wide"
               />
@@ -173,38 +219,48 @@ export function Home() {
           <p className="home-partners__copy">
             GEMA has worked with organizations and community partners to support
             student programming, professional development and experiences for
-            the GEM community. The organizations recognized here are previous
-            partners and sponsors.
+            the GEM community.
           </p>
-          <div className="home-partners__logos">
-            {pastPartnerLogos.length > 0
-              ? pastPartnerLogos.map((partner) =>
-                  partner.url ? (
-                    <a
-                      key={partner.id}
-                      className="home-partners__logo"
-                      href={partner.url}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      <img src={partner.logo} alt={partner.name} />
-                      <span className="visually-hidden"> (opens in a new tab)</span>
-                    </a>
-                  ) : (
-                    <div key={partner.id} className="home-partners__logo">
-                      <img src={partner.logo} alt={partner.name} />
-                    </div>
-                  ),
-                )
-              : Array.from({ length: pastPartnerPlaceholderCount }, (_, index) => (
+          <p className="home-partners__note">
+            The organizations recognized here are previous partners and
+            sponsors.
+          </p>
+          {pastPartnerLogos.length > 0 ? (
+            <div className="home-partners__logos">
+              {pastPartnerLogos.map((partner) =>
+                partner.url ? (
+                  <a
+                    key={partner.id}
+                    className="home-partners__logo"
+                    href={partner.url}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <HomePartnerLogo src={partner.logo} name={partner.name} />
+                    <span className="visually-hidden"> (opens in a new tab)</span>
+                  </a>
+                ) : (
+                  <div key={partner.id} className="home-partners__logo">
+                    <HomePartnerLogo src={partner.logo} name={partner.name} />
+                  </div>
+                ),
+              )}
+            </div>
+          ) : (
+            <div className="home-partners__empty">
+              <p className="home-partners__empty-label">Past partners</p>
+              <div className="home-partners__logos">
+                {Array.from({ length: pastPartnerPlaceholderCount }, (_, index) => (
                   <div
                     key={`past-partner-placeholder-${index}`}
                     className="home-partners__logo is-placeholder"
                   >
-                    <span>Past partner logo</span>
+                    <span>Logo</span>
                   </div>
                 ))}
-          </div>
+              </div>
+            </div>
+          )}
           <Link className="home-button home-button--primary" to="/partners">
             Partner With GEMA
           </Link>

@@ -40,25 +40,7 @@ export function getContactReasonFromQuery(reason: string | null): ContactReason 
 export const contactHero = {
   eyebrow: 'CONTACT',
   headline: 'Contact GEMA',
-  copy: "Have a question, partnership idea or want to learn more about GEMA? Reach out and we'll help connect you with the right person.",
-}
-
-export const contactChannels = {
-  general: {
-    title: 'General Inquiries',
-    copy: 'For general questions about GEMA, our events, involvement or the GEM community.',
-    emailPlaceholder: 'General GEMA email to be added',
-  },
-  partnerships: {
-    title: 'Partnerships & Sponsorships',
-    copy: 'Interested in partnering with GEMA, supporting an event or exploring sponsorship opportunities? Send us an inquiry and our team can follow up with more information.',
-    cta: 'Partnership Inquiry',
-    to: '/contact?reason=partnership#send-message',
-  },
-  social: {
-    title: 'Social Media',
-    copy: 'For current announcements, events and updates, connect with GEMA through our social channels.',
-  },
+  copy: 'Students, partners, alumni, faculty, and community members are welcome to get in touch. Use the options below to reach the right part of GEMA.',
 }
 
 export const contactFormCopy = {
@@ -79,23 +61,46 @@ export const contactSuccess = {
 
 export const contactRoutes = [
   {
-    title: 'Events',
-    cta: 'Explore Events',
-    to: '/events',
-  },
-  {
-    title: 'Get Involved',
-    cta: 'Get Involved',
-    to: '/get-involved',
-  },
-  {
     title: 'Partnerships',
-    cta: 'Explore Partnerships',
+    copy: 'Interested in sponsorship or collaboration?',
     to: '/partners',
+    accent: 'red' as const,
+  },
+  {
+    title: 'Events',
+    copy: 'Looking for upcoming GEMA programming?',
+    to: '/events',
+    accent: 'gold' as const,
+  },
+  {
+    title: 'Join GEMA',
+    copy: 'Interested in opportunities or getting involved?',
+    to: '/get-involved',
+    accent: 'blue' as const,
   },
   {
     title: 'GEM Major',
-    cta: 'Explore the GEM Major',
+    copy: 'Looking for information about the academic program?',
     to: '/gem-major',
+    accent: 'dark' as const,
   },
 ]
+
+export const contactConnect = {
+  heading: 'Get in Touch & Stay Connected',
+  general: {
+    title: 'General Inquiries',
+    copy: 'Questions about the association, collaborations, or anything else.',
+    emailPlaceholder: 'General GEMA email to be added',
+  },
+  instagram: {
+    title: 'Instagram',
+    copy: 'Event updates, recruitment, and announcements.',
+    linkLabel: 'Visit Instagram',
+  },
+  linkedin: {
+    title: 'LinkedIn',
+    copy: 'Professional updates, organization news, and community highlights.',
+    linkLabel: 'Visit LinkedIn',
+  },
+}

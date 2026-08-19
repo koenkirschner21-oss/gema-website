@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import './PhotoPlaceholder.css'
 
 type PhotoPlaceholderProps = {
@@ -13,12 +14,20 @@ export function PhotoPlaceholder({
   src,
   ratio,
 }: PhotoPlaceholderProps) {
+  const [failed, setFailed] = useState(false)
+  const showImage = Boolean(src) && !failed
+
   return (
     <figure className={`photo-placeholder photo-placeholder--${ratio}`}>
-      {src ? (
-        <img src={src} alt={alt} />
+      {showImage ? (
+        <img src={src ?? undefined} alt={alt} onError={() => setFailed(true)} />
       ) : (
-        <figcaption className="photo-placeholder__label">{label}</figcaption>
+        <>
+          <span className="visually-hidden">{alt}</span>
+          {src ? null : (
+            <figcaption className="photo-placeholder__label">{label}</figcaption>
+          )}
+        </>
       )}
     </figure>
   )

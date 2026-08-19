@@ -62,44 +62,44 @@ export const partnerMedia = {
 export const partnerSupport = [
   {
     title: 'Events & Programming',
-    copy: 'Support events, panels, networking opportunities and other programming designed to bring students together and expand their experiences beyond the classroom.',
+    copy: 'Supporting professional, networking, social, and student-facing experiences.',
     accent: 'red' as const,
   },
   {
     title: 'Professional Development',
-    copy: 'Help create opportunities for students to engage with professionals, explore different perspectives and build connections beyond the university.',
+    copy: 'Helping connect students with speakers, industry knowledge, networking, and career-related opportunities.',
     accent: 'gold' as const,
   },
   {
-    title: 'Student Engagement',
-    copy: 'Connect with the GEM community through relevant initiatives, conversations and experiences throughout the academic year.',
+    title: 'Community Initiatives',
+    copy: 'Supporting activities and experiences that strengthen the broader GEMA student community.',
     accent: 'blue' as const,
   },
   {
     title: 'In-Kind Support',
-    copy: 'Organizations can also support GEMA through products, services, resources or other non-monetary contributions that strengthen student programming.',
+    copy: 'Providing goods, services, merchandise, coupons, resources, or other non-monetary contributions.',
     accent: 'dark' as const,
   },
 ]
 
 export const partnerBenefits = [
   {
-    title: 'Connect With Students',
-    copy: 'Engage directly with GEM students through relevant programming, events and initiatives.',
+    title: 'Brand Exposure',
+    copy: 'Introduce your organization to students through appropriate GEMA communications, programming and partnership opportunities.',
     accent: 'red' as const,
   },
   {
-    title: 'Build Campus Visibility',
-    copy: 'Introduce your organization to students through appropriate GEMA communications, programming and partnership opportunities.',
+    title: 'Access to Students',
+    copy: 'Engage directly with GEM students through relevant programming, events and initiatives.',
     accent: 'gold' as const,
   },
   {
-    title: 'Share Your Experience',
+    title: 'Leadership & Engagement',
     copy: 'Contribute to panels, discussions, networking opportunities or other programming where your organization’s experience can provide value to students.',
     accent: 'blue' as const,
   },
   {
-    title: 'Support Student Development',
+    title: 'Community Impact',
     copy: "Help GEMA create opportunities that contribute to students' professional growth, involvement and university experience.",
     accent: 'dark' as const,
   },

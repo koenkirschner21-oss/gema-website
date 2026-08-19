@@ -18,7 +18,7 @@
 }
 
 .about-hero {
-  padding: 6rem 0;
+  padding: 5.5rem 0 5rem;
 }
 
 .about-hero__grid {
@@ -29,7 +29,7 @@
 }
 
 .about-hero h1 {
-  max-width: 10ch;
+  max-width: 16ch;
   margin-bottom: var(--space-4);
   font-size: clamp(1.85rem, 3vw, 2.55rem);
   line-height: 1.12;
@@ -45,8 +45,7 @@
 .about-lede,
 .about-who__copy p,
 .about-values__intro p,
-.about-work__item p,
-.about-cta p {
+.about-work__item p {
   color: var(--color-text-secondary);
 }
 
@@ -73,15 +72,37 @@
   background: var(--color-gold);
 }
 
-.about-hero__media .photo-placeholder {
+.about-hero__media .photo-placeholder,
+.about-who__media .photo-placeholder,
+.about-work__media .photo-placeholder {
   position: relative;
   z-index: 1;
+  width: 100%;
+  height: 100%;
+}
+
+.about-hero__media .photo-placeholder img,
+.about-who__media .photo-placeholder img,
+.about-work__media .photo-placeholder img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.about .photo-placeholder img {
+  transition: none;
+}
+
+.about .photo-placeholder:hover img {
+  transform: none;
 }
 
 .about-who,
 .about-values,
 .about-work {
-  padding: 6rem 0;
+  padding: 5rem 0;
   border-top: 1px solid var(--color-border);
 }
 
@@ -89,10 +110,23 @@
   display: grid;
   grid-template-columns: minmax(0, 0.45fr) minmax(0, 0.55fr);
   gap: var(--space-7);
-  align-items: start;
+  align-items: stretch;
+}
+
+.about-who__media {
+  display: flex;
+}
+
+.about-who__media .photo-placeholder {
+  flex: 1;
+  min-height: 22rem;
+  aspect-ratio: auto;
 }
 
 .about-who__copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   padding-left: var(--space-5);
   border-left: 3px solid var(--color-red);
 }
@@ -132,7 +166,7 @@
 
 .about-values__intro {
   max-width: 38rem;
-  margin-bottom: var(--space-7);
+  margin-bottom: var(--space-6);
 }
 
 .about-values__grid {
@@ -142,9 +176,13 @@
   margin: 0;
   padding: 0;
   list-style: none;
+  align-items: stretch;
 }
 
 .about-values__item {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   padding-top: var(--space-5);
   background: var(--color-white);
   border-top: 5px solid var(--color-red);
@@ -189,39 +227,49 @@
   font-size: 1.35rem;
 }
 
+.about-values__item p {
+  margin: 0;
+}
+
 .about-values__item::after {
   content: '';
   display: block;
   width: 1.5rem;
   height: 0.35rem;
-  margin-top: var(--space-5);
+  margin-top: auto;
+  padding-top: var(--space-5);
   background: var(--color-red);
+  background-clip: content-box;
 }
 
 .about-values__item[data-accent='gold']::after {
   background: var(--color-gold);
+  background-clip: content-box;
 }
 
 .about-values__item[data-accent='blue']::after {
   background: var(--color-blue);
+  background-clip: content-box;
 }
 
 .about-values__item[data-accent='dark']::after {
   background: var(--color-text);
+  background-clip: content-box;
 }
 
 .about-work h2 {
-  margin-bottom: var(--space-6);
+  margin-bottom: var(--space-5);
 }
 
 .about-work__grid {
   display: grid;
   grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
   gap: var(--space-7);
-  align-items: start;
+  align-items: stretch;
 }
 
 .about-work__media {
+  display: flex;
   padding: 0 0 0.55rem 0.55rem;
 }
 
@@ -233,8 +281,9 @@
 }
 
 .about-work__media .photo-placeholder {
-  position: relative;
-  z-index: 1;
+  flex: 1;
+  min-height: 100%;
+  aspect-ratio: auto;
 }
 
 .about-work__list {
@@ -247,6 +296,7 @@
   display: grid;
   grid-template-columns: 3.4rem minmax(0, 1fr);
   gap: var(--space-4);
+  align-items: start;
   padding: var(--space-4) 0;
   border-top: 1px solid var(--color-border);
 }
@@ -260,7 +310,7 @@
   font-size: 2rem;
   font-weight: 700;
   letter-spacing: 0.02em;
-  line-height: 1;
+  line-height: 1.1;
   color: var(--color-red);
 }
 
@@ -282,18 +332,29 @@
 }
 
 .about-cta {
-  padding: 4rem 0;
-  background: var(--color-white);
-  border-top: 5px solid var(--color-gold);
+  min-height: 20.5rem;
+  padding: 3.5rem 0;
+  background: var(--color-text);
+  border-top: 3px solid var(--color-gold);
+}
+
+.about-cta__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--space-6);
+  align-items: center;
 }
 
 .about-cta h2 {
   max-width: 16ch;
+  margin-bottom: var(--space-3);
+  color: var(--color-white);
 }
 
 .about-cta p {
   max-width: 34rem;
-  margin: 0 0 var(--space-5);
+  margin: 0;
+  color: #d7dbdf;
   font-size: 1.08rem;
 }
 
@@ -309,6 +370,8 @@
   justify-content: center;
   min-height: 2.9rem;
   padding: 0.7rem 1.35rem;
+  border-radius: 0;
+  font-family: inherit;
   font-size: 1rem;
   font-weight: 600;
   text-decoration: none;
@@ -329,20 +392,24 @@
   border-color: #a30528;
 }
 
-.about-button--secondary {
-  background: var(--color-white);
-  border: 1px solid var(--color-text);
-  color: var(--color-text);
+.about-button--on-dark {
+  background: transparent;
+  border: 1px solid var(--color-white);
+  color: var(--color-white);
 }
 
-.about-button--secondary:hover {
-  border-color: var(--color-red);
-  color: var(--color-red);
+.about-button--on-dark:hover {
+  background: var(--color-white);
+  color: var(--color-text);
 }
 
 .about-button:focus-visible {
   outline: 2px solid var(--color-red);
   outline-offset: 3px;
+}
+
+.about-cta .about-button:focus-visible {
+  outline-color: var(--color-white);
 }
 
 @media (max-width: 1080px) {
@@ -354,7 +421,8 @@
 @media (max-width: 860px) {
   .about-hero__grid,
   .about-who__grid,
-  .about-work__grid {
+  .about-work__grid,
+  .about-cta__grid {
     grid-template-columns: 1fr;
     gap: var(--space-5);
   }
@@ -364,13 +432,19 @@
   }
 
   .about-hero h1 {
-    max-width: 10ch;
+    max-width: 16ch;
     font-size: clamp(1.75rem, 6vw, 2.2rem);
   }
 
   .about-who__copy {
     order: -1;
     padding-left: var(--space-4);
+  }
+
+  .about-who__media .photo-placeholder,
+  .about-work__media .photo-placeholder {
+    min-height: 16rem;
+    aspect-ratio: 4 / 3;
   }
 
   .about-work__list {
@@ -380,7 +454,12 @@
   .about-who,
   .about-values,
   .about-work {
-    padding: 4.5rem 0;
+    padding: 3.75rem 0;
+  }
+
+  .about-cta {
+    min-height: 0;
+    padding: 3rem 0;
   }
 }
 
@@ -409,15 +488,10 @@
   .about-cta__actions {
     display: grid;
   }
-
-  .about-cta {
-    padding: 3.5rem 0;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .about-button,
-  .photo-placeholder img {
+  .about-button {
     transition: none;
   }
 }

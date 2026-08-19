@@ -1,7 +1,7 @@
 import { useEffect, useId, useRef, useState } from 'react'
 import type { FocusEvent, KeyboardEvent as ReactKeyboardEvent } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
-import gemaCrest from '../assets/gema-crest.png'
+import gemaLogo from '../assets/gema-logo.png'
 import { isDropdownItem, navigation } from '../data/navigation'
 import { Container } from './Container'
 import './Navbar.css'
@@ -143,8 +143,7 @@ export function Navbar() {
             onClick={closeMenus}
             aria-label="GEMA home"
           >
-            <img src={gemaCrest} alt="" />
-            <span className="navbar__wordmark">GEMA</span>
+            <img src={gemaLogo} alt="" />
           </Link>
 
           <button

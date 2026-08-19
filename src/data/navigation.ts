@@ -26,7 +26,7 @@ export const navigation: NavItem[] = [
   { label: 'GEM Major', to: '/gem-major' },
   { label: 'Events', to: '/events' },
   { label: 'Get Involved', to: '/get-involved' },
-  { label: 'Partners', to: '/partners' },
+  { label: 'Partner With GEMA', to: '/partners' },
   { label: 'Contact', to: '/contact' },
 ]
 

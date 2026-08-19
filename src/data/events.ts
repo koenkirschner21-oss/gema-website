@@ -59,14 +59,11 @@ export const events: GemaEvent[] = []
 
 export const eventsMedia = {
   hero: {
-    src: null as string | null,
-    label: 'Replace with networking, panel, or community event photo',
+    src: '/events-hero.jpg' as string | null,
+    label: 'GEMA students at an event',
     alt: 'GEMA students at an event',
   },
 }
-
-/** Neutral cards shown on /events until confirmed events are added. */
-export const eventsPagePlaceholderCount = 3
 
 export const featuredSectionCopy = {
   orientation: {
@@ -81,7 +78,7 @@ export const featuredSectionCopy = {
 
 export const featuredEmptyState = {
   heading: 'More events are on the way.',
-  copy: 'GEMA programming is updated throughout the year. Check back soon or stay connected for upcoming events and announcements.',
+  copy: 'GEMA programming is updated throughout the year. Check back soon for upcoming events and announcements.',
 }
 
 export function getVisibleEvents() {

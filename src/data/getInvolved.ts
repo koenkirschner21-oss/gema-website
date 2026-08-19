@@ -1,11 +1,11 @@
 export const involveMedia = {
   hero: {
-    src: '/get-involved-hero.jpg',
+    src: '/get-involved-hero.jpg' as string | null,
     label: 'GEMA student/community photo',
     alt: 'GEMA students and community',
   },
   why: {
-    src: '/get-involved-why.jpg',
+    src: '/get-involved-why.jpg' as string | null,
     label: 'GEMA team or event photo',
     alt: 'GEMA team or event',
   },
@@ -14,50 +14,67 @@ export const involveMedia = {
 export const involvementPaths = [
   {
     title: 'Attend Events',
-    copy: 'GEMA hosts professional, networking, social and community-focused events throughout the year. Attending an event is one of the easiest ways to meet other students and become more connected to the GEM community.',
+    copy: 'Join professional, social, networking, and community events throughout the year.',
     accent: 'red' as const,
-    cta: { label: 'Explore Events', to: '/events' },
   },
   {
     title: 'Join the Executive Team',
-    copy: "Take on a leadership role and contribute directly to GEMA's programming, operations and student experience. Recruitment opportunities are posted when positions become available.",
+    copy: 'Apply for leadership roles when recruitment opportunities are available.',
     accent: 'gold' as const,
-    cta: { label: 'View Current Opportunities', to: '#current-opportunities' },
   },
   {
     title: 'Support GEMA Initiatives',
-    copy: 'Get involved with the events, projects and initiatives GEMA runs throughout the year and help contribute to the student experience beyond the classroom.',
+    copy: 'Contribute to events, projects, outreach, and other student-focused initiatives.',
     accent: 'blue' as const,
-    cta: null,
   },
   {
     title: 'Stay Connected',
-    copy: 'Keep up with GEMA announcements, events, recruitment and other opportunities throughout the academic year.',
+    copy: 'Follow GEMA and stay aware of upcoming events, opportunities, and announcements.',
     accent: 'dark' as const,
-    cta: null,
-    social: true,
   },
 ]
 
 export const involvementBenefits = [
   {
-    title: 'Build Experience',
-    copy: 'Put skills into practice through real events, projects, responsibilities and student-led initiatives.',
+    title: 'Leadership Experience',
+    copy: 'Take ownership, work with others and build practical leadership experience outside the classroom.',
     accent: 'red' as const,
   },
   {
-    title: 'Develop as a Leader',
-    copy: 'Take ownership, work with others and build practical leadership experience outside the classroom.',
+    title: 'Professional Development',
+    copy: 'Put skills into practice through real events, projects, responsibilities and student-led initiatives.',
     accent: 'gold' as const,
   },
   {
-    title: 'Meet Your Community',
+    title: 'Community',
     copy: 'Connect with other GEM students and build relationships with people across the program.',
     accent: 'blue' as const,
   },
   {
-    title: 'Expand Your Network',
+    title: 'Connections',
     copy: 'Engage with students, faculty, alumni, professionals and organizations through GEMA programming and involvement.',
     accent: 'dark' as const,
   },
 ]
+
+export const involveSocial = [
+  {
+    platform: 'instagram' as const,
+    title: 'Instagram',
+    copy: 'Primary channel for event updates, recruitment, and announcements.',
+    linkLabel: 'Visit Instagram',
+  },
+  {
+    platform: 'linkedin' as const,
+    title: 'LinkedIn',
+    copy: 'Professional updates, organization news, and community highlights.',
+    linkLabel: 'Visit LinkedIn',
+  },
+]
+
+export const openingsEmptyState = {
+  heading: 'There are no open applications at the moment.',
+  copy: 'Recruitment is announced when roles open. Follow GEMA for updates, or start by getting involved through events and community opportunities.',
+  linkLabel: 'Explore Events',
+  linkTo: '/events',
+}

@@ -1,9 +1,31 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Container } from '../components/Container'
-import { PhotoPlaceholder } from '../components/PhotoPlaceholder'
 import { aboutMedia, aboutValues, aboutWork } from '../data/about'
 import './About.css'
+
+function AboutMedia({
+  src,
+  alt,
+  ratio,
+}: {
+  src: string | null
+  alt: string
+  ratio: 'wide' | 'square' | 'editorial'
+}) {
+  const [failed, setFailed] = useState(false)
+  const showImage = Boolean(src) && !failed
+
+  return (
+    <figure className={`photo-placeholder photo-placeholder--${ratio}`}>
+      {showImage ? (
+        <img src={src ?? undefined} alt={alt} onError={() => setFailed(true)} />
+      ) : (
+        <span className="visually-hidden">{alt}</span>
+      )}
+    </figure>
+  )
+}
 
 export function About() {
   useEffect(() => {
@@ -17,7 +39,7 @@ export function About() {
           <div className="about-hero__grid">
             <div className="about-hero__copy">
               <p className="about-eyebrow">About GEMA</p>
-              <h1>About GEMA</h1>
+              <h1>Built to connect, represent, and grow the GEM community.</h1>
               <p className="about-lede">
                 The Government, Economics & Management Association is the
                 student association representing the GEM community at the
@@ -35,9 +57,8 @@ export function About() {
               </div>
             </div>
             <div className="about-hero__media">
-              <PhotoPlaceholder
+              <AboutMedia
                 src={aboutMedia.hero.src}
-                label={aboutMedia.hero.label}
                 alt={aboutMedia.hero.alt}
                 ratio="wide"
               />
@@ -50,9 +71,8 @@ export function About() {
         <Container>
           <div className="about-who__grid">
             <div className="about-who__media">
-              <PhotoPlaceholder
+              <AboutMedia
                 src={aboutMedia.community.src}
-                label={aboutMedia.community.label}
                 alt={aboutMedia.community.alt}
                 ratio="square"
               />
@@ -114,9 +134,8 @@ export function About() {
           <h2>What We Do</h2>
           <div className="about-work__grid">
             <div className="about-work__media">
-              <PhotoPlaceholder
+              <AboutMedia
                 src={aboutMedia.events.src}
-                label={aboutMedia.events.label}
                 alt={aboutMedia.events.alt}
                 ratio="editorial"
               />
@@ -144,19 +163,29 @@ export function About() {
 
       <section className="about-cta">
         <Container>
-          <h2>Be part of the GEMA community.</h2>
-          <p>
-            Whether you want to attend an event, meet other GEM students or take
-            on a larger role within the association, there are plenty of ways to
-            get involved.
-          </p>
-          <div className="about-cta__actions">
-            <Link className="about-button about-button--primary" to="/get-involved">
-              Get Involved
-            </Link>
-            <Link className="about-button about-button--secondary" to="/events">
-              Explore Events
-            </Link>
+          <div className="about-cta__grid">
+            <div className="about-cta__copy">
+              <h2>Be part of the GEMA community.</h2>
+              <p>
+                Whether you want to attend an event, meet other GEM students or
+                take on a larger role within the association, there are plenty
+                of ways to get involved.
+              </p>
+            </div>
+            <div className="about-cta__actions">
+              <Link
+                className="about-button about-button--primary"
+                to="/get-involved"
+              >
+                Get Involved
+              </Link>
+              <Link
+                className="about-button about-button--on-dark"
+                to="/events"
+              >
+                Explore Events
+              </Link>
+            </div>
           </div>
         </Container>
       </section>

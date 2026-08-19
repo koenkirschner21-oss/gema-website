@@ -1,12 +1,13 @@
 /**
- * Placeholder team roster for /about/team.
+ * Team roster for /about/team.
  *
  * Replace every `name: 'Name'`, `image: null`, and `linkedin: null`
  * with current team details. Add a real `portfolio` for directors.
  * Photo paths can live in `public/team/`.
  *
- * `level: 'manager'` is supported for future use and is not rendered
- * on the public page until that section is approved.
+ * The public page renders Co-Presidents (`leadership`) and Directors
+ * only. `level: 'manager'` may remain in this file for future use and
+ * is not shown on /about/team.
  */
 export type TeamLevel = 'leadership' | 'director' | 'manager'
 

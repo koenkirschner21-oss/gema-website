@@ -1,34 +1,62 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Container } from '../components/Container'
-import { PhotoPlaceholder } from '../components/PhotoPlaceholder'
 import {
-  getPastPartners,
+  getActivePartners,
   partnerBenefits,
   partnerMedia,
-  partnershipOpportunities,
   partnerSupport,
   pastPartnerPagePlaceholderCount,
   type Partner,
 } from '../data/partners'
 import './Partners.css'
 
-function PartnerCard({ partner }: { partner: Partner }) {
-  const logo = (
-    <div className="partners-logo">
-      {partner.logo ? (
-        <img src={partner.logo} alt="" />
+function PartnersMedia({
+  src,
+  alt,
+  ratio,
+}: {
+  src: string | null
+  alt: string
+  ratio: 'wide' | 'editorial'
+}) {
+  const [failed, setFailed] = useState(false)
+  const showImage = Boolean(src) && !failed
+
+  return (
+    <figure className={`photo-placeholder photo-placeholder--${ratio}`}>
+      {showImage ? (
+        <img src={src ?? undefined} alt={alt} onError={() => setFailed(true)} />
       ) : (
-        <span>Past partner logo</span>
+        <span className="visually-hidden">{alt}</span>
+      )}
+    </figure>
+  )
+}
+
+function PartnerLogo({ src }: { src: string | null }) {
+  const [failed, setFailed] = useState(false)
+  const showImage = Boolean(src) && !failed
+
+  return (
+    <div className={showImage ? 'partners-logo' : 'partners-logo is-placeholder'}>
+      {showImage ? (
+        <img src={src ?? undefined} alt="" onError={() => setFailed(true)} />
+      ) : (
+        <span>Logo</span>
       )}
     </div>
   )
+}
+
+function PartnerCard({ partner }: { partner: Partner }) {
+  const logo = <PartnerLogo src={partner.logo} />
 
   const body = (
     <>
       {logo}
       <div className="partners-card__body">
-        <h3>{partner.name}</h3>
+        {partner.name ? <h3>{partner.name}</h3> : null}
         {partner.type ? <p className="partners-card__type">{partner.type}</p> : null}
         {partner.year ? <p className="partners-card__type">{partner.year}</p> : null}
         {partner.description ? <p>{partner.description}</p> : null}
@@ -49,7 +77,7 @@ function PartnerCard({ partner }: { partner: Partner }) {
 }
 
 export function Partners() {
-  const pastPartners = getPastPartners()
+  const currentPartners = getActivePartners()
 
   useEffect(() => {
     document.title = 'Partners & Sponsors | GEMA'
@@ -62,7 +90,7 @@ export function Partners() {
           <div className="partners-hero__grid">
             <div className="partners-hero__copy">
               <p className="partners-eyebrow">PARTNERS & SPONSORS</p>
-              <h1>Partner with GEMA.</h1>
+              <h1>Building opportunities through partnership.</h1>
               <p className="partners-lede">
                 GEMA works with organizations, professionals and community
                 partners to create meaningful opportunities for students in
@@ -82,16 +110,15 @@ export function Partners() {
                 </Link>
                 <a
                   className="partners-button partners-button--secondary"
-                  href="#partnership-opportunities"
+                  href="#partner-with-gema"
                 >
                   Explore Partnership Opportunities
                 </a>
               </div>
             </div>
             <div className="partners-hero__media">
-              <PhotoPlaceholder
+              <PartnersMedia
                 src={partnerMedia.hero.src}
-                label={partnerMedia.hero.label}
                 alt={partnerMedia.hero.alt}
                 ratio="wide"
               />
@@ -100,40 +127,29 @@ export function Partners() {
         </Container>
       </section>
 
-      <section className="partners-past">
+      <section className="partners-current">
         <Container>
-          <h2>Past Partners</h2>
-          <p className="partners-section-copy">
-            GEMA has worked with organizations and community partners to support
-            student events, professional development and experiences throughout
-            the GEM community.
-          </p>
-          {pastPartners.length > 0 ? (
-            <div className="partners-past__grid">
-              {pastPartners.map((partner) => (
+          <h2>Current Partners</h2>
+          {currentPartners.length > 0 ? (
+            <div className="partners-current__grid">
+              {currentPartners.map((partner) => (
                 <PartnerCard key={partner.id} partner={partner} />
               ))}
             </div>
           ) : (
-            <div className="partners-past__grid">
+            <div className="partners-current__grid">
               {Array.from({ length: pastPartnerPagePlaceholderCount }, (_, index) => (
                 <div
-                  key={`past-partner-placeholder-${index}`}
+                  key={`partner-placeholder-${index}`}
                   className="partners-card"
                 >
                   <div className="partners-logo is-placeholder">
-                    <span>Past partner logo</span>
+                    <span>Logo</span>
                   </div>
                 </div>
               ))}
             </div>
           )}
-          <a
-            className="partners-button partners-button--primary partners-past__cta"
-            href="#partnership-opportunities"
-          >
-            Explore Partnership Opportunities
-          </a>
         </Container>
       </section>
 
@@ -153,98 +169,75 @@ export function Partners() {
 
       <section className="partners-why">
         <Container>
-          <h2>Why Partner With GEMA?</h2>
-          <p className="partners-section-copy">
-            A partnership with GEMA creates opportunities for organizations to
-            engage with University of Guelph students interested in the
-            intersection of business, economics, government, management and
-            public policy.
-          </p>
           <div className="partners-why__grid">
             <div className="partners-why__media">
-              <PhotoPlaceholder
+              <PartnersMedia
                 src={partnerMedia.why.src}
-                label={partnerMedia.why.label}
                 alt={partnerMedia.why.alt}
                 ratio="editorial"
               />
             </div>
-            <ol className="partners-why__list">
-              {partnerBenefits.map((item, index) => (
-                <li key={item.title} data-accent={item.accent}>
-                  <span className="partners-why__index" aria-hidden="true">
-                    {String(index + 1).padStart(2, '0')}
-                  </span>
-                  <div>
-                    <h3>{item.title}</h3>
-                    <p>{item.copy}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
+            <div className="partners-why__content">
+              <h2>Why Partner With GEMA?</h2>
+              <ol className="partners-why__list">
+                {partnerBenefits.map((item, index) => (
+                  <li key={item.title} data-accent={item.accent}>
+                    <span className="partners-why__index" aria-hidden="true">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <div>
+                      <h3>{item.title}</h3>
+                      <p>{item.copy}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </div>
           </div>
         </Container>
       </section>
 
-      <section
-        className="partners-opportunities"
-        id="partnership-opportunities"
-      >
+      <section className="partners-cta" id="partner-with-gema">
         <Container>
-          <h2>Explore Partnership Opportunities</h2>
-          <p className="partners-section-copy">
-            GEMA works with organizations in a variety of ways throughout the
-            academic year. From sponsorship and professional programming to
-            event collaboration and in-kind support, partnerships can be shaped
-            around opportunities that provide meaningful value to students and
-            participating organizations.
-          </p>
-          <ul className="partners-support__grid">
-            {partnershipOpportunities.map((item) => (
-              <li key={item.title} data-accent={item.accent}>
-                <h3>{item.title}</h3>
-                <p>{item.copy}</p>
-              </li>
-            ))}
-          </ul>
-          <div className="partners-opportunities__actions">
-            <Link
-              className="partners-button partners-button--primary"
-              to="/contact?reason=corporate-package"
-            >
-              Request Corporate Package
-            </Link>
-            <Link
-              className="partners-button partners-button--secondary"
-              to="/contact?reason=partnership"
-            >
-              Start a Conversation
-            </Link>
+          <div className="partners-cta__grid">
+            <div className="partners-cta__copy">
+              <h2>Partner With GEMA</h2>
+              <p>
+                Organizations, alumni, professionals, and community partners are
+                invited to discuss sponsorships, collaboration, event
+                participation, or other ways of working with GEMA.
+              </p>
+            </div>
+            <div className="partners-cta__action">
+              <Link
+                className="partners-button partners-button--on-red"
+                to="/contact"
+              >
+                Start a Conversation
+              </Link>
+            </div>
           </div>
         </Container>
       </section>
 
-      <section className="partners-cta">
+      <section className="partners-action">
         <Container>
-          <h2>Interested in working with GEMA?</h2>
-          <p>
-            Tell us about your organization and how you'd like to connect with
-            the GEM community. We'd be happy to explore whether there's an
-            opportunity to work together.
-          </p>
-          <div className="partners-cta__actions">
-            <Link
-              className="partners-button partners-button--primary"
-              to="/contact?reason=partnership"
-            >
-              Contact GEMA
-            </Link>
-            <Link
-              className="partners-button partners-button--secondary"
-              to="/contact?reason=corporate-package"
-            >
-              Request Corporate Package
-            </Link>
+          <div className="partners-action__panel">
+            <div>
+              <h2>See GEMA in action.</h2>
+              <p>
+                Explore current programming to see the kinds of student
+                experiences partnerships can help support.
+              </p>
+            </div>
+            <div className="partners-action__cta">
+              <Link
+                className="partners-button partners-button--secondary"
+                to="/events"
+              >
+                Explore Events
+              </Link>
+            </div>
           </div>
         </Container>
       </section>

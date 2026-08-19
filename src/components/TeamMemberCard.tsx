@@ -1,22 +1,35 @@
+import { useState } from 'react'
 import { formatTeamTitle, isPlaceholderMember, type TeamMember } from '../data/team'
 import './TeamMemberCard.css'
 
 type TeamMemberCardProps = {
   member: TeamMember
   featured?: boolean
-  compact?: boolean
+}
+
+function TeamPhoto({ src, alt }: { src: string | null; alt: string }) {
+  const [failed, setFailed] = useState(false)
+  const showImage = Boolean(src) && !failed
+
+  return (
+    <div className="team-card__photo">
+      {showImage ? (
+        <img src={src ?? undefined} alt={alt} onError={() => setFailed(true)} />
+      ) : (
+        <span className="visually-hidden">Photo to be added</span>
+      )}
+    </div>
+  )
 }
 
 export function TeamMemberCard({
   member,
   featured = false,
-  compact = false,
 }: TeamMemberCardProps) {
   const placeholder = isPlaceholderMember(member)
   const className = [
     'team-card',
     featured ? 'team-card--featured' : '',
-    compact ? 'team-card--compact' : '',
     placeholder ? 'team-card--placeholder' : '',
   ]
     .filter(Boolean)
@@ -27,13 +40,7 @@ export function TeamMemberCard({
       className={className}
       aria-label={placeholder ? 'Team member placeholder' : undefined}
     >
-      <div className="team-card__photo">
-        {member.image ? (
-          <img src={member.image} alt={member.name} />
-        ) : (
-          <span className="visually-hidden">Photo to be added</span>
-        )}
-      </div>
+      <TeamPhoto src={member.image} alt={placeholder ? '' : member.name} />
       <div className="team-card__body">
         <h3>{member.name}</h3>
         <p>{formatTeamTitle(member)}</p>
