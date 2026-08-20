@@ -168,9 +168,11 @@ export function GetInvolved() {
           <h2>Ways to Get Involved</h2>
           <ul className="involve-ways__grid">
             {involvementPaths.map((item) => (
-              <li key={item.title} data-accent={item.accent}>
-                <h3>{item.title}</h3>
-                <p>{item.copy}</p>
+              <li key={item.title}>
+                <Link to={item.to} data-accent={item.accent}>
+                  <h3>{item.title}</h3>
+                  <p>{item.copy}</p>
+                </Link>
               </li>
             ))}
           </ul>
@@ -287,7 +289,7 @@ export function GetInvolved() {
         </Container>
       </section>
 
-      <section className="involve-social">
+      <section className="involve-social" id="stay-connected">
         <Container>
           <div className="involve-social__layout">
             <div className="involve-social__media">

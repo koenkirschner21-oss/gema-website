@@ -111,15 +111,15 @@
   border-top: 1px solid var(--color-border);
 }
 
-#current-opportunities {
+#current-opportunities,
+#stay-connected {
   scroll-margin-top: calc(var(--nav-height) + 1rem);
 }
 
 .involve-ways h2,
 .involve-openings h2,
 .involve-why h2,
-.involve-new__panel h2,
-.involve-social__panel h2 {
+.involve-new__panel h2 {
   margin-bottom: var(--space-4);
   font-size: clamp(1.85rem, 3vw, 2.45rem);
 }
@@ -140,6 +140,11 @@
 }
 
 .involve-ways__grid li {
+  min-width: 0;
+  height: 100%;
+}
+
+.involve-ways__grid a {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -149,21 +154,47 @@
   padding: var(--space-7) var(--space-6);
   background: var(--color-red);
   color: var(--color-white);
+  text-decoration: none;
 }
 
-.involve-ways__grid li[data-accent='gold'] {
+.involve-ways__grid a[data-accent='gold'] {
   background: var(--color-gold);
   color: var(--color-text);
 }
 
-.involve-ways__grid li[data-accent='blue'] {
+.involve-ways__grid a[data-accent='blue'] {
   background: var(--color-blue);
   color: var(--color-white);
 }
 
-.involve-ways__grid li[data-accent='dark'] {
+.involve-ways__grid a[data-accent='dark'] {
   background: var(--color-text);
   color: var(--color-white);
+}
+
+.involve-ways__grid a:hover {
+  background: #a30528;
+}
+
+.involve-ways__grid a[data-accent='gold']:hover {
+  background: #e0b01f;
+}
+
+.involve-ways__grid a[data-accent='blue']:hover {
+  background: #5a8fa3;
+}
+
+.involve-ways__grid a[data-accent='dark']:hover {
+  background: #111111;
+}
+
+.involve-ways__grid a:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: 3px;
+}
+
+.involve-ways__grid a[data-accent='dark']:focus-visible {
+  outline-color: var(--color-gold);
 }
 
 .involve-ways__grid h3 {
@@ -385,54 +416,63 @@
 }
 
 .involve-social {
-  padding: 4.5rem 0;
+  padding: 1.5rem 0;
   border-top: 1px solid var(--color-border);
 }
 
 .involve-social__layout {
   display: grid;
-  grid-template-columns: minmax(0, 0.46fr) minmax(0, 0.54fr);
+  grid-template-columns: minmax(0, 0.336fr) minmax(0, 0.531fr);
   align-items: stretch;
-  gap: var(--space-6);
+  justify-content: start;
+  gap: var(--space-4);
 }
 
 .involve-social__media {
   display: flex;
+  align-self: center;
+  height: 80%;
 }
 
 .involve-social__media .photo-placeholder {
   flex: 1;
-  min-height: 22rem;
+  min-height: 0;
+  height: 100%;
   aspect-ratio: auto;
 }
 
 .involve-social__panel {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  align-self: center;
   min-width: 0;
-  padding: var(--space-7) var(--space-6);
+  width: 100%;
+  height: 80%;
+  padding: 1.45rem 1.75rem 1.35rem;
   background: var(--color-red);
   color: var(--color-white);
 }
 
 .involve-social__panel h2 {
-  max-width: 12ch;
-  margin-bottom: var(--space-4);
+  max-width: none;
+  margin: 0 0 0.55rem;
   color: var(--color-white);
+  font-size: clamp(1.85rem, 2.6vw, 2.2rem);
 }
 
 .involve-social__panel p {
-  max-width: 32rem;
-  margin: 0 0 var(--space-5);
+  max-width: 42rem;
+  margin: 0 0 1.35rem;
   color: #f3d6dc;
-  font-size: 1.08rem;
+  font-size: 1.12rem;
+  line-height: 1.5;
 }
 
 .involve-social__links {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-3) var(--space-4);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.65rem 1rem;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -444,7 +484,7 @@
   gap: 0.7rem;
   min-height: 2.6rem;
   color: var(--color-white);
-  font-size: 1.02rem;
+  font-size: 1.12rem;
   font-weight: 600;
   text-decoration: none;
 }
@@ -460,8 +500,8 @@
 
 .involve-social__icon {
   display: block;
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 1.7rem;
+  height: 1.7rem;
   flex-shrink: 0;
 }
 
@@ -561,7 +601,7 @@
     order: -1;
   }
 
-  .involve-ways__grid li {
+  .involve-ways__grid a {
     min-height: 13.5rem;
     padding: var(--space-6) var(--space-5);
   }
@@ -572,10 +612,19 @@
     padding: 3.5rem 0;
   }
 
-  .involve-why__media .photo-placeholder,
-  .involve-social__media .photo-placeholder {
+  .involve-why__media .photo-placeholder {
     min-height: 16rem;
     aspect-ratio: 4 / 3;
+  }
+
+  .involve-social__media {
+    height: auto;
+    width: 80%;
+  }
+
+  .involve-social__media .photo-placeholder {
+    min-height: 8.8rem;
+    aspect-ratio: 16 / 9;
   }
 
   .involve-new {
@@ -587,11 +636,17 @@
   }
 
   .involve-social {
-    padding: 3.25rem 0 3.75rem;
+    padding: 1.15rem 0 1.35rem;
   }
 
   .involve-social__panel {
-    padding: var(--space-6) var(--space-5);
+    width: 80%;
+    height: auto;
+    padding: 1.1rem 1.2rem;
+  }
+
+  .involve-social__links {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -605,8 +660,7 @@
   .involve-ways h2,
   .involve-openings h2,
   .involve-why h2,
-  .involve-new__panel h2,
-  .involve-social__panel h2 {
+  .involve-new__panel h2 {
     font-size: clamp(1.75rem, 7vw, 2.2rem);
   }
 

@@ -46,10 +46,8 @@ export const contactHero = {
 export const contactFormCopy = {
   heading: 'Send Us a Message',
   copy: "Tell us what you're reaching out about and we'll make sure your message gets to the right place.",
-  disconnected:
-    'Development only — form submissions are not connected yet.',
   blockedSubmit:
-    'Development only — this form is not connected yet, and your message was not sent.',
+    'Your message could not be sent. Please try again or use another contact option on this page.',
   error:
     'Your message could not be sent. Please try again or use another contact option on this page.',
 }

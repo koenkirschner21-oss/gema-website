@@ -219,20 +219,25 @@
 }
 
 .gem-official {
-  padding: 2.75rem 0;
-  background: #2c2c2c;
-  border-top: 3px solid var(--color-gold);
+  padding: 3rem 0 3.25rem;
+  background: var(--color-white);
+  border-top: 1px solid var(--color-border);
 }
 
 .gem-official__grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: var(--space-6);
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  max-width: 64rem;
+  margin-inline: auto;
+  padding: 1.5rem 2.75rem 1.6rem;
+  background: #2c2c2c;
+  border-top: 3px solid var(--color-gold);
+  text-align: center;
 }
 
 .gem-official__label {
-  margin: 0 0 var(--space-3);
+  margin: 0 0 var(--space-2);
   color: var(--color-gold);
   font-family: var(--font-heading);
   font-size: 0.92rem;
@@ -241,15 +246,24 @@
   text-transform: uppercase;
 }
 
+.gem-official__label::after {
+  content: '';
+  display: block;
+  width: 2.4rem;
+  height: 0.28rem;
+  margin: 0.55rem auto 0;
+  background: var(--color-gold);
+}
+
 .gem-official h2 {
-  max-width: 18ch;
-  margin-bottom: var(--space-3);
+  max-width: none;
+  margin: 0 auto var(--space-3);
   color: var(--color-white);
 }
 
 .gem-official__body {
-  max-width: 38rem;
-  margin: 0;
+  max-width: 48rem;
+  margin: 0 auto var(--space-4);
   color: #d7dbdf;
   font-size: 1.08rem;
 }
@@ -257,7 +271,7 @@
 .gem-official__action {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
 }
 
 .gem-cta {
@@ -385,7 +399,6 @@
   .gem-hero__grid,
   .gem-what__grid,
   .gem-coop__grid,
-  .gem-official__grid,
   .gem-cta__grid {
     grid-template-columns: 1fr;
     gap: var(--space-5);
@@ -415,13 +428,16 @@
     aspect-ratio: 4 / 3;
   }
 
-  .gem-official,
-  .gem-cta {
-    padding: 2.75rem 0;
+  .gem-official {
+    padding: 2.75rem 0 3.25rem;
   }
 
-  .gem-official__action {
-    justify-content: flex-start;
+  .gem-official__grid {
+    padding: 1.85rem 1.5rem 2rem;
+  }
+
+  .gem-cta {
+    padding: 2.75rem 0;
   }
 }
 
@@ -450,8 +466,7 @@
   }
 
   .gem-cta__actions,
-  .gem-hero__actions,
-  .gem-official__action {
+  .gem-hero__actions {
     display: grid;
   }
 }

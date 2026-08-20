@@ -249,12 +249,9 @@ export function Contact() {
                     {isSubmitting ? 'Sending...' : 'Send Message'}
                   </button>
 
-                  {!formIsConnected || formNotice ? (
-                    <p
-                      className="contact-form__note contact-form__note--dev"
-                      role="status"
-                    >
-                      {formNotice ?? contactFormCopy.disconnected}
+                  {formNotice ? (
+                    <p className="contact-form__note" role="status">
+                      {formNotice}
                     </p>
                   ) : null}
                 </form>

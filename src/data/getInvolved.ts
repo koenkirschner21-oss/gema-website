@@ -21,21 +21,25 @@ export const involvementPaths = [
     title: 'Attend Events',
     copy: 'Join professional, social, networking, and community events throughout the year.',
     accent: 'red' as const,
+    to: '/events',
   },
   {
     title: 'Join the Executive Team',
     copy: 'Apply for leadership roles when recruitment opportunities are available.',
     accent: 'gold' as const,
+    to: '/get-involved#current-opportunities',
   },
   {
     title: 'Support GEMA Initiatives',
     copy: 'Contribute to events, projects, outreach, and other student-focused initiatives.',
     accent: 'blue' as const,
+    to: '/get-involved#current-opportunities',
   },
   {
     title: 'Stay Connected',
     copy: 'Follow GEMA and stay aware of upcoming events, opportunities, and announcements.',
     accent: 'dark' as const,
+    to: '/get-involved#stay-connected',
   },
 ]
 

@@ -25,8 +25,8 @@
 .navbar__brand img {
   display: block;
   width: auto;
-  height: 2.85rem;
-  max-width: 13.75rem;
+  height: 4rem;
+  max-width: 19rem;
   object-fit: contain;
 }
 
@@ -161,8 +161,8 @@
   }
 
   .navbar__brand img {
-    height: 2.6rem;
-    max-width: 12.5rem;
+    height: 3.55rem;
+    max-width: 17.5rem;
   }
 
   .navbar__link {
@@ -233,8 +233,8 @@
   }
 
   .navbar__brand img {
-    height: 2.5rem;
-    max-width: 11.5rem;
+    height: 3.35rem;
+    max-width: 16rem;
   }
 }
 
