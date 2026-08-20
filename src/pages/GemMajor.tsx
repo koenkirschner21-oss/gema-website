@@ -199,13 +199,15 @@ export function GemMajor() {
 
       <section className="gem-cta">
         <Container>
-          <div className="gem-cta__content">
-            <h2>Make the most of your GEM experience.</h2>
-            <p>
-              Your program is only one part of your university experience. GEMA
-              gives GEM students more ways to meet people, attend events, build
-              experience and get involved outside the classroom.
-            </p>
+          <div className="gem-cta__grid">
+            <div className="gem-cta__copy">
+              <h2>Make the most of your GEM experience.</h2>
+              <p>
+                Your program is only one part of your university experience. GEMA
+                gives GEM students more ways to meet people, attend events, build
+                experience and get involved outside the classroom.
+              </p>
+            </div>
             <div className="gem-cta__actions">
               <Link className="gem-button gem-button--on-red" to="/get-involved">
                 Get Involved

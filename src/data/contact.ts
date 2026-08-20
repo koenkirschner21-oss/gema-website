@@ -47,9 +47,9 @@ export const contactFormCopy = {
   heading: 'Send Us a Message',
   copy: "Tell us what you're reaching out about and we'll make sure your message gets to the right place.",
   disconnected:
-    'Form submissions are not connected yet. This will be enabled before launch.',
+    'Development only — form submissions are not connected yet.',
   blockedSubmit:
-    'This form is not connected yet. It will be enabled before launch, and your message was not sent.',
+    'Development only — this form is not connected yet, and your message was not sent.',
   error:
     'Your message could not be sent. Please try again or use another contact option on this page.',
 }
@@ -86,21 +86,7 @@ export const contactRoutes = [
   },
 ]
 
-export const contactConnect = {
-  heading: 'Get in Touch & Stay Connected',
-  general: {
-    title: 'General Inquiries',
-    copy: 'Questions about the association, collaborations, or anything else.',
-    emailPlaceholder: 'General GEMA email to be added',
-  },
-  instagram: {
-    title: 'Instagram',
-    copy: 'Event updates, recruitment, and announcements.',
-    linkLabel: 'Visit Instagram',
-  },
-  linkedin: {
-    title: 'LinkedIn',
-    copy: 'Professional updates, organization news, and community highlights.',
-    linkLabel: 'Visit LinkedIn',
-  },
+export const contactDirect = {
+  heading: 'Prefer to connect directly?',
+  copy: 'Reach GEMA by email or follow along for events, opportunities and community updates.',
 }

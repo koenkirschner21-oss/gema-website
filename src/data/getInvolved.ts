@@ -9,6 +9,11 @@ export const involveMedia = {
     label: 'GEMA team or event photo',
     alt: 'GEMA team or event',
   },
+  social: {
+    src: '/get-involved-backup.jpg' as string | null,
+    label: 'GEMA community photo',
+    alt: 'GEMA students connecting at a community event',
+  },
 }
 
 export const involvementPaths = [
@@ -62,13 +67,19 @@ export const involveSocial = [
     platform: 'instagram' as const,
     title: 'Instagram',
     copy: 'Primary channel for event updates, recruitment, and announcements.',
-    linkLabel: 'Visit Instagram',
+    linkLabel: 'Instagram',
   },
   {
     platform: 'linkedin' as const,
     title: 'LinkedIn',
     copy: 'Professional updates, organization news, and community highlights.',
-    linkLabel: 'Visit LinkedIn',
+    linkLabel: 'LinkedIn',
+  },
+  {
+    platform: 'tiktok' as const,
+    title: 'TikTok',
+    copy: 'Community highlights and short-form updates.',
+    linkLabel: 'TikTok',
   },
 ]
 
@@ -77,4 +88,14 @@ export const openingsEmptyState = {
   copy: 'Recruitment is announced when roles open. Follow GEMA for updates, or start by getting involved through events and community opportunities.',
   linkLabel: 'Explore Events',
   linkTo: '/events',
+}
+
+export const opportunityPlaceholderCount = 3
+
+export const opportunityPlaceholder = {
+  title: 'Role details coming soon',
+  status: 'Applications are not currently open',
+  description: 'Future opportunities will appear here.',
+  note: 'No active application',
+  action: 'Coming Soon',
 }

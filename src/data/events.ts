@@ -81,6 +81,11 @@ export const featuredEmptyState = {
   copy: 'GEMA programming is updated throughout the year. Check back soon for upcoming events and announcements.',
 }
 
+export const featuredPlaceholderNote =
+  'Fall programming will appear here as events are finalized.'
+
+export const featuredPlaceholderCount = 3
+
 export function getVisibleEvents() {
   const today = toISODate(new Date())
 

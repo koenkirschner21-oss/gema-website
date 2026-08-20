@@ -29,17 +29,18 @@ export function EventCard({
 }: EventCardProps) {
   if (placeholder) {
     return (
-      <article className="event-card event-card--placeholder" aria-label="Development event placeholder">
-        <div className="event-card__media">
-          <span className="event-card__media-label">Event image</span>
-        </div>
+      <article
+        className="event-card event-card--placeholder"
+        aria-label="Event details coming soon"
+      >
+        <div className="event-card__media" aria-hidden="true" />
         <div className="event-card__body">
-          <p className="event-card__date">Date</p>
-          <p className="event-card__category">Category</p>
-          <h3>Event name</h3>
-          <p className="event-card__meta">Time · Location</p>
-          <p className="event-card__copy">Short description</p>
-          <span className="event-card__cta">View Event</span>
+          <p className="event-card__date">Date to be confirmed</p>
+          <h3>Event title to be announced</h3>
+          <p className="event-card__meta">Time to be confirmed</p>
+          <p className="event-card__meta">Location to be confirmed</p>
+          <p className="event-card__copy">More details coming soon</p>
+          <p className="event-card__status">Details coming soon</p>
         </div>
       </article>
     )

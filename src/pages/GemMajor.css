@@ -23,16 +23,17 @@
 
 .gem-hero__grid {
   display: grid;
-  grid-template-columns: minmax(0, 0.48fr) minmax(0, 0.52fr);
-  gap: var(--space-6);
+  grid-template-columns: minmax(0, 0.52fr) minmax(0, 0.48fr);
+  gap: var(--space-7);
   align-items: center;
 }
 
 .gem-hero h1 {
-  max-width: 14ch;
+  max-width: 22ch;
   margin-bottom: var(--space-4);
   font-size: clamp(1.85rem, 3vw, 2.55rem);
   line-height: 1.12;
+  text-wrap: pretty;
 }
 
 .gem-lede,
@@ -61,13 +62,16 @@
 }
 
 .gem-hero__media {
-  padding: 0 0 0.55rem 0.55rem;
+  padding: 0 0.28rem 0.45rem 0.45rem;
 }
 
 .gem-hero__media::before {
   content: '';
   position: absolute;
-  inset: 0.55rem 0 0 0;
+  top: 0.45rem;
+  right: 0;
+  bottom: 0;
+  left: 0;
   background: var(--color-gold);
 }
 
@@ -209,19 +213,20 @@
 }
 
 .gem-coop__copy .gem-button {
+  align-self: flex-start;
+  width: auto;
   margin-top: var(--space-5);
 }
 
 .gem-official {
-  min-height: 18.75rem;
-  padding: 3.25rem 0;
-  background: var(--color-text);
+  padding: 2.75rem 0;
+  background: #2c2c2c;
   border-top: 3px solid var(--color-gold);
 }
 
 .gem-official__grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  grid-template-columns: minmax(0, 1fr) auto;
   gap: var(--space-6);
   align-items: center;
 }
@@ -237,7 +242,7 @@
 }
 
 .gem-official h2 {
-  max-width: 16ch;
+  max-width: 18ch;
   margin-bottom: var(--space-3);
   color: var(--color-white);
 }
@@ -256,26 +261,27 @@
 }
 
 .gem-cta {
-  min-height: 20.5rem;
-  padding: 3.75rem 0;
+  padding: 3.5rem 0;
   background: var(--color-red);
-  text-align: center;
+  border-top: 3px solid var(--color-gold);
 }
 
-.gem-cta__content {
-  max-width: 38rem;
-  margin-inline: auto;
+.gem-cta__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--space-6);
+  align-items: center;
 }
 
 .gem-cta h2 {
-  max-width: none;
-  margin-bottom: var(--space-4);
+  max-width: 18ch;
+  margin-bottom: var(--space-3);
   color: var(--color-white);
 }
 
 .gem-cta p {
-  max-width: 36rem;
-  margin: 0 auto var(--space-5);
+  max-width: 34rem;
+  margin: 0;
   color: #f3d6dc;
   font-size: 1.08rem;
 }
@@ -283,7 +289,6 @@
 .gem-cta__actions {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   gap: var(--space-3);
 }
 
@@ -364,20 +369,34 @@
   outline-color: var(--color-white);
 }
 
+@media (max-width: 1080px) {
+  .gem-hero {
+    padding: 4.5rem 0 4rem;
+  }
+
+  .gem-hero__grid,
+  .gem-what__grid,
+  .gem-coop__grid {
+    gap: var(--space-5);
+  }
+}
+
 @media (max-width: 860px) {
   .gem-hero__grid,
   .gem-what__grid,
   .gem-coop__grid,
-  .gem-official__grid {
+  .gem-official__grid,
+  .gem-cta__grid {
     grid-template-columns: 1fr;
     gap: var(--space-5);
   }
 
   .gem-hero {
-    padding: 3.5rem 0;
+    padding: 3.25rem 0;
   }
 
   .gem-hero h1 {
+    max-width: none;
     font-size: clamp(1.75rem, 6vw, 2.2rem);
   }
 
@@ -388,7 +407,7 @@
 
   .gem-what,
   .gem-coop {
-    padding: 3.75rem 0;
+    padding: 3.5rem 0;
   }
 
   .gem-coop__media .photo-placeholder {
@@ -398,8 +417,7 @@
 
   .gem-official,
   .gem-cta {
-    min-height: 0;
-    padding: 3rem 0;
+    padding: 2.75rem 0;
   }
 
   .gem-official__action {
@@ -415,13 +433,20 @@
     font-size: clamp(1.75rem, 7vw, 2.2rem);
   }
 
-  .gem-hero__media,
-  .gem-coop__media {
-    padding: 0.5rem;
+  .gem-hero__media {
+    padding: 0 0.18rem 0.32rem 0.32rem;
   }
 
-  .gem-button {
-    width: 100%;
+  .gem-hero__media::before {
+    top: 0.32rem;
+  }
+
+  .gem-coop__media {
+    padding: 0 0 0.32rem 0.32rem;
+  }
+
+  .gem-coop__media::before {
+    inset: 0.32rem 0 0 0;
   }
 
   .gem-cta__actions,

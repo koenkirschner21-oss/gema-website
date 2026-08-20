@@ -5,6 +5,12 @@
 
 @media (max-width: 640px) {
   .container {
-    width: min(100% - 3rem, var(--max-width));
+    width: min(100% - 2.75rem, var(--max-width));
+  }
+}
+
+@media (max-width: 430px) {
+  .container {
+    width: min(100% - 2.25rem, var(--max-width));
   }
 }

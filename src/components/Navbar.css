@@ -149,6 +149,12 @@
   background: var(--color-neutral);
 }
 
+@media (max-width: 1366px) and (min-width: 1281px) {
+  .navbar__link {
+    padding: 0.55rem 0.5rem;
+  }
+}
+
 @media (max-width: 1280px) and (min-width: 1081px) {
   .navbar__inner {
     gap: var(--space-3);
@@ -160,7 +166,8 @@
   }
 
   .navbar__link {
-    padding: 0.55rem 0.45rem;
+    padding: 0.55rem 0.42rem;
+    font-size: 0.95rem;
   }
 }
 
@@ -193,6 +200,7 @@
 
   .navbar__link {
     width: 100%;
+    min-height: 2.75rem;
     justify-content: space-between;
     padding: 0.85rem 0;
     font-size: 1.05rem;
@@ -214,17 +222,24 @@
   }
 
   .navbar__dropdown-link {
+    min-height: 2.5rem;
     padding: 0.7rem 0;
   }
 }
 
 @media (max-width: 640px) {
   .navbar__nav {
-    padding-inline: 1.5rem;
+    padding-inline: 1.375rem;
   }
 
   .navbar__brand img {
     height: 2.5rem;
     max-width: 11.5rem;
+  }
+}
+
+@media (max-width: 430px) {
+  .navbar__nav {
+    padding-inline: 1.125rem;
   }
 }

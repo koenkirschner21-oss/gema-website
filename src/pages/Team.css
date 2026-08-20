@@ -63,13 +63,15 @@
 .team-leadership {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-5);
+  align-items: stretch;
+  gap: var(--space-6);
   max-width: 42rem;
   margin-inline: auto;
 }
 
 .team-directors {
   display: grid;
+  align-items: stretch;
   gap: var(--space-5);
   margin-inline: auto;
 }
@@ -89,9 +91,9 @@
 }
 
 .team-cta {
-  min-height: 18.5rem;
-  padding: 3.5rem 0;
-  background: var(--color-text);
+  min-height: 19.5rem;
+  padding: 3.75rem 0;
+  background: #2c2c2c;
   border-top: 3px solid var(--color-gold);
   text-align: center;
 }
@@ -169,14 +171,10 @@
 }
 
 @media (max-width: 1080px) {
-  .team-directors--4 {
-    grid-template-columns: repeat(2, minmax(0, 16rem));
-    justify-content: center;
-  }
-
+  .team-directors--4,
   .team-directors--3,
   .team-directors--auto {
-    grid-template-columns: repeat(2, minmax(0, 16rem));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     justify-content: center;
   }
 }
@@ -184,15 +182,15 @@
 @media (max-width: 860px) {
   .team-hero {
     min-height: 0;
-    padding: 3.25rem 0;
+    padding: 3rem 0;
   }
 
   .team-section {
-    padding: 3.5rem 0;
+    padding: 3.25rem 0;
   }
 
   .team-leadership {
-    max-width: 36rem;
+    max-width: none;
   }
 
   .team-hero h1,
@@ -203,7 +201,7 @@
 
   .team-cta {
     min-height: 0;
-    padding: 3rem 0;
+    padding: 2.75rem 0;
   }
 }
 
@@ -212,12 +210,8 @@
   .team-directors--4,
   .team-directors--3,
   .team-directors--auto {
-    grid-template-columns: minmax(0, 22rem);
+    grid-template-columns: minmax(0, 1fr);
     justify-content: center;
-  }
-
-  .team-button {
-    width: 100%;
   }
 
   .team-cta__actions {

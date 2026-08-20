@@ -2,7 +2,7 @@ import { useEffect, useState, type FormEvent } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { Container } from '../components/Container'
 import {
-  contactConnect,
+  contactDirect,
   contactFormCopy,
   contactFormEndpoint,
   contactHero,
@@ -13,6 +13,76 @@ import {
 } from '../data/contact'
 import { site } from '../data/site'
 import './Contact.css'
+
+function InstagramIcon() {
+  return (
+    <svg className="contact-direct__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <rect
+        x="3.25"
+        y="3.25"
+        width="17.5"
+        height="17.5"
+        rx="5"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.75"
+      />
+      <circle
+        cx="12"
+        cy="12"
+        r="4.15"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.75"
+      />
+      <circle cx="17.35" cy="6.65" r="1.05" fill="currentColor" />
+    </svg>
+  )
+}
+
+function LinkedInIcon() {
+  return (
+    <svg className="contact-direct__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path
+        fill="currentColor"
+        d="M4.98 3.5C4.98 4.88 3.88 6 2.5 6S.02 4.88.02 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.2 8.15h4.6V23H.2zM8.34 8.15h4.4v2.02h.06c.61-1.16 2.12-2.38 4.36-2.38 4.66 0 5.52 3.07 5.52 7.06V23h-4.6v-8.12c0-1.94-.03-4.43-2.7-4.43-2.7 0-3.12 2.11-3.12 4.29V23h-4.6z"
+      />
+    </svg>
+  )
+}
+
+function TikTokIcon() {
+  return (
+    <svg className="contact-direct__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path
+        fill="currentColor"
+        d="M14.2 2h2.72c.22 1.7 1.12 3.18 2.7 3.98A7.4 7.4 0 0 0 22.2 6.7v2.78a9.4 9.4 0 0 1-5.28-1.66v7.55A6.63 6.63 0 1 1 8.4 9.04v2.9a3.75 3.75 0 1 0 2.52 3.55V2z"
+      />
+    </svg>
+  )
+}
+
+function EmailIcon() {
+  return (
+    <svg className="contact-direct__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <rect
+        x="3.25"
+        y="5.5"
+        width="17.5"
+        height="13"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.75"
+      />
+      <path
+        d="M3.5 6.25 12 13.1 20.5 6.25"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.75"
+      />
+    </svg>
+  )
+}
 
 export function Contact() {
   const [searchParams] = useSearchParams()
@@ -59,12 +129,31 @@ export function Contact() {
     }
   }
 
+  const socials = [
+    {
+      label: site.instagram.label,
+      href: site.instagram.href,
+      icon: <InstagramIcon />,
+    },
+    {
+      label: site.linkedin.label,
+      href: site.linkedin.href,
+      icon: <LinkedInIcon />,
+    },
+    {
+      label: site.tiktok.label,
+      href: site.tiktok.href,
+      icon: <TikTokIcon />,
+    },
+  ]
+
   return (
     <article className="contact">
       <section className="contact-hero">
         <Container>
           <div className="contact-hero__content">
-            <p className="contact-eyebrow">{contactHero.eyebrow}</p>
+            <p className="contact-hero__label">{contactHero.eyebrow}</p>
+            <span className="contact-hero__accent" aria-hidden="true" />
             <h1>{contactHero.headline}</h1>
             <p className="contact-lede">{contactHero.copy}</p>
           </div>
@@ -161,7 +250,10 @@ export function Contact() {
                   </button>
 
                   {!formIsConnected || formNotice ? (
-                    <p className="contact-form__note" role="status">
+                    <p
+                      className="contact-form__note contact-form__note--dev"
+                      role="status"
+                    >
                       {formNotice ?? contactFormCopy.disconnected}
                     </p>
                   ) : null}
@@ -191,50 +283,38 @@ export function Contact() {
         </Container>
       </section>
 
-      <section className="contact-connect">
+      <section className="contact-direct">
         <Container>
-          <h2>{contactConnect.heading}</h2>
-          <ul className="contact-connect__grid">
-            <li>
-              <h3>{contactConnect.general.title}</h3>
-              <p>{contactConnect.general.copy}</p>
+          <div className="contact-direct__grid">
+            <div className="contact-direct__copy">
+              <h2>{contactDirect.heading}</h2>
+              <p>{contactDirect.copy}</p>
+            </div>
+            <ul className="contact-direct__links">
+              {socials.map((item) => (
+                <li key={item.label}>
+                  <a
+                    className="contact-direct__link"
+                    href={item.href}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {item.icon}
+                    <span>{item.label}</span>
+                    <span className="visually-hidden"> (opens in a new tab)</span>
+                  </a>
+                </li>
+              ))}
               {site.email ? (
-                <a className="contact-text-link" href={`mailto:${site.email}`}>
-                  {site.email}
-                </a>
-              ) : (
-                <p className="contact-connect__placeholder">
-                  {contactConnect.general.emailPlaceholder}
-                </p>
-              )}
-            </li>
-            <li>
-              <h3>{contactConnect.instagram.title}</h3>
-              <p>{contactConnect.instagram.copy}</p>
-              <a
-                className="contact-text-link"
-                href={site.instagram.href}
-                target="_blank"
-                rel="noreferrer"
-              >
-                {contactConnect.instagram.linkLabel}
-                <span className="visually-hidden"> (opens in a new tab)</span>
-              </a>
-            </li>
-            <li>
-              <h3>{contactConnect.linkedin.title}</h3>
-              <p>{contactConnect.linkedin.copy}</p>
-              <a
-                className="contact-text-link"
-                href={site.linkedin.href}
-                target="_blank"
-                rel="noreferrer"
-              >
-                {contactConnect.linkedin.linkLabel}
-                <span className="visually-hidden"> (opens in a new tab)</span>
-              </a>
-            </li>
-          </ul>
+                <li>
+                  <a className="contact-direct__link" href={`mailto:${site.email}`}>
+                    <EmailIcon />
+                    <span>{site.email}</span>
+                  </a>
+                </li>
+              ) : null}
+            </ul>
+          </div>
         </Container>
       </section>
     </article>

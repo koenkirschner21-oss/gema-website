@@ -112,15 +112,8 @@ export function About() {
             </p>
           </div>
           <ul className="about-values__grid">
-            {aboutValues.map((item, index) => (
-              <li
-                key={item.title}
-                className="about-values__item"
-                data-accent={item.accent}
-              >
-                <span className="about-values__index" aria-hidden="true">
-                  {String(index + 1).padStart(2, '0')}
-                </span>
+            {aboutValues.map((item) => (
+              <li key={item.title} data-accent={item.accent}>
                 <h3>{item.title}</h3>
                 <p>{item.copy}</p>
               </li>
@@ -174,13 +167,13 @@ export function About() {
             </div>
             <div className="about-cta__actions">
               <Link
-                className="about-button about-button--primary"
+                className="about-button about-button--on-red"
                 to="/get-involved"
               >
                 Get Involved
               </Link>
               <Link
-                className="about-button about-button--on-dark"
+                className="about-button about-button--on-red-secondary"
                 to="/events"
               >
                 Explore Events

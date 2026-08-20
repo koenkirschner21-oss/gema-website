@@ -109,7 +109,7 @@ export function EventsCalendar() {
       </div>
 
       {visibleEvents.length === 0 ? (
-        <p className="events-cal__empty-copy">
+        <p className="events-cal__empty-copy events-cal__empty-copy--note">
           No events are currently scheduled.
         </p>
       ) : selectedDate ? (

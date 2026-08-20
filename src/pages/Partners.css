@@ -36,8 +36,7 @@
 }
 
 .partners-lede,
-.partners-why__list p,
-.partners-action__panel p {
+.partners-why__list p {
   color: var(--color-text-secondary);
 }
 
@@ -113,8 +112,7 @@
 .partners-current h2,
 .partners-support h2,
 .partners-why h2,
-.partners-cta h2,
-.partners-action h2 {
+.partners-cta h2 {
   margin-bottom: var(--space-4);
   font-size: clamp(1.85rem, 3vw, 2.45rem);
 }
@@ -200,6 +198,7 @@ a.partners-card:focus-visible {
 .partners-support__grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
   gap: var(--space-4);
   margin: 0;
   padding: 0;
@@ -212,6 +211,7 @@ a.partners-card:focus-visible {
   justify-content: center;
   min-width: 0;
   min-height: 16.5rem;
+  height: 100%;
   padding: var(--space-7) var(--space-6);
   background: var(--color-red);
   color: var(--color-white);
@@ -327,26 +327,36 @@ a.partners-card:focus-visible {
 }
 
 .partners-cta {
-  min-height: 18.75rem;
-  padding: 3.25rem 0;
+  padding: 3.5rem 0;
   background: var(--color-red);
+  border-top: 3px solid var(--color-gold);
 }
 
 .partners-cta__grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  grid-template-columns: minmax(0, 1fr) auto;
   gap: var(--space-6);
   align-items: center;
 }
 
+.partners-cta__label {
+  margin: 0 0 var(--space-3);
+  color: var(--color-gold);
+  font-family: var(--font-heading);
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
 .partners-cta h2 {
-  max-width: 14ch;
+  max-width: 16ch;
   margin-bottom: var(--space-3);
   color: var(--color-white);
 }
 
 .partners-cta p {
-  max-width: 38rem;
+  max-width: 34rem;
   margin: 0;
   color: #f3d6dc;
   font-size: 1.08rem;
@@ -356,35 +366,6 @@ a.partners-card:focus-visible {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-}
-
-.partners-action {
-  padding: 3.25rem 0;
-  background: var(--color-white);
-}
-
-.partners-action__panel {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: var(--space-6);
-  align-items: center;
-  padding: var(--space-5) 0;
-  border-top: 3px solid var(--color-gold);
-}
-
-.partners-action h2 {
-  margin-bottom: var(--space-3);
-}
-
-.partners-action__panel p {
-  max-width: 36rem;
-  margin: 0;
-  font-size: 1.08rem;
-}
-
-.partners-action__cta {
-  display: flex;
-  align-items: center;
 }
 
 .partners-button {
@@ -449,6 +430,15 @@ a.partners-card:focus-visible {
 }
 
 @media (max-width: 1080px) {
+  .partners-hero {
+    padding: 4.5rem 0 4rem;
+  }
+
+  .partners-hero__grid,
+  .partners-why__grid {
+    gap: var(--space-5);
+  }
+
   .partners-current__grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -456,10 +446,8 @@ a.partners-card:focus-visible {
 
 @media (max-width: 860px) {
   .partners-hero__grid,
-  .partners-support__grid,
   .partners-why__grid,
-  .partners-cta__grid,
-  .partners-action__panel {
+  .partners-cta__grid {
     grid-template-columns: 1fr;
     gap: var(--space-5);
   }
@@ -469,10 +457,11 @@ a.partners-card:focus-visible {
   }
 
   .partners-hero {
-    padding: 3.5rem 0;
+    padding: 3.25rem 0;
   }
 
   .partners-hero h1 {
+    max-width: none;
     font-size: clamp(1.75rem, 6vw, 2.2rem);
   }
 
@@ -489,7 +478,7 @@ a.partners-card:focus-visible {
   .partners-current,
   .partners-support,
   .partners-why {
-    padding: 3.75rem 0;
+    padding: 3.5rem 0;
   }
 
   .partners-why__media .photo-placeholder {
@@ -498,40 +487,49 @@ a.partners-card:focus-visible {
   }
 
   .partners-cta {
-    min-height: 0;
-    padding: 3rem 0;
+    padding: 2.75rem 0;
   }
 
   .partners-cta__action {
     justify-content: flex-start;
   }
-
-  .partners-action {
-    padding: 2.5rem 0;
-  }
 }
 
 @media (max-width: 640px) {
+  .partners-support__grid {
+    grid-template-columns: 1fr;
+  }
+
   .partners-current h2,
   .partners-support h2,
   .partners-why h2,
-  .partners-cta h2,
-  .partners-action h2 {
+  .partners-cta h2 {
     font-size: clamp(1.75rem, 7vw, 2.2rem);
   }
 
-  .partners-hero__media,
-  .partners-why__media {
-    padding: 0.5rem;
+  .partners-hero__media {
+    padding: 0 0.18rem 0.32rem 0.32rem;
   }
 
-  .partners-button {
-    width: 100%;
+  .partners-hero__media::before {
+    inset: 0.32rem 0 0 0;
+  }
+
+  .partners-why__media {
+    padding: 0 0 0.32rem 0.32rem;
+  }
+
+  .partners-why__media::before {
+    inset: 0.32rem 0 0 0;
+  }
+
+  .partners-why__list li {
+    grid-template-columns: 2.6rem minmax(0, 1fr);
+    gap: var(--space-3);
   }
 
   .partners-hero__actions,
-  .partners-cta__action,
-  .partners-action__cta {
+  .partners-cta__action {
     display: grid;
   }
 }

@@ -102,7 +102,7 @@
   margin: 0;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 860px) {
   .footer {
     padding-top: 2rem;
   }
@@ -117,7 +117,7 @@
   }
 }
 
-@media (max-width: 560px) {
+@media (max-width: 640px) {
   .footer__grid {
     grid-template-columns: 1fr;
     gap: var(--space-5);
@@ -128,7 +128,13 @@
     grid-column: auto;
   }
 
-  .footer__social {
+  .footer a {
+    display: inline-flex;
+    align-items: center;
     min-height: 2.4rem;
+  }
+
+  .footer__social {
+    min-height: 2.5rem;
   }
 }

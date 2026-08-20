@@ -201,41 +201,21 @@ export function Partners() {
         <Container>
           <div className="partners-cta__grid">
             <div className="partners-cta__copy">
-              <h2>Partner With GEMA</h2>
+              <p className="partners-cta__label">Work With GEMA</p>
+              <h2>Let’s create something valuable for GEM students.</h2>
               <p>
-                Organizations, alumni, professionals, and community partners are
-                invited to discuss sponsorships, collaboration, event
-                participation, or other ways of working with GEMA.
+                Whether you’re interested in sponsorship, professional
+                programming, event collaboration or another way of supporting
+                the GEM community, tell us about your organization and what you
+                have in mind.
               </p>
             </div>
             <div className="partners-cta__action">
               <Link
                 className="partners-button partners-button--on-red"
-                to="/contact"
+                to="/contact?reason=partnership"
               >
-                Start a Conversation
-              </Link>
-            </div>
-          </div>
-        </Container>
-      </section>
-
-      <section className="partners-action">
-        <Container>
-          <div className="partners-action__panel">
-            <div>
-              <h2>See GEMA in action.</h2>
-              <p>
-                Explore current programming to see the kinds of student
-                experiences partnerships can help support.
-              </p>
-            </div>
-            <div className="partners-action__cta">
-              <Link
-                className="partners-button partners-button--secondary"
-                to="/events"
-              >
-                Explore Events
+                Start a Partnership Conversation
               </Link>
             </div>
           </div>
