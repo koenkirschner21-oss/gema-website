@@ -98,21 +98,48 @@
   cursor: pointer;
 }
 
+.events-cal__day.has-events {
+  background: var(--color-red);
+  border-color: var(--color-red);
+  color: var(--color-white);
+  font-weight: 700;
+}
+
+.events-cal__day.has-events:hover {
+  background: #a30528;
+  border-color: #a30528;
+}
+
 .events-cal__day.is-today {
   border-color: var(--color-gold);
   color: var(--color-text);
   font-weight: 700;
 }
 
-.events-cal__day.has-events {
+.events-cal__day.is-today.has-events {
+  border-color: var(--color-gold);
+  color: var(--color-white);
+}
+
+.events-cal__day.is-selected {
+  border-color: var(--color-gold);
   color: var(--color-text);
   font-weight: 700;
 }
 
-.events-cal__day.is-selected {
+.events-cal__day.is-selected.has-events {
   background: var(--color-red);
-  border-color: var(--color-red);
+  border-color: var(--color-gold);
   color: var(--color-white);
+}
+
+.events-cal__day.is-selected:hover {
+  border-color: var(--color-gold);
+}
+
+.events-cal__day.is-selected.has-events:hover {
+  background: var(--color-red);
+  border-color: var(--color-gold);
 }
 
 .events-cal__day:focus-visible {
@@ -122,14 +149,7 @@
 }
 
 .events-cal__dot {
-  width: 0.35rem;
-  height: 0.35rem;
-  background: var(--color-red);
-  border-radius: 50%;
-}
-
-.events-cal__day.is-selected .events-cal__dot {
-  background: var(--color-white);
+  display: none;
 }
 
 .events-cal__empty-copy {
