@@ -16,6 +16,10 @@ export function Events() {
   const featuredEvents = getFeaturedEvents()
   const featuredTitle = getFeaturedSectionTitle()
   const featuredCopy = getFeaturedSectionCopy()
+  const remainingPlaceholders = Math.max(
+    0,
+    featuredPlaceholderCount - featuredEvents.length,
+  )
 
   useEffect(() => {
     document.title = 'Events | GEMA'
@@ -46,7 +50,13 @@ export function Events() {
               <p className="events-section-copy">{featuredCopy}</p>
               <div className="events-featured__grid">
                 {featuredEvents.map((event) => (
-                  <EventCard key={event.id} event={event} />
+                  <EventCard key={event.id} event={event} detailed />
+                ))}
+                {Array.from({ length: remainingPlaceholders }, (_, index) => (
+                  <EventCard
+                    key={`event-placeholder-${index}`}
+                    placeholder
+                  />
                 ))}
               </div>
             </>

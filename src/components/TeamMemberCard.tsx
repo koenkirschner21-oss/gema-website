@@ -40,7 +40,10 @@ export function TeamMemberCard({
       className={className}
       aria-label={placeholder ? 'Team member placeholder' : undefined}
     >
-      <TeamPhoto src={member.image} alt={placeholder ? '' : member.name} />
+      <TeamPhoto
+        src={member.image}
+        alt={member.image ? `${member.name}, GEMA ${member.role}` : ''}
+      />
       <div className="team-card__body">
         <h3>{member.name}</h3>
         <p>{formatTeamTitle(member)}</p>

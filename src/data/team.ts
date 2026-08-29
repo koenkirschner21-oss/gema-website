@@ -1,9 +1,8 @@
 /**
  * Team roster for /about/team.
  *
- * Replace every `name: 'Name'`, `image: null`, and `linkedin: null`
- * with current team details. Add a real `portfolio` for directors.
- * Photo paths can live in `public/team/`.
+ * Co-President portraits live in `public/team/`. Director photos are
+ * still pending; keep `image: null` until official headshots are supplied.
  *
  * The public page renders Co-Presidents (`leadership`) and Directors
  * only. `level: 'manager'` may remain in this file for future use and
@@ -23,91 +22,82 @@ export type TeamMember = {
 
 export const team: TeamMember[] = [
   {
-    id: 'leadership-1',
-    name: 'Name',
+    id: 'rachel',
+    name: 'Rachel',
     role: 'Co-President',
     portfolio: null,
-    image: null,
+    image: '/team/rachel-copresident.png',
     linkedin: null,
     level: 'leadership',
   },
   {
-    id: 'leadership-2',
-    name: 'Name',
+    id: 'rodeen',
+    name: 'Rodeen',
     role: 'Co-President',
     portfolio: null,
-    image: null,
+    image: '/team/rodeen-copresident.png',
     linkedin: null,
     level: 'leadership',
   },
   {
-    id: 'director-1',
-    name: 'Name',
-    role: 'Director',
-    portfolio: null,
+    id: 'eivina-stavickyte',
+    name: 'Eivina Stavickyte',
+    role: 'Director of Marketing',
+    portfolio: 'Marketing',
     image: null,
     linkedin: null,
     level: 'director',
   },
   {
-    id: 'director-2',
-    name: 'Name',
-    role: 'Director',
-    portfolio: null,
+    id: 'reshawn-norbert',
+    name: 'Reshawn Norbert',
+    role: 'Director of Brand Ambassadors',
+    portfolio: 'Brand Ambassadors',
     image: null,
     linkedin: null,
     level: 'director',
   },
   {
-    id: 'director-3',
-    name: 'Name',
-    role: 'Director',
-    portfolio: null,
+    id: 'lilian-lorenzo-rebollar',
+    name: 'Lilian Lorenzo Rebollar',
+    role: 'Director of Finance',
+    portfolio: 'Finance',
     image: null,
     linkedin: null,
     level: 'director',
   },
   {
-    id: 'director-4',
-    name: 'Name',
-    role: 'Director',
-    portfolio: null,
+    id: 'simran-aujla',
+    name: 'Simran Aujla',
+    role: 'Director of Events',
+    portfolio: 'Events',
     image: null,
     linkedin: null,
     level: 'director',
   },
   {
-    id: 'director-5',
-    name: 'Name',
-    role: 'Director',
-    portfolio: null,
+    id: 'lama-alqasem',
+    name: 'Lama Alqasem',
+    role: 'Director of Human Resources',
+    portfolio: 'Human Resources',
     image: null,
     linkedin: null,
     level: 'director',
   },
   {
-    id: 'director-6',
-    name: 'Name',
-    role: 'Director',
-    portfolio: null,
+    id: 'samantha-van-wees',
+    name: 'Samantha Van Wees',
+    role: 'Director of Corporate',
+    portfolio: 'Corporate',
     image: null,
     linkedin: null,
     level: 'director',
   },
   {
-    id: 'director-7',
-    name: 'Name',
-    role: 'Director',
-    portfolio: null,
-    image: null,
-    linkedin: null,
-    level: 'director',
-  },
-  {
-    id: 'director-8',
-    name: 'Name',
-    role: 'Director',
-    portfolio: null,
+    id: 'koen',
+    name: 'Koen Kirschner',
+    role: 'Director of Web and Design',
+    portfolio: 'Web and Design',
     image: null,
     linkedin: null,
     level: 'director',
@@ -119,7 +109,7 @@ export function getTeamByLevel(level: TeamLevel) {
 }
 
 export function formatTeamTitle(member: TeamMember) {
-  return member.portfolio ? `${member.role}, ${member.portfolio}` : member.role
+  return member.role
 }
 
 export function isPlaceholderMember(member: TeamMember) {

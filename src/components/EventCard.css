@@ -13,7 +13,7 @@
 .event-card__media {
   display: grid;
   place-items: center;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 2 / 1;
   background: #e6e7ea;
   overflow: hidden;
 }
@@ -22,7 +22,8 @@
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
 }
 
 .event-card__body {
@@ -74,6 +75,21 @@
 .event-card__copy {
   margin: 0;
   color: var(--color-text-secondary);
+}
+
+.event-card__more {
+  color: var(--color-red);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.event-card__more:hover {
+  text-decoration: underline;
+}
+
+.event-card__more:focus-visible {
+  outline: 2px solid var(--color-red);
+  outline-offset: 2px;
 }
 
 .event-card__status {

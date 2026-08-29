@@ -53,7 +53,11 @@ function HomePartnerLogo({
 }
 
 export function Home() {
-  const homepageEvents = getHomepageEvents()
+  const homepageEvents = getHomepageEvents(homepageEventPlaceholderCount)
+  const remainingEventPlaceholders = Math.max(
+    0,
+    homepageEventPlaceholderCount - homepageEvents.length,
+  )
   const pastPartnerLogos = getPastPartnersWithLogos()
 
   useEffect(() => {
@@ -158,20 +162,19 @@ export function Home() {
             </Link>
           </div>
           <div className="home-events__grid">
-            {homepageEvents.length > 0
-              ? homepageEvents.map((event) => (
-                  <EventCard key={event.id} event={event} />
-                ))
-              : Array.from({ length: homepageEventPlaceholderCount }, (_, index) => (
-                  <article
-                    key={`event-placeholder-${index}`}
-                    className="home-event-placeholder"
-                    aria-label="Event placeholder"
-                  >
-                    <div className="home-event-placeholder__media" />
-                    <p>Event details coming soon</p>
-                  </article>
-                ))}
+            {homepageEvents.map((event) => (
+              <EventCard key={event.id} event={event} readMoreTo="/events" />
+            ))}
+            {Array.from({ length: remainingEventPlaceholders }, (_, index) => (
+              <article
+                key={`event-placeholder-${index}`}
+                className="home-event-placeholder"
+                aria-label="Event placeholder"
+              >
+                <div className="home-event-placeholder__media" />
+                <p>Event details coming soon</p>
+              </article>
+            ))}
           </div>
         </Container>
       </section>

@@ -10,6 +10,7 @@ export type GemaEvent = {
   endTime: string | null
   location: string | null
   shortDescription: string
+  fullDescription: string | null
   category: string
   registrationUrl: string | null
   image: string | null
@@ -47,6 +48,7 @@ export const featuredEventsMode: FeaturedEventsMode = 'standard'
  *   endTime: '8:00 PM',
  *   location: 'Location',
  *   shortDescription: 'One or two sentences.',
+ *   fullDescription: null,
  *   category: 'Networking',
  *   registrationUrl: null,
  *   image: null,
@@ -55,7 +57,27 @@ export const featuredEventsMode: FeaturedEventsMode = 'standard'
  *   status: 'upcoming',
  * }
  */
-export const events: GemaEvent[] = []
+export const events: GemaEvent[] = [
+  {
+    id: 'custom-tote-bag-decorating',
+    title: 'Custom Tote Bag Decorating',
+    date: '2026-09-07',
+    startTime: '12:00 PM',
+    endTime: '2:00 PM',
+    location: 'Branion Plaza',
+    shortDescription:
+      'Join GEMA during Orientation Week for a free custom tote bag decorating event. Meet new people, learn more about the GEMA community, and personalize your own tote using materials provided.',
+    fullDescription:
+      'Join GEMA during Orientation Week for a free custom tote bag decorating event. Plain tote bags are provided for customization, along with materials such as stickers, glitter pens, rhinestones, and non-scented fabric markers. All students are welcome to meet new people, learn more about GEMA, and personalize a tote.',
+    category: 'Orientation Week',
+    registrationUrl:
+      'https://uoguelph.campusgroups.com/gema/rsvp_boot?id=375495',
+    image: '/custom-tote-bag-decorating.png',
+    featured: true,
+    orientationWeek: true,
+    status: 'upcoming',
+  },
+]
 
 export const eventsMedia = {
   hero: {

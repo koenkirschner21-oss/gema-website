@@ -15,7 +15,10 @@ export type Opportunity = {
  * Current GEMA opportunities shown on /get-involved.
  *
  * Add real roles here when recruitment opens. The page renders every
- * entry with `active: true`. If none are active, it shows the empty state.
+ * entry with `active: true` and `status: 'open'`. If none are active,
+ * it shows the empty state.
+ *
+ * Brand Ambassador is currently filled. Do not list it as open.
  *
  * Example:
  * {
@@ -32,5 +35,5 @@ export type Opportunity = {
 export const opportunities: Opportunity[] = []
 
 export function getActiveOpportunities() {
-  return opportunities.filter((item) => item.active)
+  return opportunities.filter((item) => item.active && item.status === 'open')
 }

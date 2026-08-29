@@ -86,8 +86,17 @@
 }
 
 .team-directors--auto {
-  grid-template-columns: repeat(auto-fit, minmax(14rem, 16rem));
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
+  align-items: stretch;
+}
+
+.team-directors--auto > * {
+  flex: 0 0 calc((100% - (3 * var(--space-5))) / 4);
+  width: calc((100% - (3 * var(--space-5))) / 4);
+  max-width: calc((100% - (3 * var(--space-5))) / 4);
+  min-width: 0;
 }
 
 .team-cta {
@@ -172,10 +181,15 @@
 
 @media (max-width: 1080px) {
   .team-directors--4,
-  .team-directors--3,
-  .team-directors--auto {
+  .team-directors--3 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     justify-content: center;
+  }
+
+  .team-directors--auto > * {
+    flex-basis: calc((100% - var(--space-5)) / 2);
+    width: calc((100% - var(--space-5)) / 2);
+    max-width: calc((100% - var(--space-5)) / 2);
   }
 }
 
@@ -208,10 +222,15 @@
 @media (max-width: 640px) {
   .team-leadership,
   .team-directors--4,
-  .team-directors--3,
-  .team-directors--auto {
+  .team-directors--3 {
     grid-template-columns: minmax(0, 1fr);
     justify-content: center;
+  }
+
+  .team-directors--auto > * {
+    flex-basis: 100%;
+    width: 100%;
+    max-width: none;
   }
 
   .team-cta__actions {

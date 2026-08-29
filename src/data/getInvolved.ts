@@ -94,6 +94,7 @@ export const openingsEmptyState = {
   linkTo: '/events',
 }
 
+/** Retained for future hiring cycles if placeholder cards are needed. */
 export const opportunityPlaceholderCount = 3
 
 export const opportunityPlaceholder = {

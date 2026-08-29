@@ -7,8 +7,6 @@ import {
   involvementPaths,
   involveSocial,
   openingsEmptyState,
-  opportunityPlaceholder,
-  opportunityPlaceholderCount,
 } from '../data/getInvolved'
 import { getActiveOpportunities } from '../data/opportunities'
 import { site } from '../data/site'
@@ -214,33 +212,13 @@ export function GetInvolved() {
               ))}
             </ul>
           ) : (
-            <>
+            <div className="involve-openings__empty">
+              <h3>{openingsEmptyState.heading}</h3>
               <p className="involve-openings__intro">{openingsEmptyState.copy}</p>
-              <ul className="involve-openings__grid">
-                {Array.from({ length: opportunityPlaceholderCount }, (_, index) => (
-                  <li
-                    key={`opportunity-placeholder-${index}`}
-                    className="involve-openings__card involve-openings__card--placeholder"
-                    aria-label="Opportunity details coming soon"
-                  >
-                    <p className="involve-openings__badge">
-                      {opportunityPlaceholder.status}
-                    </p>
-                    <h3>{opportunityPlaceholder.title}</h3>
-                    <p>{opportunityPlaceholder.description}</p>
-                    <p className="involve-openings__note">
-                      {opportunityPlaceholder.note}
-                    </p>
-                    <span className="involve-button involve-button--muted">
-                      {opportunityPlaceholder.action}
-                    </span>
-                  </li>
-                ))}
-              </ul>
               <Link className="involve-text-link" to={openingsEmptyState.linkTo}>
                 {openingsEmptyState.linkLabel}
               </Link>
-            </>
+            </div>
           )}
         </Container>
       </section>

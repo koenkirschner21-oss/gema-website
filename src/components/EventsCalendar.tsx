@@ -5,6 +5,7 @@ import {
   getEventDateSet,
   getEventsByDate,
   getVisibleEvents,
+  parseISODate,
   toISODate,
 } from '../data/events'
 import './EventsCalendar.css'
@@ -26,13 +27,45 @@ function buildMonthCells(year: number, monthIndex: number) {
   return cells
 }
 
+function getCalendarStart(today: Date) {
+  const upcoming = getVisibleEvents()
+  const year = today.getFullYear()
+  const month = today.getMonth()
+  const monthPrefix = `${year}-${String(month + 1).padStart(2, '0')}`
+  const inThisMonth = upcoming.filter((event) =>
+    event.date.startsWith(monthPrefix),
+  )
+
+  if (inThisMonth.length > 0) {
+    return {
+      year,
+      month,
+      selectedDate: inThisMonth[0].date,
+    }
+  }
+
+  if (upcoming.length > 0) {
+    const next = parseISODate(upcoming[0].date)
+    return {
+      year: next.getFullYear(),
+      month: next.getMonth(),
+      selectedDate: upcoming[0].date,
+    }
+  }
+
+  return { year, month, selectedDate: null as string | null }
+}
+
 export function EventsCalendar() {
   const today = useMemo(() => new Date(), [])
+  const start = useMemo(() => getCalendarStart(today), [today])
   const [monthCursor, setMonthCursor] = useState({
-    year: today.getFullYear(),
-    month: today.getMonth(),
+    year: start.year,
+    month: start.month,
   })
-  const [selectedDate, setSelectedDate] = useState<string | null>(null)
+  const [selectedDate, setSelectedDate] = useState<string | null>(
+    start.selectedDate,
+  )
 
   const visibleEvents = getVisibleEvents()
   const eventDates = getEventDateSet()

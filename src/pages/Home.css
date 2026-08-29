@@ -241,6 +241,11 @@
   gap: var(--space-5);
 }
 
+.home-events .event-card__copy {
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
 .home-event-placeholder {
   min-width: 0;
   background: var(--color-white);
