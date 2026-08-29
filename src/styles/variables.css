@@ -1,13 +1,21 @@
 :root {
   --color-red: #c00630;
+  --color-red-hover: #a30528;
   --color-gold: #fdc72a;
+  --color-gold-hover: #e0b01f;
   --color-blue: #69a3b9;
+  --color-blue-hover: #5a8fa3;
   --color-black: #1a1a1a;
+  --color-charcoal: #2c2c2c;
   --color-white: #ffffff;
   --color-neutral: #f5f7f8;
   --color-border: #e4e7ea;
   --color-text: #1a1a1a;
   --color-text-secondary: #5a6168;
+  --color-placeholder: #e6e7ea;
+  --color-placeholder-text: #8b9096;
+  --color-on-red: #f3d6dc;
+  --color-on-dark: #d7dbdf;
 
   --max-width: 1240px;
   --radius: 4px;

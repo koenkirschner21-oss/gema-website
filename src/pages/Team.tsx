@@ -81,9 +81,9 @@ export function Team() {
               </Link>
               <Link
                 className="team-button team-button--on-dark"
-                to="/get-involved#current-opportunities"
+                to="/get-involved#get-connected"
               >
-                View Current Opportunities
+                Stay Connected
               </Link>
             </div>
           </div>

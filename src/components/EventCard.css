@@ -10,11 +10,25 @@
   border-radius: 0;
 }
 
+.event-card--clickable {
+  cursor: pointer;
+}
+
+.event-card--clickable:hover {
+  border-color: var(--color-text-secondary);
+  border-top-color: var(--color-red);
+}
+
+.event-card--clickable:focus-visible {
+  outline: 2px solid var(--color-red);
+  outline-offset: 3px;
+}
+
 .event-card__media {
   display: grid;
   place-items: center;
   aspect-ratio: 2 / 1;
-  background: #e6e7ea;
+  background: var(--color-placeholder);
   overflow: hidden;
 }
 
@@ -78,9 +92,15 @@
 }
 
 .event-card__more {
+  display: inline;
+  padding: 0;
+  background: none;
+  border: 0;
   color: var(--color-red);
+  font: inherit;
   font-weight: 600;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .event-card__more:hover {
@@ -103,6 +123,8 @@
 }
 
 .event-card__cta {
+  position: relative;
+  z-index: 1;
   display: inline-flex;
   margin-top: 0.9rem;
   color: var(--color-red);
@@ -120,6 +142,13 @@ a.event-card__cta:focus-visible {
   outline-offset: 3px;
 }
 
+@media (max-width: 640px) {
+  .event-card__cta {
+    min-height: 2.75rem;
+    align-items: center;
+  }
+}
+
 .event-card--placeholder .event-card__date,
 .event-card--placeholder .event-card__category,
 .event-card--placeholder .event-card__meta,
@@ -127,5 +156,5 @@ a.event-card__cta:focus-visible {
 .event-card--placeholder .event-card__status,
 .event-card--placeholder h3,
 .event-card--placeholder .event-card__cta {
-  color: #8b9096;
+  color: var(--color-placeholder-text);
 }

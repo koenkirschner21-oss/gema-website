@@ -12,11 +12,12 @@ export type Opportunity = {
 }
 
 /**
- * Current GEMA opportunities shown on /get-involved.
+ * Opportunity data for /get-involved.
  *
- * Add real roles here when recruitment opens. The page renders every
- * entry with `active: true` and `status: 'open'`. If none are active,
- * it shows the empty state.
+ * The Current Opportunities section is currently omitted from the
+ * rendered page. Restore it in GetInvolved.tsx when real roles exist.
+ * Add entries with `active: true` and `status: 'open'`. Empty-state
+ * copy and opening-card styles remain in getInvolved.ts / GetInvolved.css.
  *
  * Brand Ambassador is currently filled. Do not list it as open.
  *

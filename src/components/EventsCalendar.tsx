@@ -149,7 +149,12 @@ export function EventsCalendar() {
         <div className="events-cal__selected">
           {selectedEvents.length > 0 ? (
             selectedEvents.map((event) => (
-              <EventCard key={event.id} event={event} compact />
+              <EventCard
+                key={event.id}
+                event={event}
+                compact
+                readMoreDetails
+              />
             ))
           ) : (
             <p className="events-cal__empty-copy">No events on this date.</p>

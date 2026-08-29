@@ -16,7 +16,7 @@
 
 .team-card__photo {
   aspect-ratio: 1;
-  background: #e6e7ea;
+  background: var(--color-placeholder);
   overflow: hidden;
 }
 
@@ -65,8 +65,10 @@
 }
 
 .team-card__linkedin {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   margin-top: 0.7rem;
+  min-height: 2.4rem;
   color: var(--color-red);
   font-size: 0.85rem;
   font-weight: 600;
@@ -79,7 +81,7 @@
 
 .team-card--placeholder h3,
 .team-card--placeholder .team-card__body p {
-  color: #8b9096;
+  color: var(--color-placeholder-text);
 }
 
 .team-card__linkedin:focus-visible {

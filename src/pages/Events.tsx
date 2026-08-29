@@ -50,7 +50,7 @@ export function Events() {
               <p className="events-section-copy">{featuredCopy}</p>
               <div className="events-featured__grid">
                 {featuredEvents.map((event) => (
-                  <EventCard key={event.id} event={event} detailed />
+                  <EventCard key={event.id} event={event} readMoreDetails />
                 ))}
                 {Array.from({ length: remainingPlaceholders }, (_, index) => (
                   <EventCard
@@ -125,7 +125,7 @@ export function Events() {
             <div className="events-partner__action">
               <Link
                 className="events-button events-button--primary"
-                to="/partners"
+                to="/partners#partner-with-gema"
               >
                 Explore Partnerships
               </Link>

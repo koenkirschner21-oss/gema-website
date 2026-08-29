@@ -43,7 +43,7 @@ function PartnerLogo({ src }: { src: string | null }) {
       {showImage ? (
         <img src={src ?? undefined} alt="" onError={() => setFailed(true)} />
       ) : (
-        <span>Logo</span>
+        <span className="visually-hidden">Partner logo to be added</span>
       )}
     </div>
   )
@@ -104,16 +104,16 @@ export function Partners() {
               <div className="partners-hero__actions">
                 <Link
                   className="partners-button partners-button--primary"
-                  to="/contact?reason=partnership"
+                  to="/contact?reason=partnership#send-message"
                 >
                   Partner With GEMA
                 </Link>
-                <a
+                <Link
                   className="partners-button partners-button--secondary"
-                  href="#partner-with-gema"
+                  to="#partner-with-gema"
                 >
                   Explore Partnership Opportunities
-                </a>
+                </Link>
               </div>
             </div>
             <div className="partners-hero__media">
@@ -144,7 +144,7 @@ export function Partners() {
                   className="partners-card"
                 >
                   <div className="partners-logo is-placeholder">
-                    <span>Logo</span>
+                    <span className="visually-hidden">Partner logo to be added</span>
                   </div>
                 </div>
               ))}
@@ -213,7 +213,7 @@ export function Partners() {
             <div className="partners-cta__action">
               <Link
                 className="partners-button partners-button--on-red"
-                to="/contact?reason=partnership"
+                to="/contact?reason=partnership#send-message"
               >
                 Start a Partnership Conversation
               </Link>

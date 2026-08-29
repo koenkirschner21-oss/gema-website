@@ -149,28 +149,6 @@
   background: var(--color-neutral);
 }
 
-@media (max-width: 1366px) and (min-width: 1281px) {
-  .navbar__link {
-    padding: 0.55rem 0.5rem;
-  }
-}
-
-@media (max-width: 1280px) and (min-width: 1081px) {
-  .navbar__inner {
-    gap: var(--space-3);
-  }
-
-  .navbar__brand img {
-    height: 3.55rem;
-    max-width: 17.5rem;
-  }
-
-  .navbar__link {
-    padding: 0.55rem 0.42rem;
-    font-size: 0.95rem;
-  }
-}
-
 @media (max-width: 1080px) {
   .navbar__toggle {
     display: block;
@@ -222,7 +200,7 @@
   }
 
   .navbar__dropdown-link {
-    min-height: 2.5rem;
+    min-height: 2.75rem;
     padding: 0.7rem 0;
   }
 }

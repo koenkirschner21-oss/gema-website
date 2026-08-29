@@ -6,9 +6,7 @@ import {
   involvementBenefits,
   involvementPaths,
   involveSocial,
-  openingsEmptyState,
 } from '../data/getInvolved'
-import { getActiveOpportunities } from '../data/opportunities'
 import { site } from '../data/site'
 import './GetInvolved.css'
 
@@ -118,8 +116,6 @@ function SocialIcon({ platform }: { platform: (typeof involveSocial)[number]['pl
 }
 
 export function GetInvolved() {
-  const activeOpportunities = getActiveOpportunities()
-
   useEffect(() => {
     document.title = 'Get Involved | GEMA'
   }, [])
@@ -139,12 +135,12 @@ export function GetInvolved() {
                 positions become available.
               </p>
               <div className="involve-hero__actions">
-                <a
+                <Link
                   className="involve-button involve-button--primary"
-                  href="#current-opportunities"
+                  to="#get-connected"
                 >
-                  Explore Opportunities
-                </a>
+                  Stay Connected
+                </Link>
                 <Link className="involve-button involve-button--secondary" to="/events">
                   View Events
                 </Link>
@@ -174,52 +170,6 @@ export function GetInvolved() {
               </li>
             ))}
           </ul>
-        </Container>
-      </section>
-
-      <section className="involve-openings" id="current-opportunities">
-        <Container>
-          <h2>Current Opportunities</h2>
-          {activeOpportunities.length > 0 ? (
-            <ul className="involve-openings__grid">
-              {activeOpportunities.map((item) => (
-                <li key={item.id}>
-                  {item.category ? (
-                    <p className="involve-openings__category">{item.category}</p>
-                  ) : null}
-                  <h3>{item.title}</h3>
-                  <p>{item.description}</p>
-                  {item.deadline ? (
-                    <p className="involve-openings__deadline">
-                      Apply by {item.deadline}
-                    </p>
-                  ) : null}
-                  {item.applicationUrl ? (
-                    <a
-                      className="involve-button involve-button--primary"
-                      href={item.applicationUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      Apply Now
-                      <span className="visually-hidden">
-                        {' '}
-                        for {item.title} (opens in a new tab)
-                      </span>
-                    </a>
-                  ) : null}
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <div className="involve-openings__empty">
-              <h3>{openingsEmptyState.heading}</h3>
-              <p className="involve-openings__intro">{openingsEmptyState.copy}</p>
-              <Link className="involve-text-link" to={openingsEmptyState.linkTo}>
-                {openingsEmptyState.linkLabel}
-              </Link>
-            </div>
-          )}
         </Container>
       </section>
 
@@ -267,7 +217,7 @@ export function GetInvolved() {
         </Container>
       </section>
 
-      <section className="involve-social" id="stay-connected">
+      <section className="involve-social" id="get-connected">
         <Container>
           <div className="involve-social__layout">
             <div className="involve-social__media">

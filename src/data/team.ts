@@ -1,8 +1,8 @@
 /**
  * Team roster for /about/team.
  *
- * Co-President portraits live in `public/team/`. Director photos are
- * still pending; keep `image: null` until official headshots are supplied.
+ * Team portraits live in `public/team/`. Keep `image: null` until an
+ * official headshot is supplied.
  *
  * The public page renders Co-Presidents (`leadership`) and Directors
  * only. `level: 'manager'` may remain in this file for future use and
@@ -80,7 +80,7 @@ export const team: TeamMember[] = [
     name: 'Lama Alqasem',
     role: 'Director of Human Resources',
     portfolio: 'Human Resources',
-    image: null,
+    image: '/team/lama-alqasem.png',
     linkedin: null,
     level: 'director',
   },
@@ -89,7 +89,7 @@ export const team: TeamMember[] = [
     name: 'Samantha Van Wees',
     role: 'Director of Corporate',
     portfolio: 'Corporate',
-    image: null,
+    image: '/team/samantha-van-wees.png',
     linkedin: null,
     level: 'director',
   },
@@ -98,7 +98,7 @@ export const team: TeamMember[] = [
     name: 'Koen Kirschner',
     role: 'Director of Web and Design',
     portfolio: 'Web and Design',
-    image: null,
+    image: '/team/koen-kirschner.png',
     linkedin: null,
     level: 'director',
   },

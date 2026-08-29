@@ -18,7 +18,7 @@
 }
 
 .partners-hero {
-  padding: 6rem 0;
+  padding: 5.5rem 0 5rem;
 }
 
 .partners-hero__grid {
@@ -63,13 +63,16 @@
 }
 
 .partners-hero__media {
-  padding: 0 0 0.55rem 0.55rem;
+  padding: 0 0.28rem 0.45rem 0.45rem;
 }
 
 .partners-hero__media::before {
   content: '';
   position: absolute;
-  inset: 0.55rem 0 0 0;
+  top: 0.45rem;
+  right: 0;
+  bottom: 0;
+  left: 0;
   background: var(--color-gold);
 }
 
@@ -79,6 +82,7 @@
   z-index: 1;
   width: 100%;
   height: 100%;
+  border: 0;
 }
 
 .partners-hero__media .photo-placeholder img,
@@ -157,7 +161,7 @@
   place-items: center;
   aspect-ratio: 16 / 10;
   overflow: hidden;
-  background: #e6e7ea;
+  background: var(--color-placeholder);
   border: 1px solid var(--color-border);
 }
 
@@ -174,7 +178,7 @@
 
 .partners-logo span {
   padding: 0.75rem;
-  color: #5a6168;
+  color: var(--color-text-secondary);
   font-size: 0.82rem;
   font-weight: 600;
   letter-spacing: 0.04em;
@@ -183,7 +187,7 @@
 }
 
 .partners-logo.is-placeholder {
-  background: #e6e7ea;
+  background: var(--color-placeholder);
 }
 
 a.partners-card:hover .partners-logo {
@@ -358,7 +362,7 @@ a.partners-card:focus-visible {
 .partners-cta p {
   max-width: 34rem;
   margin: 0;
-  color: #f3d6dc;
+  color: var(--color-on-red);
   font-size: 1.08rem;
 }
 
@@ -393,8 +397,8 @@ a.partners-card:focus-visible {
 }
 
 .partners-button--primary:hover {
-  background: #a30528;
-  border-color: #a30528;
+  background: var(--color-red-hover);
+  border-color: var(--color-red-hover);
 }
 
 .partners-button--secondary {
@@ -512,7 +516,7 @@ a.partners-card:focus-visible {
   }
 
   .partners-hero__media::before {
-    inset: 0.32rem 0 0 0;
+    top: 0.32rem;
   }
 
   .partners-why__media {
@@ -531,6 +535,11 @@ a.partners-card:focus-visible {
   .partners-hero__actions,
   .partners-cta__action {
     display: grid;
+  }
+
+  .partners-current__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-3);
   }
 }
 

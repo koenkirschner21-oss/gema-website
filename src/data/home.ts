@@ -1,8 +1,11 @@
+import { aboutMedia } from './about'
+
 export const homeMedia = {
   hero: {
-    src: '/home-hero.jpg' as string | null,
-    label: 'Primary GEMA event photography',
-    alt: 'Students attending a GEMA event at the University of Guelph',
+    // Temporary: reuse the About GEMA hero until a dedicated homepage photo is supplied.
+    src: aboutMedia.hero.src,
+    label: aboutMedia.hero.label,
+    alt: aboutMedia.hero.alt,
   },
   involve: {
     src: '/home-get-involved.jpg' as string | null,
@@ -26,11 +29,6 @@ export const homeIntroPoints = [
     title: 'Experience beyond the classroom',
     copy: 'Giving students access to events, initiatives and professional development opportunities.',
     accent: 'blue' as const,
-  },
-  {
-    title: 'Leadership & involvement',
-    copy: 'Creating ways for students to contribute, take responsibility and build practical experience.',
-    accent: 'dark' as const,
   },
 ]
 

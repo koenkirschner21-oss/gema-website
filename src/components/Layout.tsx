@@ -10,12 +10,27 @@ export function Layout() {
   useLayoutEffect(() => {
     if (location.hash) {
       const id = decodeURIComponent(location.hash.slice(1))
-      const target = document.getElementById(id)
 
-      if (target) {
-        target.scrollIntoView()
+      const scrollToHash = () => {
+        const target = document.getElementById(id)
+        if (target) {
+          target.scrollIntoView()
+          return true
+        }
+        return false
+      }
+
+      if (scrollToHash()) {
         return
       }
+
+      const frame = window.requestAnimationFrame(() => {
+        if (!scrollToHash()) {
+          window.scrollTo(0, 0)
+        }
+      })
+
+      return () => window.cancelAnimationFrame(frame)
     }
 
     window.scrollTo(0, 0)

@@ -106,8 +106,8 @@
 }
 
 .events-cal__day.has-events:hover {
-  background: #a30528;
-  border-color: #a30528;
+  background: var(--color-red-hover);
+  border-color: var(--color-red-hover);
 }
 
 .events-cal__day.is-today {
@@ -189,6 +189,10 @@
     align-items: stretch;
   }
 
+  .events-cal__month {
+    font-size: clamp(1.4rem, 5vw, 1.7rem);
+  }
+
   .events-cal__nav {
     width: 100%;
   }
@@ -200,7 +204,7 @@
 
   .events-cal__empty,
   .events-cal__day {
-    min-height: 2.85rem;
+    min-height: 2.75rem;
   }
 
   .events-cal__day {
@@ -209,7 +213,7 @@
   }
 
   .events-cal__weekdays span {
-    font-size: 0.7rem;
+    font-size: 0.72rem;
     letter-spacing: 0.04em;
   }
 
@@ -220,13 +224,9 @@
 }
 
 @media (max-width: 430px) {
-  .events-cal__empty,
-  .events-cal__day {
-    min-height: 2.55rem;
-  }
-
   .events-cal__weekdays span {
-    font-size: 0.64rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.02em;
   }
 }
 

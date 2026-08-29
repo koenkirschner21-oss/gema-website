@@ -86,17 +86,34 @@ export function Home() {
                 <Link className="home-button home-button--primary" to="/get-involved">
                   Get Involved
                 </Link>
-                <Link className="home-button home-button--secondary" to="/events">
+                <Link className="home-button home-button--on-dark" to="/events">
                   Explore Events
                 </Link>
               </div>
             </div>
             <div className="home-hero__media">
-              <HomeMedia
-                src={homeMedia.hero.src}
-                alt={homeMedia.hero.alt}
-                ratio="wide"
-              />
+              {homeMedia.hero.src ? (
+                <HomeMedia
+                  src={homeMedia.hero.src}
+                  alt={homeMedia.hero.alt}
+                  ratio="wide"
+                />
+              ) : (
+                <figure className="home-hero__placeholder">
+                  <span className="visually-hidden">{homeMedia.hero.alt}</span>
+                  <div className="home-hero__placeholder-inner" aria-hidden="true">
+                    <span className="home-hero__placeholder-accents">
+                      <span />
+                      <span />
+                      <span />
+                    </span>
+                    <p>GEMA</p>
+                    <span className="home-hero__placeholder-caption">
+                      Photography coming soon
+                    </span>
+                  </div>
+                </figure>
+              )}
             </div>
           </div>
         </Container>
@@ -109,25 +126,33 @@ export function Home() {
               <h2>What Is GEMA?</h2>
               <p>
                 GEMA is the student association for the Government, Economics
-                & Management major at the University of Guelph.
+                & Management major at the University of Guelph’s Gordon S. Lang
+                School of Business and Economics.
               </p>
               <p>
-                We bring students together, represent the GEM community and
-                create opportunities to connect, develop professionally and get
-                involved beyond the classroom.
+                We exist to make the GEM experience stronger and more connected.
+                That means bringing students together, representing the program
+                community, and creating space to meet people, develop
+                professionally, and get involved beyond the classroom.
+              </p>
+              <p>
+                GEMA is student-led and built around the experiences, interests,
+                and opportunities that matter to GEM students. Whether you are
+                new to the major or already part of the community, there is a
+                place to start.
               </p>
               <Link className="home-text-link" to="/about">
                 Learn About GEMA
               </Link>
             </div>
             <ul className="home-intro__points">
-              {homeIntroPoints.map((item) => (
+              {homeIntroPoints.map((item, index) => (
                 <li key={item.title} data-accent={item.accent}>
-                  <span className="home-intro__mark" aria-hidden="true" />
-                  <div>
-                    <h3>{item.title}</h3>
-                    <p>{item.copy}</p>
-                  </div>
+                  <span className="home-intro__index" aria-hidden="true">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <h3>{item.title}</h3>
+                  <p>{item.copy}</p>
                 </li>
               ))}
             </ul>
@@ -157,25 +182,18 @@ export function Home() {
               From professional development and networking to community events,
               there are plenty of ways to connect throughout the year.
             </p>
-            <Link className="home-text-link home-text-link--inline" to="/events">
-              View All Events
-            </Link>
           </div>
           <div className="home-events__grid">
             {homepageEvents.map((event) => (
-              <EventCard key={event.id} event={event} readMoreTo="/events" />
+              <EventCard key={event.id} event={event} readMoreDetails />
             ))}
             {Array.from({ length: remainingEventPlaceholders }, (_, index) => (
-              <article
-                key={`event-placeholder-${index}`}
-                className="home-event-placeholder"
-                aria-label="Event placeholder"
-              >
-                <div className="home-event-placeholder__media" />
-                <p>Event details coming soon</p>
-              </article>
+              <EventCard key={`event-placeholder-${index}`} placeholder />
             ))}
           </div>
+          <Link className="home-text-link home-events__all" to="/events">
+            View All Events
+          </Link>
         </Container>
       </section>
 
@@ -199,7 +217,7 @@ export function Home() {
                 </Link>
                 <Link
                   className="home-button home-button--on-red-secondary"
-                  to="/get-involved#current-opportunities"
+                  to="/get-involved#get-connected"
                 >
                   Explore Opportunities
                 </Link>
@@ -258,7 +276,7 @@ export function Home() {
                     key={`past-partner-placeholder-${index}`}
                     className="home-partners__logo is-placeholder"
                   >
-                    <span>Logo</span>
+                    <span className="visually-hidden">Partner logo to be added</span>
                   </div>
                 ))}
               </div>

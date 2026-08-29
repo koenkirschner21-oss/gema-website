@@ -52,7 +52,7 @@
 .contact-lede {
   max-width: 38rem;
   margin: 0 auto;
-  color: #f3d6dc;
+  color: var(--color-on-red);
   font-size: 1.08rem;
 }
 
@@ -116,7 +116,7 @@
   min-height: 3.1rem;
   padding: 0.8rem 1rem;
   background: var(--color-white);
-  border: 1px solid #cfd3d7;
+  border: 1px solid var(--color-border);
   border-radius: 0;
   color: var(--color-text);
   font-family: inherit;
@@ -145,7 +145,7 @@
 .contact-field input:hover,
 .contact-field select:hover,
 .contact-field textarea:hover {
-  border-color: #aeb4ba;
+  border-color: var(--color-text-secondary);
 }
 
 .contact-field input:focus-visible,
@@ -222,15 +222,15 @@
 }
 
 .contact-routes__grid a:hover {
-  background: #a30528;
+  background: var(--color-red-hover);
 }
 
 .contact-routes__grid a[data-accent='gold']:hover {
-  background: #e0b01f;
+  background: var(--color-gold-hover);
 }
 
 .contact-routes__grid a[data-accent='blue']:hover {
-  background: #5a8fa3;
+  background: var(--color-blue-hover);
 }
 
 .contact-routes__grid a[data-accent='dark']:hover {
@@ -289,7 +289,7 @@
 .contact-direct p {
   max-width: 32rem;
   margin: 0;
-  color: #f3d6dc;
+  color: var(--color-on-red);
   font-size: 1.05rem;
 }
 
@@ -314,6 +314,7 @@
   font-size: 1.02rem;
   font-weight: 600;
   text-decoration: none;
+  overflow-wrap: anywhere;
 }
 
 .contact-direct__link:hover {
@@ -362,8 +363,8 @@
 }
 
 .contact-button--primary:hover:not(:disabled) {
-  background: #a30528;
-  border-color: #a30528;
+  background: var(--color-red-hover);
+  border-color: var(--color-red-hover);
 }
 
 .contact-button:focus-visible {
@@ -408,6 +409,10 @@
 }
 
 @media (max-width: 640px) {
+  .contact-hero {
+    padding: 2.5rem 0;
+  }
+
   .contact-routes__grid {
     grid-template-columns: 1fr;
   }
@@ -421,6 +426,15 @@
 
   .contact-form .contact-button {
     width: 100%;
+  }
+
+  .contact-direct__link {
+    min-height: 2.75rem;
+  }
+
+  .contact-direct__links {
+    max-width: none;
+    padding-left: 1rem;
   }
 }
 

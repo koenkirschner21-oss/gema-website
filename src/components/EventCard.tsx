@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useCallback, useState, type KeyboardEvent } from 'react'
 import { Link } from 'react-router-dom'
+import { EventDetailsDialog } from './EventDetailsDialog'
 import {
   formatEventDate,
   formatEventTime,
@@ -13,6 +14,7 @@ type EventCardProps = {
   detailed?: boolean
   placeholder?: boolean
   readMoreTo?: string
+  readMoreDetails?: boolean
 }
 
 function EventPhoto({ src, alt }: { src: string; alt: string }) {
@@ -31,7 +33,10 @@ export function EventCard({
   detailed = false,
   placeholder = false,
   readMoreTo,
+  readMoreDetails = false,
 }: EventCardProps) {
+  const [detailsOpen, setDetailsOpen] = useState(false)
+  const closeDetails = useCallback(() => setDetailsOpen(false), [])
   if (placeholder) {
     return (
       <article
@@ -58,12 +63,39 @@ export function EventCard({
   const description = detailed
     ? event.fullDescription || event.shortDescription
     : event.shortDescription
-  const className = ['event-card', compact ? 'event-card--compact' : '']
+  const className = [
+    'event-card',
+    compact ? 'event-card--compact' : '',
+    readMoreDetails ? 'event-card--clickable' : '',
+  ]
     .filter(Boolean)
     .join(' ')
 
+  function openDetails() {
+    setDetailsOpen(true)
+  }
+
+  function handleCardKeyDown(keyEvent: KeyboardEvent<HTMLElement>) {
+    if (!readMoreDetails || keyEvent.target !== keyEvent.currentTarget) {
+      return
+    }
+
+    if (keyEvent.key === 'Enter' || keyEvent.key === ' ') {
+      keyEvent.preventDefault()
+      openDetails()
+    }
+  }
+
   return (
-    <article className={className}>
+    <article
+      className={className}
+      tabIndex={readMoreDetails ? 0 : undefined}
+      aria-label={
+        readMoreDetails ? `${event.title}. Activate to view event details.` : undefined
+      }
+      onClick={readMoreDetails ? openDetails : undefined}
+      onKeyDown={readMoreDetails ? handleCardKeyDown : undefined}
+    >
       {compact ? null : (
         <div className="event-card__media">
           {event.image ? (
@@ -89,12 +121,30 @@ export function EventCard({
             {event.location}
           </p>
         ) : null}
-        {description ? (
+        {description || readMoreDetails || readMoreTo ? (
           <p className="event-card__copy">
             {description}
-            {readMoreTo ? (
+            {readMoreDetails ? (
               <>
-                {' '}
+                {description ? ' ' : null}
+                <button
+                  type="button"
+                  className="event-card__more"
+                  onClick={(clickEvent) => {
+                    clickEvent.stopPropagation()
+                    openDetails()
+                  }}
+                >
+                  Read more
+                  <span className="visually-hidden">
+                    {' '}
+                    about {event.title}
+                  </span>
+                </button>
+              </>
+            ) : readMoreTo ? (
+              <>
+                {description ? ' ' : null}
                 <Link className="event-card__more" to={readMoreTo}>
                   Read more
                   <span className="visually-hidden">
@@ -112,6 +162,7 @@ export function EventCard({
             href={event.registrationUrl}
             target="_blank"
             rel="noreferrer"
+            onClick={(clickEvent) => clickEvent.stopPropagation()}
           >
             RSVP
             <span className="visually-hidden">
@@ -121,6 +172,9 @@ export function EventCard({
           </a>
         ) : null}
       </div>
+      {detailsOpen ? (
+        <EventDetailsDialog event={event} onClose={closeDetails} />
+      ) : null}
     </article>
   )
 }

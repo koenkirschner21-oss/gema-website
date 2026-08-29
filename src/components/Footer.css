@@ -60,7 +60,7 @@
 }
 
 .footer a {
-  color: #d7dbdf;
+  color: var(--color-on-dark);
   text-decoration: none;
 }
 
@@ -100,6 +100,7 @@
 
 .footer__bottom p {
   margin: 0;
+  overflow-wrap: break-word;
 }
 
 @media (max-width: 860px) {
@@ -131,10 +132,10 @@
   .footer a {
     display: inline-flex;
     align-items: center;
-    min-height: 2.4rem;
+    min-height: 2.75rem;
   }
 
   .footer__social {
-    min-height: 2.5rem;
+    min-height: 2.75rem;
   }
 }
