@@ -20,7 +20,7 @@
 
 .team-hero__label {
   margin: 0 0 var(--space-3);
-  color: var(--color-gold);
+  color: var(--color-gold-on-red);
   font-family: var(--font-heading);
   font-size: 0.92rem;
   font-weight: 700;

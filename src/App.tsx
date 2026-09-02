@@ -6,6 +6,7 @@ import { Events } from './pages/Events'
 import { GemMajor } from './pages/GemMajor'
 import { GetInvolved } from './pages/GetInvolved'
 import { Home } from './pages/Home'
+import { NotFound } from './pages/NotFound'
 import { Partners } from './pages/Partners'
 import { Team } from './pages/Team'
 
@@ -22,6 +23,7 @@ function App() {
           <Route path="/get-involved" element={<GetInvolved />} />
           <Route path="/partners" element={<Partners />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -9,7 +9,7 @@ const footerLinks = [
   { label: 'Events', to: '/events' },
   { label: 'Get Involved', to: '/get-involved' },
   { label: 'Partner With GEMA', to: '/partners' },
-  { label: 'Contact', to: '/contact' },
+  { label: 'Contact GEMA', to: '/contact' },
 ]
 
 function InstagramIcon() {
@@ -69,14 +69,14 @@ export function Footer() {
       <Container>
         <div className="footer__grid">
           <div className="footer__brand">
-            <img src={gemaCrest} alt="" />
+            <img src={gemaCrest} alt="" width={205} height={256} decoding="async" loading="lazy" />
             <p className="footer__full-name">{site.fullName}</p>
             <p className="footer__meta">{site.school}</p>
             <p className="footer__meta">{site.university}</p>
           </div>
 
           <nav className="footer__nav" aria-label="Footer">
-            <p className="footer__heading">Quick Links</p>
+            <h2 className="footer__heading">Quick Links</h2>
             <ul>
               {footerLinks.map((item) => (
                 <li key={item.to}>
@@ -87,7 +87,7 @@ export function Footer() {
           </nav>
 
           <div className="footer__connect">
-            <p className="footer__heading">Connect</p>
+            <h2 className="footer__heading">Connect</h2>
             <ul>
               {socials.map((item) => (
                 <li key={item.label}>

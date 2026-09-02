@@ -87,9 +87,13 @@ export function EventsCalendar() {
   }
 
   return (
-    <div className="events-cal">
+    <div
+      className="events-cal"
+      role="group"
+      aria-label={`Events calendar, ${monthLabel}`}
+    >
       <div className="events-cal__header">
-        <p className="events-cal__month">{monthLabel}</p>
+        <h3 className="events-cal__month">{monthLabel}</h3>
         <div className="events-cal__nav">
           <button type="button" onClick={() => shiftMonth(-1)}>
             Previous month

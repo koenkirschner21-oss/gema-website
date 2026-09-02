@@ -5,6 +5,7 @@ import {
   formatEventTime,
   type GemaEvent,
 } from '../data/events'
+import { SiteImage } from './SiteImage'
 import './EventDetailsDialog.css'
 
 type EventDetailsDialogProps = {
@@ -23,14 +24,23 @@ export function EventDetailsDialog({
   const description = event.fullDescription || event.shortDescription
   const titleId = `event-dialog-title-${event.id}`
 
+  const descriptionId = `event-dialog-desc-${event.id}`
+
   useEffect(() => {
     const previouslyFocused = document.activeElement as HTMLElement | null
     const originalOverflow = document.body.style.overflow
+    const layout = document.querySelector('.layout')
     document.body.style.overflow = 'hidden'
+    layout?.setAttribute('inert', '')
     closeRef.current?.focus()
+
+    function isFocusable(element: HTMLElement) {
+      return !element.closest('[hidden]') && !element.hasAttribute('disabled')
+    }
 
     function handleKey(keyEvent: KeyboardEvent) {
       if (keyEvent.key === 'Escape') {
+        keyEvent.preventDefault()
         onClose()
         return
       }
@@ -41,11 +51,13 @@ export function EventDetailsDialog({
 
       const focusable = [
         ...panelRef.current.querySelectorAll<HTMLElement>(
-          'a[href], button:not([disabled])',
+          'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])',
         ),
-      ]
+      ].filter(isFocusable)
 
       if (focusable.length === 0) {
+        keyEvent.preventDefault()
+        panelRef.current.focus()
         return
       }
 
@@ -65,6 +77,7 @@ export function EventDetailsDialog({
 
     return () => {
       document.body.style.overflow = originalOverflow
+      layout?.removeAttribute('inert')
       document.removeEventListener('keydown', handleKey)
       previouslyFocused?.focus()
     }
@@ -82,13 +95,16 @@ export function EventDetailsDialog({
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
+        aria-describedby={description ? descriptionId : undefined}
+        tabIndex={-1}
         onClick={(clickEvent) => clickEvent.stopPropagation()}
       >
         {event.image && !imageFailed ? (
           <div className="event-dialog__media">
-            <img
+            <SiteImage
               src={event.image}
-              alt={`Promotional graphic for ${event.title}${event.location ? ` at ${event.location}` : ''}`}
+              alt={`${event.title} promotional graphic`}
+              priority
               onError={() => setImageFailed(true)}
             />
           </div>
@@ -106,6 +122,7 @@ export function EventDetailsDialog({
               ref={closeRef}
               type="button"
               className="event-dialog__close"
+              aria-label={`Close details for ${event.title}`}
               onClick={onClose}
             >
               Close
@@ -132,7 +149,7 @@ export function EventDetailsDialog({
           </dl>
 
           {description ? (
-            <p className="event-dialog__copy">{description}</p>
+            <p className="event-dialog__copy" id={descriptionId}>{description}</p>
           ) : null}
 
           {event.registrationUrl ? (

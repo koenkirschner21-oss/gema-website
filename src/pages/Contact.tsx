@@ -1,17 +1,24 @@
-import { useEffect, useState, type FormEvent } from 'react'
+import { useEffect, useRef, useState, type FormEvent } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { Container } from '../components/Container'
 import {
   contactDirect,
+  contactFieldIds,
   contactFormCopy,
-  contactFormEndpoint,
   contactHero,
   contactReasons,
   contactRoutes,
   contactSuccess,
   getContactReasonFromQuery,
+  validateContactForm,
+  type ContactFieldErrors,
+  type ContactFieldName,
 } from '../data/contact'
 import { site } from '../data/site'
+import {
+  getFormspreeDevMock,
+  getFormspreeEndpoint,
+} from '../lib/formspree'
 import './Contact.css'
 
 function InstagramIcon() {
@@ -87,46 +94,125 @@ function EmailIcon() {
 export function Contact() {
   const [searchParams] = useSearchParams()
   const selectedReason = getContactReasonFromQuery(searchParams.get('reason'))
-  const [formNotice, setFormNotice] = useState<string | null>(null)
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitted, setSubmitted] = useState(false)
-  const formIsConnected = Boolean(contactFormEndpoint)
+  const [fieldErrors, setFieldErrors] = useState<ContactFieldErrors>({})
+  const [submitError, setSubmitError] = useState(false)
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>(
+    'idle',
+  )
+  const successRef = useRef<HTMLDivElement>(null)
+  const statusRef = useRef<HTMLParagraphElement>(null)
+  const nameRef = useRef<HTMLInputElement>(null)
+  const emailRef = useRef<HTMLInputElement>(null)
+  const reasonRef = useRef<HTMLSelectElement>(null)
+  const messageRef = useRef<HTMLTextAreaElement>(null)
+  const isSubmitting = status === 'submitting'
+  const submitted = status === 'success'
 
   useEffect(() => {
-    document.title = 'Contact GEMA | GEMA'
-  }, [])
+    if (status === 'success') {
+      successRef.current?.focus()
+    }
+
+    if (status === 'error') {
+      statusRef.current?.focus()
+    }
+  }, [status])
+
+  function focusFirstFieldError(errors: ContactFieldErrors) {
+    if (errors.name) {
+      nameRef.current?.focus()
+      return
+    }
+
+    if (errors.email) {
+      emailRef.current?.focus()
+      return
+    }
+
+    if (errors.reason) {
+      reasonRef.current?.focus()
+      return
+    }
+
+    messageRef.current?.focus()
+  }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
-    if (!formIsConnected || !contactFormEndpoint) {
-      setFormNotice(contactFormCopy.blockedSubmit)
+    const form = event.currentTarget
+    const payload = new FormData(form)
+    const fields = {
+      name: String(payload.get('name') ?? ''),
+      email: String(payload.get('email') ?? ''),
+      reason: String(payload.get('reason') ?? ''),
+      message: String(payload.get('message') ?? ''),
+    }
+    const errors = validateContactForm(fields)
+
+    setFieldErrors(errors)
+    setSubmitError(false)
+
+    if (Object.keys(errors).length > 0) {
+      setStatus('idle')
+      focusFirstFieldError(errors)
       return
     }
 
-    setIsSubmitting(true)
-    setFormNotice(null)
+    const endpoint = getFormspreeEndpoint()
+    const mock = getFormspreeDevMock()
 
-    const payload = new FormData(event.currentTarget)
+    if (!endpoint && !mock) {
+      setStatus('error')
+      setSubmitError(true)
+      return
+    }
+
+    setStatus('submitting')
+
+    payload.set('_subject', `GEMA website: ${fields.reason.trim()}`)
+    payload.set('_replyto', fields.email.trim())
 
     try {
-      const response = await fetch(contactFormEndpoint, {
+      if (mock) {
+        await new Promise((resolve) => window.setTimeout(resolve, 600))
+        if (mock === 'error') {
+          setStatus('error')
+          setSubmitError(true)
+          return
+        }
+
+        setStatus('success')
+        return
+      }
+
+      if (!endpoint) {
+        setStatus('error')
+        setSubmitError(true)
+        return
+      }
+
+      const response = await fetch(endpoint, {
         method: 'POST',
         body: payload,
         headers: { Accept: 'application/json' },
       })
 
       if (!response.ok) {
-        setFormNotice(contactFormCopy.error)
+        setStatus('error')
+        setSubmitError(true)
         return
       }
 
-      setSubmitted(true)
+      setStatus('success')
     } catch {
-      setFormNotice(contactFormCopy.error)
-    } finally {
-      setIsSubmitting(false)
+      setStatus('error')
+      setSubmitError(true)
     }
+  }
+
+  function fieldDescribedBy(field: ContactFieldName) {
+    return fieldErrors[field] ? `${contactFieldIds[field]}-error` : undefined
   }
 
   const socials = [
@@ -164,51 +250,102 @@ export function Contact() {
         <Container>
           <div className="contact-form-section__inner">
             {submitted ? (
-              <div className="contact-success">
+              <div
+                className="contact-success"
+                role="status"
+                aria-live="polite"
+                tabIndex={-1}
+                ref={successRef}
+              >
                 <h2>{contactSuccess.heading}</h2>
                 <p>{contactSuccess.copy}</p>
               </div>
             ) : (
               <>
-                <h2>{contactFormCopy.heading}</h2>
+                <h2 id="contact-form-heading">{contactFormCopy.heading}</h2>
                 <p className="contact-form-intro">{contactFormCopy.copy}</p>
-                <form className="contact-form" onSubmit={handleSubmit}>
+                <form
+                  className="contact-form"
+                  onSubmit={handleSubmit}
+                  noValidate
+                  aria-labelledby="contact-form-heading"
+                  aria-describedby={submitError ? 'contact-form-status' : undefined}
+                  aria-busy={isSubmitting}
+                >
                   <div className="contact-form__row">
                     <div className="contact-field">
-                      <label htmlFor="contact-name">Name</label>
+                      <label htmlFor={contactFieldIds.name}>
+                        Name
+                        <span aria-hidden="true"> *</span>
+                        <span className="visually-hidden"> (required)</span>
+                      </label>
                       <input
-                        id="contact-name"
+                        ref={nameRef}
+                        id={contactFieldIds.name}
                         name="name"
                         type="text"
                         autoComplete="name"
                         required
                         aria-required="true"
+                        aria-invalid={fieldErrors.name ? true : undefined}
+                        aria-describedby={fieldDescribedBy('name')}
+                        disabled={isSubmitting}
                       />
+                      {fieldErrors.name ? (
+                        <p
+                          id={`${contactFieldIds.name}-error`}
+                          className="contact-field__error"
+                        >
+                          {fieldErrors.name}
+                        </p>
+                      ) : null}
                     </div>
                     <div className="contact-field">
-                      <label htmlFor="contact-email">Email</label>
+                      <label htmlFor={contactFieldIds.email}>
+                        Email
+                        <span aria-hidden="true"> *</span>
+                        <span className="visually-hidden"> (required)</span>
+                      </label>
                       <input
-                        id="contact-email"
+                        ref={emailRef}
+                        id={contactFieldIds.email}
                         name="email"
                         type="email"
                         autoComplete="email"
                         required
                         aria-required="true"
+                        aria-invalid={fieldErrors.email ? true : undefined}
+                        aria-describedby={fieldDescribedBy('email')}
+                        disabled={isSubmitting}
                       />
+                      {fieldErrors.email ? (
+                        <p
+                          id={`${contactFieldIds.email}-error`}
+                          className="contact-field__error"
+                        >
+                          {fieldErrors.email}
+                        </p>
+                      ) : null}
                     </div>
                   </div>
 
                   <div className="contact-field">
-                    <label htmlFor="contact-subject">
+                    <label htmlFor={contactFieldIds.reason}>
                       Subject / Reason for Contact
+                      <span aria-hidden="true"> *</span>
+                      <span className="visually-hidden"> (required)</span>
                     </label>
                     <select
-                      id="contact-subject"
-                      name="_subject"
+                      ref={reasonRef}
+                      id={contactFieldIds.reason}
+                      name="reason"
                       required
                       aria-required="true"
+                      aria-invalid={fieldErrors.reason ? true : undefined}
+                      aria-describedby={fieldDescribedBy('reason')}
                       key={selectedReason || 'default'}
                       defaultValue={selectedReason}
+                      disabled={isSubmitting}
                     >
                       <option value="" disabled>
                         Select a reason
@@ -219,21 +356,45 @@ export function Contact() {
                         </option>
                       ))}
                     </select>
+                    {fieldErrors.reason ? (
+                      <p
+                        id={`${contactFieldIds.reason}-error`}
+                        className="contact-field__error"
+                      >
+                        {fieldErrors.reason}
+                      </p>
+                    ) : null}
                   </div>
 
                   <div className="contact-field">
-                    <label htmlFor="contact-message">Message</label>
+                    <label htmlFor={contactFieldIds.message}>
+                      Message
+                      <span aria-hidden="true"> *</span>
+                      <span className="visually-hidden"> (required)</span>
+                    </label>
                     <textarea
-                      id="contact-message"
+                      ref={messageRef}
+                      id={contactFieldIds.message}
                       name="message"
                       rows={7}
                       required
                       aria-required="true"
+                      aria-invalid={fieldErrors.message ? true : undefined}
+                      aria-describedby={fieldDescribedBy('message')}
+                      disabled={isSubmitting}
                     />
+                    {fieldErrors.message ? (
+                      <p
+                        id={`${contactFieldIds.message}-error`}
+                        className="contact-field__error"
+                      >
+                        {fieldErrors.message}
+                      </p>
+                    ) : null}
                   </div>
 
                   <input
-                    className="visually-hidden"
+                    className="contact-form__honeypot"
                     type="text"
                     name="_gotcha"
                     tabIndex={-1}
@@ -245,15 +406,26 @@ export function Contact() {
                     className="contact-button contact-button--primary"
                     type="submit"
                     disabled={isSubmitting}
+                    aria-disabled={isSubmitting}
                   >
-                    {isSubmitting ? 'Sending...' : 'Send Message'}
+                    {isSubmitting ? contactFormCopy.sending : contactFormCopy.submit}
                   </button>
 
-                  {formNotice ? (
-                    <p className="contact-form__note" role="status">
-                      {formNotice}
-                    </p>
-                  ) : null}
+                  <p
+                    id="contact-form-status"
+                    className="contact-form__note"
+                    role="alert"
+                    tabIndex={-1}
+                    ref={statusRef}
+                    hidden={!submitError}
+                  >
+                    {submitError && site.email ? (
+                      <>
+                        {contactFormCopy.errorLead}{' '}
+                        <a href={`mailto:${site.email}`}>{site.email}</a>.
+                      </>
+                    ) : null}
+                  </p>
                 </form>
               </>
             )}

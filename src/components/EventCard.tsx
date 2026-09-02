@@ -1,6 +1,7 @@
-import { useCallback, useState, type KeyboardEvent } from 'react'
+import { useCallback, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { EventDetailsDialog } from './EventDetailsDialog'
+import { SiteImage } from './SiteImage'
 import {
   formatEventDate,
   formatEventTime,
@@ -24,7 +25,13 @@ function EventPhoto({ src, alt }: { src: string; alt: string }) {
     return <span className="visually-hidden">Event photo to be added</span>
   }
 
-  return <img src={src} alt={alt} onError={() => setFailed(true)} />
+  return (
+    <SiteImage
+      src={src}
+      alt={alt}
+      onError={() => setFailed(true)}
+    />
+  )
 }
 
 export function EventCard({
@@ -75,33 +82,14 @@ export function EventCard({
     setDetailsOpen(true)
   }
 
-  function handleCardKeyDown(keyEvent: KeyboardEvent<HTMLElement>) {
-    if (!readMoreDetails || keyEvent.target !== keyEvent.currentTarget) {
-      return
-    }
-
-    if (keyEvent.key === 'Enter' || keyEvent.key === ' ') {
-      keyEvent.preventDefault()
-      openDetails()
-    }
-  }
-
   return (
-    <article
-      className={className}
-      tabIndex={readMoreDetails ? 0 : undefined}
-      aria-label={
-        readMoreDetails ? `${event.title}. Activate to view event details.` : undefined
-      }
-      onClick={readMoreDetails ? openDetails : undefined}
-      onKeyDown={readMoreDetails ? handleCardKeyDown : undefined}
-    >
+    <article className={className}>
       {compact ? null : (
         <div className="event-card__media">
           {event.image ? (
             <EventPhoto
               src={event.image}
-              alt={`Promotional graphic for ${event.title}${event.location ? ` at ${event.location}` : ''}`}
+              alt={`${event.title} promotional graphic`}
             />
           ) : (
             <span className="visually-hidden">Event photo to be added</span>
@@ -130,16 +118,12 @@ export function EventCard({
                 <button
                   type="button"
                   className="event-card__more"
-                  onClick={(clickEvent) => {
-                    clickEvent.stopPropagation()
-                    openDetails()
-                  }}
+                  aria-haspopup="dialog"
+                  aria-expanded={detailsOpen}
+                  onClick={openDetails}
                 >
                   Read more
-                  <span className="visually-hidden">
-                    {' '}
-                    about {event.title}
-                  </span>
+                  <span className="visually-hidden"> about {event.title}</span>
                 </button>
               </>
             ) : readMoreTo ? (
@@ -162,7 +146,6 @@ export function EventCard({
             href={event.registrationUrl}
             target="_blank"
             rel="noreferrer"
-            onClick={(clickEvent) => clickEvent.stopPropagation()}
           >
             RSVP
             <span className="visually-hidden">

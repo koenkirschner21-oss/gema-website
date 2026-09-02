@@ -13,9 +13,12 @@
   --color-text: #1a1a1a;
   --color-text-secondary: #5a6168;
   --color-placeholder: #e6e7ea;
-  --color-placeholder-text: #8b9096;
+  --color-placeholder-text: #5f646a;
   --color-on-red: #f3d6dc;
   --color-on-dark: #d7dbdf;
+  --color-gold-on-red: #ffd95a;
+  --color-gold-on-light: #9a6b00;
+  --color-blue-on-light: #2f5d70;
 
   --max-width: 1240px;
   --radius: 4px;

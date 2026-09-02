@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Container } from '../components/Container'
+import { SiteImage } from '../components/SiteImage'
 import {
   involveMedia,
   involvementBenefits,
@@ -14,10 +15,16 @@ function InvolveMedia({
   src,
   alt,
   ratio,
+  priority = false,
+  width,
+  height,
 }: {
   src: string | null
   alt: string
   ratio: 'wide' | 'editorial'
+  priority?: boolean
+  width?: number
+  height?: number
 }) {
   const [failed, setFailed] = useState(false)
   const showImage = Boolean(src) && !failed
@@ -25,7 +32,14 @@ function InvolveMedia({
   return (
     <figure className={`photo-placeholder photo-placeholder--${ratio}`}>
       {showImage ? (
-        <img src={src ?? undefined} alt={alt} onError={() => setFailed(true)} />
+        <SiteImage
+          src={src ?? undefined}
+          alt={alt}
+          width={width}
+          height={height}
+          priority={priority}
+          onError={() => setFailed(true)}
+        />
       ) : (
         <span className="visually-hidden">{alt}</span>
       )}
@@ -116,10 +130,6 @@ function SocialIcon({ platform }: { platform: (typeof involveSocial)[number]['pl
 }
 
 export function GetInvolved() {
-  useEffect(() => {
-    document.title = 'Get Involved | GEMA'
-  }, [])
-
   return (
     <article className="involve">
       <section className="involve-hero">
@@ -151,6 +161,9 @@ export function GetInvolved() {
                 src={involveMedia.hero.src}
                 alt={involveMedia.hero.alt}
                 ratio="wide"
+                priority
+                width={1600}
+                height={1066}
               />
             </div>
           </div>
@@ -181,6 +194,8 @@ export function GetInvolved() {
                 src={involveMedia.why.src}
                 alt={involveMedia.why.alt}
                 ratio="editorial"
+                width={1600}
+                height={1066}
               />
             </div>
             <div className="involve-why__content">
@@ -225,6 +240,8 @@ export function GetInvolved() {
                 src={involveMedia.social.src}
                 alt={involveMedia.social.alt}
                 ratio="editorial"
+                width={1600}
+                height={1066}
               />
             </div>
             <div className="involve-social__panel">

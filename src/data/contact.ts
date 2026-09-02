@@ -1,12 +1,53 @@
 /**
  * Contact page content and form configuration.
  *
- * Set `contactFormEndpoint` to a Formspree URL when available,
- * for example: 'https://formspree.io/f/xxxxxxxx'
- * Do not commit secrets. Formspree form IDs are public endpoints.
+ * The Formspree endpoint is read from `VITE_FORMSPREE_ENDPOINT`.
+ * Do not hardcode a form URL here. Formspree form IDs are public endpoints,
+ * not secrets, but the value still belongs in environment config.
  * Do not expose the Corporate Partnership Package as a public download.
  */
-export const contactFormEndpoint: string | null = null
+
+export const contactFieldIds = {
+  name: 'contact-name',
+  email: 'contact-email',
+  reason: 'contact-subject',
+  message: 'contact-message',
+} as const
+
+export type ContactFieldName = keyof typeof contactFieldIds
+
+export type ContactFieldErrors = Partial<Record<ContactFieldName, string>>
+
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+export function validateContactForm(fields: {
+  name: string
+  email: string
+  reason: string
+  message: string
+}): ContactFieldErrors {
+  const errors: ContactFieldErrors = {}
+
+  if (!fields.name.trim()) {
+    errors.name = 'Enter your name.'
+  }
+
+  if (!fields.email.trim()) {
+    errors.email = 'Enter your email address.'
+  } else if (!EMAIL_PATTERN.test(fields.email.trim())) {
+    errors.email = 'Enter a valid email address.'
+  }
+
+  if (!fields.reason.trim()) {
+    errors.reason = 'Select a reason for contact.'
+  }
+
+  if (!fields.message.trim()) {
+    errors.message = 'Enter your message.'
+  }
+
+  return errors
+}
 
 export const contactReasons = [
   'General Inquiry',
@@ -46,10 +87,9 @@ export const contactHero = {
 export const contactFormCopy = {
   heading: 'Send Us a Message',
   copy: "Tell us what you're reaching out about and we'll make sure your message gets to the right place.",
-  blockedSubmit:
-    'Your message could not be sent. Please try again or use another contact option on this page.',
-  error:
-    'Your message could not be sent. Please try again or use another contact option on this page.',
+  sending: 'Sending...',
+  submit: 'Send Message',
+  errorLead: 'Your message could not be sent. Please try again, or email GEMA at',
 }
 
 export const contactSuccess = {

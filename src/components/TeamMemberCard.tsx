@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { formatTeamTitle, isPlaceholderMember, type TeamMember } from '../data/team'
+import { SiteImage } from './SiteImage'
 import './TeamMemberCard.css'
 
 type TeamMemberCardProps = {
@@ -14,7 +15,11 @@ function TeamPhoto({ src, alt }: { src: string | null; alt: string }) {
   return (
     <div className="team-card__photo">
       {showImage ? (
-        <img src={src ?? undefined} alt={alt} onError={() => setFailed(true)} />
+        <SiteImage
+          src={src ?? undefined}
+          alt={alt}
+          onError={() => setFailed(true)}
+        />
       ) : (
         <span className="visually-hidden">Photo to be added</span>
       )}

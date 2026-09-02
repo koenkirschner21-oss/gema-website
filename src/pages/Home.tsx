@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Container } from '../components/Container'
 import { EventCard } from '../components/EventCard'
 import { FeaturedPartner } from '../components/FeaturedPartner'
+import { SiteImage } from '../components/SiteImage'
 import { getHomepageEvents } from '../data/events'
 import {
   homeIntroPoints,
@@ -17,10 +18,16 @@ function HomeMedia({
   src,
   alt,
   ratio,
+  priority = false,
+  width,
+  height,
 }: {
   src: string | null
   alt: string
   ratio: 'wide'
+  priority?: boolean
+  width?: number
+  height?: number
 }) {
   const [failed, setFailed] = useState(false)
   const showImage = Boolean(src) && !failed
@@ -28,7 +35,14 @@ function HomeMedia({
   return (
     <figure className={`photo-placeholder photo-placeholder--${ratio}`}>
       {showImage ? (
-        <img src={src ?? undefined} alt={alt} onError={() => setFailed(true)} />
+        <SiteImage
+          src={src ?? undefined}
+          alt={alt}
+          width={width}
+          height={height}
+          priority={priority}
+          onError={() => setFailed(true)}
+        />
       ) : (
         <span className="visually-hidden">{alt}</span>
       )}
@@ -43,10 +57,6 @@ export function Home() {
     homepageEventPlaceholderCount - homepageEvents.length,
   )
   const featuredPartners = getFeaturedPartners()
-
-  useEffect(() => {
-    document.title = 'GEMA | Government, Economics & Management Association'
-  }, [])
 
   return (
     <article className="home">
@@ -81,6 +91,9 @@ export function Home() {
                   src={homeMedia.hero.src}
                   alt={homeMedia.hero.alt}
                   ratio="wide"
+                  priority
+                  width={1600}
+                  height={1066}
                 />
               ) : (
                 <figure className="home-hero__placeholder">
@@ -209,6 +222,8 @@ export function Home() {
                 src={homeMedia.involve.src}
                 alt={homeMedia.involve.alt}
                 ratio="wide"
+                width={1600}
+                height={1066}
               />
             </div>
           </div>

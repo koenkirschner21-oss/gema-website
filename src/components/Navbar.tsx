@@ -1,7 +1,7 @@
 import { useEffect, useId, useRef, useState } from 'react'
 import type { FocusEvent, KeyboardEvent as ReactKeyboardEvent } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
-import gemaLogo from '../assets/gema-logo.png'
+import gemaLogo from '../assets/gema-logo.webp'
 import { isDropdownItem, navigation } from '../data/navigation'
 import { Container } from './Container'
 import './Navbar.css'
@@ -31,20 +31,51 @@ export function Navbar() {
   }
 
   useEffect(() => {
+    function getHeaderFocusable() {
+      if (!headerRef.current) {
+        return [] as HTMLElement[]
+      }
+
+      return [
+        ...headerRef.current.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled])',
+        ),
+      ].filter((element) => !element.closest('[hidden]'))
+    }
+
     function onKeyDown(event: globalThis.KeyboardEvent) {
-      if (event.key !== 'Escape') {
+      if (event.key === 'Escape') {
+        if (mobileOpen) {
+          setMobileOpen(false)
+          toggleRef.current?.focus()
+          return
+        }
+
+        if (aboutOpen) {
+          setAboutOpen(false)
+          aboutButtonRef.current?.focus()
+        }
         return
       }
 
-      if (mobileOpen) {
-        setMobileOpen(false)
-        toggleRef.current?.focus()
+      if (event.key !== 'Tab' || !mobileOpen) {
         return
       }
 
-      if (aboutOpen) {
-        setAboutOpen(false)
-        aboutButtonRef.current?.focus()
+      const focusable = getHeaderFocusable()
+      if (focusable.length === 0) {
+        return
+      }
+
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault()
+        last.focus()
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault()
+        first.focus()
       }
     }
 
@@ -122,11 +153,17 @@ export function Navbar() {
   }
 
   function handleAboutKeyDown(event: ReactKeyboardEvent<HTMLButtonElement>) {
-    if (event.key === 'ArrowDown') {
+    if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
       event.preventDefault()
       setAboutOpen(true)
       window.requestAnimationFrame(() => {
-        aboutItemRef.current?.querySelector('a')?.focus()
+        const links = aboutItemRef.current?.querySelectorAll('a')
+        if (!links || links.length === 0) {
+          return
+        }
+        const target =
+          event.key === 'ArrowUp' ? links[links.length - 1] : links[0]
+        target.focus()
       })
     }
   }
@@ -143,7 +180,7 @@ export function Navbar() {
             onClick={closeMenus}
             aria-label="GEMA home"
           >
-            <img src={gemaLogo} alt="" />
+            <img src={gemaLogo} alt="" width={465} height={200} decoding="async" />
           </Link>
 
           <button

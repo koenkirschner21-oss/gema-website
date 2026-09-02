@@ -8,7 +8,7 @@ export const homeMedia = {
     alt: aboutMedia.hero.alt,
   },
   involve: {
-    src: '/home-get-involved.jpg' as string | null,
+    src: '/home-get-involved.webp' as string | null,
     label: 'GEMA students participating in an event',
     alt: 'University of Guelph students participating in the GEMA community',
   },

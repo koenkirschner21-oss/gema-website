@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Container } from '../components/Container'
 import { FeaturedPartner } from '../components/FeaturedPartner'
+import { SiteImage } from '../components/SiteImage'
 import {
   getCurrentGridPartners,
   getFeaturedPartners,
@@ -16,10 +17,16 @@ function PartnersMedia({
   src,
   alt,
   ratio,
+  priority = false,
+  width,
+  height,
 }: {
   src: string | null
   alt: string
   ratio: 'wide' | 'editorial'
+  priority?: boolean
+  width?: number
+  height?: number
 }) {
   const [failed, setFailed] = useState(false)
   const showImage = Boolean(src) && !failed
@@ -27,7 +34,14 @@ function PartnersMedia({
   return (
     <figure className={`photo-placeholder photo-placeholder--${ratio}`}>
       {showImage ? (
-        <img src={src ?? undefined} alt={alt} onError={() => setFailed(true)} />
+        <SiteImage
+          src={src ?? undefined}
+          alt={alt}
+          width={width}
+          height={height}
+          priority={priority}
+          onError={() => setFailed(true)}
+        />
       ) : (
         <span className="visually-hidden">{alt}</span>
       )}
@@ -48,7 +62,13 @@ function PartnerLogo({
   return (
     <div className={showImage ? 'partners-logo' : 'partners-logo is-placeholder'}>
       {showImage ? (
-        <img src={src ?? undefined} alt={alt} onError={() => setFailed(true)} />
+        <SiteImage
+          src={src ?? undefined}
+          alt={alt}
+          width={512}
+          height={512}
+          onError={() => setFailed(true)}
+        />
       ) : (
         <span className="visually-hidden">{alt || 'Partner logo to be added'}</span>
       )}
@@ -91,10 +111,6 @@ export function Partners() {
   const featuredPartners = getFeaturedPartners()
   const gridPartners = getCurrentGridPartners()
 
-  useEffect(() => {
-    document.title = 'Partners & Sponsors | GEMA'
-  }, [])
-
   return (
     <article className="partners">
       <section className="partners-hero">
@@ -133,6 +149,9 @@ export function Partners() {
                 src={partnerMedia.hero.src}
                 alt={partnerMedia.hero.alt}
                 ratio="wide"
+                priority
+                width={1600}
+                height={1066}
               />
             </div>
           </div>
@@ -183,6 +202,8 @@ export function Partners() {
                 src={partnerMedia.why.src}
                 alt={partnerMedia.why.alt}
                 ratio="editorial"
+                width={1200}
+                height={1600}
               />
             </div>
             <div className="partners-why__content">

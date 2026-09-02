@@ -31,7 +31,7 @@
 }
 
 .events-cal__nav button {
-  min-height: 2.7rem;
+  min-height: 2.75rem;
   padding: 0.55rem 1.1rem;
   background: var(--color-white);
   border: 1px solid var(--color-text);

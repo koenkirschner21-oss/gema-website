@@ -13,7 +13,7 @@ export const gemMedia = {
     alt: 'GEM students at the University of Guelph',
   },
   coop: {
-    src: '/gem-major-coop.jpg' as string | null,
+    src: '/gem-major-coop.webp' as string | null,
     label: 'GEM co-op and professional development',
     alt: 'Students participating in a Lang conference or professional development event',
   },

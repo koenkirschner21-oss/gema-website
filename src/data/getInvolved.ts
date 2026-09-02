@@ -1,16 +1,16 @@
 export const involveMedia = {
   hero: {
-    src: '/get-involved-hero.jpg' as string | null,
+    src: '/get-involved-hero.webp' as string | null,
     label: 'GEMA student/community photo',
     alt: 'GEMA students and community',
   },
   why: {
-    src: '/get-involved-why.jpg' as string | null,
+    src: '/get-involved-why.webp' as string | null,
     label: 'GEMA team or event photo',
-    alt: 'GEMA team or event',
+    alt: 'GEMA team or event photography',
   },
   social: {
-    src: '/get-involved-backup.jpg' as string | null,
+    src: '/get-involved-backup.webp' as string | null,
     label: 'GEMA community photo',
     alt: 'GEMA students connecting at a community event',
   },

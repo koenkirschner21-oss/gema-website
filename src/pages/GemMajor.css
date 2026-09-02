@@ -75,7 +75,15 @@
   background: var(--color-gold);
 }
 
-.gem-hero__media .photo-placeholder,
+.gem-hero__media .photo-placeholder {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  border: 0;
+}
+
 .gem-coop__media .photo-placeholder {
   position: relative;
   z-index: 1;
@@ -91,14 +99,6 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
-}
-
-.gem .photo-placeholder img {
-  transition: none;
-}
-
-.gem .photo-placeholder:hover img {
-  transform: none;
 }
 
 .gem-what,

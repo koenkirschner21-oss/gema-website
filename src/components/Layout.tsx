@@ -2,42 +2,65 @@ import { useLayoutEffect } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import { Footer } from './Footer'
 import { Navbar } from './Navbar'
+import { Seo } from './Seo'
 import './Layout.css'
 
 export function Layout() {
   const location = useLocation()
 
   useLayoutEffect(() => {
-    if (location.hash) {
-      const id = decodeURIComponent(location.hash.slice(1))
+    const previous = window.history.scrollRestoration
+    window.history.scrollRestoration = 'manual'
 
-      const scrollToHash = () => {
-        const target = document.getElementById(id)
-        if (target) {
-          target.scrollIntoView()
-          return true
-        }
-        return false
-      }
+    return () => {
+      window.history.scrollRestoration = previous
+    }
+  }, [])
 
-      if (scrollToHash()) {
-        return
-      }
-
-      const frame = window.requestAnimationFrame(() => {
-        if (!scrollToHash()) {
-          window.scrollTo(0, 0)
-        }
-      })
-
-      return () => window.cancelAnimationFrame(frame)
+  useLayoutEffect(() => {
+    if (!location.hash) {
+      window.scrollTo(0, 0)
+      return
     }
 
-    window.scrollTo(0, 0)
+    const id = decodeURIComponent(location.hash.slice(1))
+    let cancelled = false
+
+    const scrollToHash = () => {
+      if (cancelled) {
+        return true
+      }
+
+      const target = document.getElementById(id)
+      if (target) {
+        target.scrollIntoView()
+        return true
+      }
+
+      return false
+    }
+
+    scrollToHash()
+
+    const frame = window.requestAnimationFrame(() => {
+      if (!scrollToHash()) {
+        window.scrollTo(0, 0)
+      }
+    })
+
+    // Browser restoration can overwrite the first scroll after a full load.
+    const timeout = window.setTimeout(scrollToHash, 50)
+
+    return () => {
+      cancelled = true
+      window.cancelAnimationFrame(frame)
+      window.clearTimeout(timeout)
+    }
   }, [location.pathname, location.hash])
 
   return (
     <div className="layout">
+      <Seo />
       <a className="skip-link" href="#main-content">
         Skip to content
       </a>

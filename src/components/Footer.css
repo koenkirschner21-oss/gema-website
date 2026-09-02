@@ -40,7 +40,7 @@
 }
 
 .footer__heading {
-  margin-bottom: var(--space-3);
+  margin: 0 0 var(--space-3);
   color: var(--color-white);
   font-family: var(--font-heading);
   font-size: 1.05rem;
@@ -60,6 +60,9 @@
 }
 
 .footer a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
   color: var(--color-on-dark);
   text-decoration: none;
 }
@@ -77,6 +80,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.55rem;
+  min-height: 2.75rem;
 }
 
 .footer__icon {

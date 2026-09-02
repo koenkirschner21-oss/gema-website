@@ -72,7 +72,7 @@ export const events: GemaEvent[] = [
     category: 'Orientation Week',
     registrationUrl:
       'https://uoguelph.campusgroups.com/gema/rsvp_boot?id=375495',
-    image: '/custom-tote-bag-decorating.png',
+    image: '/custom-tote-bag-decorating.webp',
     featured: true,
     orientationWeek: true,
     status: 'upcoming',
@@ -81,7 +81,7 @@ export const events: GemaEvent[] = [
 
 export const eventsMedia = {
   hero: {
-    src: '/events-hero.jpg' as string | null,
+    src: null as string | null,
     label: 'GEMA students at an event',
     alt: 'GEMA students at an event',
   },

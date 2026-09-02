@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { formatEventDate } from '../data/events'
 import type { EventRecap, EventRecapImage } from '../data/eventRecaps'
+import { SiteImage } from './SiteImage'
 import './EventRecapCard.css'
 
 function RecapPhoto({ image }: { image: EventRecapImage }) {
@@ -11,7 +12,11 @@ function RecapPhoto({ image }: { image: EventRecapImage }) {
       {failed ? (
         <span className="visually-hidden">{image.alt}</span>
       ) : (
-        <img src={image.src} alt={image.alt} onError={() => setFailed(true)} />
+        <SiteImage
+          src={image.src}
+          alt={image.alt}
+          onError={() => setFailed(true)}
+        />
       )}
     </figure>
   )

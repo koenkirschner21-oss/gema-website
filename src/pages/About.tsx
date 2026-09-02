@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Container } from '../components/Container'
+import { SiteImage } from '../components/SiteImage'
 import { aboutMedia, aboutValues, aboutWork } from '../data/about'
 import './About.css'
 
@@ -8,10 +9,16 @@ function AboutMedia({
   src,
   alt,
   ratio,
+  priority = false,
+  width,
+  height,
 }: {
   src: string | null
   alt: string
   ratio: 'wide' | 'square' | 'editorial'
+  priority?: boolean
+  width?: number
+  height?: number
 }) {
   const [failed, setFailed] = useState(false)
   const showImage = Boolean(src) && !failed
@@ -19,7 +26,14 @@ function AboutMedia({
   return (
     <figure className={`photo-placeholder photo-placeholder--${ratio}`}>
       {showImage ? (
-        <img src={src ?? undefined} alt={alt} onError={() => setFailed(true)} />
+        <SiteImage
+          src={src ?? undefined}
+          alt={alt}
+          width={width}
+          height={height}
+          priority={priority}
+          onError={() => setFailed(true)}
+        />
       ) : (
         <span className="visually-hidden">{alt}</span>
       )}
@@ -28,10 +42,6 @@ function AboutMedia({
 }
 
 export function About() {
-  useEffect(() => {
-    document.title = 'About GEMA | GEMA'
-  }, [])
-
   return (
     <article className="about">
       <section className="about-hero">
@@ -61,6 +71,9 @@ export function About() {
                 src={aboutMedia.hero.src}
                 alt={aboutMedia.hero.alt}
                 ratio="wide"
+                priority
+                width={1600}
+                height={1066}
               />
             </div>
           </div>
@@ -75,6 +88,8 @@ export function About() {
                 src={aboutMedia.community.src}
                 alt={aboutMedia.community.alt}
                 ratio="square"
+                width={1600}
+                height={1066}
               />
             </div>
             <div className="about-who__copy">
@@ -131,6 +146,8 @@ export function About() {
                 src={aboutMedia.events.src}
                 alt={aboutMedia.events.alt}
                 ratio="editorial"
+                width={1200}
+                height={1600}
               />
             </div>
             <ol className="about-work__list">

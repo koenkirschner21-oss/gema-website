@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Container } from '../components/Container'
 import { EventCard } from '../components/EventCard'
@@ -23,10 +22,6 @@ export function Events() {
     featuredPlaceholderCount - featuredEvents.length,
   )
   const eventRecaps = getEventRecaps()
-
-  useEffect(() => {
-    document.title = 'Events | GEMA'
-  }, [])
 
   return (
     <article className="events">

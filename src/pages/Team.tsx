@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Container } from '../components/Container'
 import { TeamMemberCard } from '../components/TeamMemberCard'
@@ -20,10 +19,6 @@ function directorGridClass(count: number) {
 export function Team() {
   const leadership = getTeamByLevel('leadership')
   const directors = getTeamByLevel('director')
-
-  useEffect(() => {
-    document.title = 'Meet the Team | GEMA'
-  }, [])
 
   return (
     <article className="team">

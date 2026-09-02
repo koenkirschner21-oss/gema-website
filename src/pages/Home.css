@@ -81,7 +81,8 @@
   position: relative;
   z-index: 1;
   width: 100%;
-  height: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
   border: 0;
 }
 
@@ -156,14 +157,6 @@
 .home-hero__media .photo-placeholder img {
   object-fit: cover;
   object-position: center 46%;
-}
-
-.home .photo-placeholder img {
-  transition: none;
-}
-
-.home .photo-placeholder:hover img {
-  transform: none;
 }
 
 .home-intro,
@@ -246,7 +239,7 @@
 
 .home-intro__points li[data-accent='blue'] {
   background: var(--color-blue);
-  color: var(--color-white);
+  color: var(--color-text);
 }
 
 .home-intro__points h3 {
@@ -291,7 +284,7 @@
 
 .home-do__grid li[data-accent='blue'] {
   background: var(--color-blue);
-  color: var(--color-white);
+  color: var(--color-text);
 }
 
 .home-do__grid li[data-accent='dark'] {

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import type { Partner } from '../data/partners'
+import { SiteImage } from './SiteImage'
 import './FeaturedPartner.css'
 
 export function FeaturedPartner({ partner }: { partner: Partner }) {
@@ -8,9 +9,11 @@ export function FeaturedPartner({ partner }: { partner: Partner }) {
   const showLogo = Boolean(partner.logo) && !logoFailed
 
   const mark = showLogo ? (
-    <img
+    <SiteImage
       src={partner.logo ?? undefined}
       alt={logoAlt}
+      width={512}
+      height={512}
       onError={() => setLogoFailed(true)}
     />
   ) : null

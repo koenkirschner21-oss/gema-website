@@ -10,18 +10,26 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: var(--nav-height);
-  overflow-x: clip;
+  overflow-x: hidden;
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 body {
   margin: 0;
-  overflow-x: clip;
+  overflow-x: hidden;
   background: var(--color-white);
   color: var(--color-text);
   font-family: var(--font-body);
@@ -112,4 +120,14 @@ button {
 
 .skip-link:focus {
   top: var(--space-4);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--color-red);
+  outline-offset: 3px;
 }

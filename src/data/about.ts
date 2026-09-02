@@ -1,16 +1,16 @@
 export const aboutMedia = {
   hero: {
-    src: '/about-hero.jpg' as string | null,
+    src: '/about-hero.webp' as string | null,
     label: 'GEMA student and team photography',
     alt: 'GEMA students and team members at an event',
   },
   community: {
-    src: '/about-who-we-are.jpg' as string | null,
+    src: '/about-who-we-are.webp' as string | null,
     label: 'GEMA event and community photography',
     alt: 'Students connecting at a GEMA event',
   },
   events: {
-    src: '/about-what-we-do.png' as string | null,
+    src: '/about-what-we-do.webp' as string | null,
     label: 'GEMA event photography',
     alt: 'GEMA professional event and panel programming',
   },
