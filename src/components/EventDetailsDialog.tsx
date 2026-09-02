@@ -29,8 +29,10 @@ export function EventDetailsDialog({
   useEffect(() => {
     const previouslyFocused = document.activeElement as HTMLElement | null
     const originalOverflow = document.body.style.overflow
+    const originalHtmlOverflow = document.documentElement.style.overflow
     const layout = document.querySelector('.layout')
     document.body.style.overflow = 'hidden'
+    document.documentElement.style.overflow = 'hidden'
     layout?.setAttribute('inert', '')
     closeRef.current?.focus()
 
@@ -77,6 +79,7 @@ export function EventDetailsDialog({
 
     return () => {
       document.body.style.overflow = originalOverflow
+      document.documentElement.style.overflow = originalHtmlOverflow
       layout?.removeAttribute('inert')
       document.removeEventListener('keydown', handleKey)
       previouslyFocused?.focus()
@@ -157,7 +160,7 @@ export function EventDetailsDialog({
               className="event-dialog__rsvp"
               href={event.registrationUrl}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
             >
               RSVP
               <span className="visually-hidden">

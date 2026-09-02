@@ -19,14 +19,18 @@ export function FeaturedPartner({ partner }: { partner: Partner }) {
   ) : null
 
   return (
-    <article className="partners-featured">
+    <article
+      className={
+        showLogo ? 'partners-featured' : 'partners-featured partners-featured--no-logo'
+      }
+    >
       {showLogo ? (
         partner.url ? (
           <a
             className="partners-featured__mark"
             href={partner.url}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
           >
             {mark}
             <span className="visually-hidden">
@@ -43,7 +47,7 @@ export function FeaturedPartner({ partner }: { partner: Partner }) {
         ) : null}
         <h3>
           {partner.url ? (
-            <a href={partner.url} target="_blank" rel="noreferrer">
+            <a href={partner.url} target="_blank" rel="noopener noreferrer">
               {partner.name}
               <span className="visually-hidden"> (opens in a new tab)</span>
             </a>
@@ -57,7 +61,7 @@ export function FeaturedPartner({ partner }: { partner: Partner }) {
             className="partners-featured__cta"
             href={partner.url}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
           >
             Visit Apply Yourself Global
             <span className="visually-hidden"> (opens in a new tab)</span>

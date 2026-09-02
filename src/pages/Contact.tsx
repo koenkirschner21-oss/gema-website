@@ -140,6 +140,10 @@ export function Contact() {
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
+    if (isSubmitting) {
+      return
+    }
+
     const form = event.currentTarget
     const payload = new FormData(form)
     const fields = {
@@ -345,6 +349,7 @@ export function Contact() {
                       aria-describedby={fieldDescribedBy('reason')}
                       key={selectedReason || 'default'}
                       defaultValue={selectedReason}
+                      autoComplete="off"
                       disabled={isSubmitting}
                     >
                       <option value="" disabled>
@@ -466,7 +471,7 @@ export function Contact() {
                     className="contact-direct__link"
                     href={item.href}
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noopener noreferrer"
                   >
                     {item.icon}
                     <span>{item.label}</span>

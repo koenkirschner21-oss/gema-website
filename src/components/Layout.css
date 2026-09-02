@@ -2,9 +2,16 @@
   min-height: 100svh;
   display: flex;
   flex-direction: column;
+  padding-top: var(--nav-height);
 }
 
 .layout__main {
   flex: 1;
   min-width: 0;
+  scroll-margin-top: var(--nav-height);
+}
+
+.layout__main:focus,
+.layout__main:focus-visible {
+  outline: none;
 }

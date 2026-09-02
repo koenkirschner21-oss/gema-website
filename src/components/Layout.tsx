@@ -34,6 +34,9 @@ export function Layout() {
       const target = document.getElementById(id)
       if (target) {
         target.scrollIntoView()
+        if (id === 'main-content' && target instanceof HTMLElement) {
+          target.focus({ preventScroll: true })
+        }
         return true
       }
 
@@ -65,7 +68,7 @@ export function Layout() {
         Skip to content
       </a>
       <Navbar />
-      <main id="main-content" className="layout__main">
+      <main id="main-content" className="layout__main" tabIndex={-1}>
         <Outlet />
       </main>
       <Footer />

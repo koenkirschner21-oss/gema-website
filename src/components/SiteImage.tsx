@@ -1,4 +1,4 @@
-import type { ImgHTMLAttributes } from 'react'
+import { useState, type ImgHTMLAttributes } from 'react'
 
 type SiteImageProps = Omit<
   ImgHTMLAttributes<HTMLImageElement>,
@@ -11,8 +11,15 @@ export function SiteImage({
   priority = false,
   decoding = 'async',
   alt = '',
+  onError,
   ...props
 }: SiteImageProps) {
+  const [failed, setFailed] = useState(false)
+
+  if (failed) {
+    return null
+  }
+
   return (
     <img
       {...props}
@@ -20,6 +27,10 @@ export function SiteImage({
       decoding={decoding}
       loading={priority ? 'eager' : 'lazy'}
       fetchPriority={priority ? 'high' : 'auto'}
+      onError={(event) => {
+        setFailed(true)
+        onError?.(event)
+      }}
     />
   )
 }

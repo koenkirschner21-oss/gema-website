@@ -70,7 +70,7 @@ export function GemMajor() {
                     className="gem-button gem-button--primary"
                     href={gemOfficialProgramUrl}
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noopener noreferrer"
                   >
                     Explore the Official Program
                     <span className="visually-hidden"> (opens in a new tab)</span>
@@ -167,7 +167,7 @@ export function GemMajor() {
                   className="gem-button gem-button--primary"
                   href={gemOfficialCoopUrl}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                 >
                   Learn About GEM Co-op
                   <span className="visually-hidden"> (opens in a new tab)</span>
@@ -197,7 +197,7 @@ export function GemMajor() {
                   className="gem-button gem-button--primary"
                   href={gemOfficialProgramUrl}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                 >
                   View Official GEM Program
                   <span className="visually-hidden"> (opens in a new tab)</span>

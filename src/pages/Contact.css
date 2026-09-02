@@ -253,6 +253,7 @@
   background: var(--color-red);
   color: var(--color-white);
   text-decoration: none;
+  cursor: pointer;
 }
 
 .contact-routes__grid a[data-accent='gold'] {

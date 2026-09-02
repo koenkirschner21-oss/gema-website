@@ -43,7 +43,7 @@ export function EventRecapCard({ recap }: { recap: EventRecap }) {
             className="event-recap__gallery"
             href={recap.galleryUrl}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
           >
             View Photo Gallery
             <span className="visually-hidden">

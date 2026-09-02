@@ -7,6 +7,10 @@
   border-top: 3px solid var(--color-red);
 }
 
+.partners-featured--no-logo {
+  grid-template-columns: 1fr;
+}
+
 .partners-featured__mark {
   display: grid;
   place-items: center;
@@ -14,6 +18,10 @@
   padding: var(--space-6);
   color: inherit;
   text-decoration: none;
+}
+
+a.partners-featured__mark {
+  cursor: pointer;
 }
 
 .partners-featured__mark:focus-visible {

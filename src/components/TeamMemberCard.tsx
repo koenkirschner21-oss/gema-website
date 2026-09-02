@@ -57,7 +57,7 @@ export function TeamMemberCard({
             className="team-card__linkedin"
             href={member.linkedin}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
           >
             LinkedIn
             <span className="visually-hidden"> (opens in a new tab)</span>

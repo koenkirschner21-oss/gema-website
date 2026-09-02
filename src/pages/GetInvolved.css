@@ -152,6 +152,7 @@
   background: var(--color-red);
   color: var(--color-white);
   text-decoration: none;
+  cursor: pointer;
 }
 
 .involve-ways__grid a[data-accent='gold'] {

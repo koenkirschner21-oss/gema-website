@@ -260,7 +260,7 @@ export function GetInvolved() {
                         className="involve-social__link"
                         href={destination.href}
                         target="_blank"
-                        rel="noreferrer"
+                        rel="noopener noreferrer"
                       >
                         <SocialIcon platform={item.platform} />
                         <span>{item.linkLabel}</span>

@@ -145,7 +145,7 @@ export function EventCard({
             className="event-card__cta"
             href={event.registrationUrl}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
           >
             RSVP
             <span className="visually-hidden">

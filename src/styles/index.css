@@ -107,7 +107,7 @@ button {
 }
 
 .skip-link {
-  position: absolute;
+  position: fixed;
   left: var(--space-4);
   top: -100%;
   z-index: 200;
@@ -118,8 +118,11 @@ button {
   border: 1px solid var(--color-border);
 }
 
-.skip-link:focus {
+.skip-link:focus,
+.skip-link:focus-visible {
   top: var(--space-4);
+  outline: 2px solid var(--color-red);
+  outline-offset: 3px;
 }
 
 a:focus-visible,

@@ -95,7 +95,7 @@ export function Footer() {
                     className="footer__social"
                     href={item.href}
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noopener noreferrer"
                   >
                     {item.label === 'Instagram' ? <InstagramIcon /> : null}
                     {item.label === 'LinkedIn' ? <LinkedInIcon /> : null}

@@ -97,7 +97,7 @@ function PartnerCard({ partner }: { partner: Partner }) {
 
   if (partner.url) {
     return (
-      <a className="partners-card" href={partner.url} target="_blank" rel="noreferrer">
+      <a className="partners-card" href={partner.url} target="_blank" rel="noopener noreferrer">
         {body}
         <span className="visually-hidden"> (opens in a new tab)</span>
       </a>
