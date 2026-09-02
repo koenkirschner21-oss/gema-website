@@ -10,14 +10,34 @@ export type Partner = {
 }
 
 /**
- * Confirmed current partners and sponsors, if a live cycle is in place.
- * Do not invent organization names or logos. The Partners page currently
- * showcases past relationships, not a current sponsorship cycle.
+ * Confirmed current partners and sponsors.
+ * Do not invent organization names, logos, or website URLs.
+ * Set `active: true` for current relationships shown on /partners.
  */
-export const partners: Partner[] = []
+export const partners: Partner[] = [
+  {
+    id: 'apply-yourself-global',
+    name: 'Apply Yourself Global',
+    logo: null,
+    url: 'https://www.applyyourselfglobal.com/',
+    description:
+      'Apply Yourself Global (AYG) supports students pursuing graduate and professional programs through admissions-test preparation, application strategy, personal-statement coaching, and interview support. AYG regularly joins GEMA events to share practical guidance with students exploring their academic and professional next steps.',
+    type: 'Current Partner',
+    year: null,
+    active: true,
+  },
+]
 
 export function getActivePartners() {
   return partners.filter((item) => item.active)
+}
+
+export function getFeaturedPartners() {
+  return getActivePartners().filter((item) => Boolean(item.description))
+}
+
+export function getCurrentGridPartners() {
+  return getActivePartners().filter((item) => !item.description)
 }
 
 export function getPartnersWithLogos() {

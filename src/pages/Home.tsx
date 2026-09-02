@@ -146,11 +146,8 @@ export function Home() {
               </Link>
             </div>
             <ul className="home-intro__points">
-              {homeIntroPoints.map((item, index) => (
+              {homeIntroPoints.map((item) => (
                 <li key={item.title} data-accent={item.accent}>
-                  <span className="home-intro__index" aria-hidden="true">
-                    {String(index + 1).padStart(2, '0')}
-                  </span>
                   <h3>{item.title}</h3>
                   <p>{item.copy}</p>
                 </li>

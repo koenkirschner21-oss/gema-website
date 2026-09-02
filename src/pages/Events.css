@@ -62,13 +62,15 @@
 }
 
 .events-featured,
-.events-calendar {
+.events-calendar,
+.events-recaps {
   padding: 5rem 0;
   border-top: 1px solid var(--color-border);
 }
 
 .events-featured h2,
 .events-calendar h2,
+.events-recaps h2,
 .events-new__panel h2,
 .events-partner h2 {
   margin-bottom: var(--space-4);
@@ -94,6 +96,19 @@
 
 .events-calendar__intro .events-section-copy {
   margin: 0 auto;
+}
+
+#past-event-recaps {
+  scroll-margin-top: calc(var(--nav-height) + 1rem);
+}
+
+.events-recaps__list {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.events-recaps__empty {
+  margin-bottom: 0;
 }
 
 .events-new {
@@ -223,7 +238,8 @@
   }
 
   .events-featured,
-  .events-calendar {
+  .events-calendar,
+  .events-recaps {
     padding: 3.5rem 0;
   }
 
@@ -255,6 +271,7 @@
 
   .events-featured h2,
   .events-calendar h2,
+  .events-recaps h2,
   .events-partner h2 {
     font-size: clamp(1.75rem, 7vw, 2.2rem);
   }

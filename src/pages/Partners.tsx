@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Container } from '../components/Container'
 import {
-  getActivePartners,
+  getCurrentGridPartners,
+  getFeaturedPartners,
   partnerBenefits,
   partnerMedia,
   partnerSupport,
@@ -34,23 +35,34 @@ function PartnersMedia({
   )
 }
 
-function PartnerLogo({ src }: { src: string | null }) {
+function PartnerLogo({
+  src,
+  alt,
+}: {
+  src: string | null
+  alt: string
+}) {
   const [failed, setFailed] = useState(false)
   const showImage = Boolean(src) && !failed
 
   return (
     <div className={showImage ? 'partners-logo' : 'partners-logo is-placeholder'}>
       {showImage ? (
-        <img src={src ?? undefined} alt="" onError={() => setFailed(true)} />
+        <img src={src ?? undefined} alt={alt} onError={() => setFailed(true)} />
       ) : (
-        <span className="visually-hidden">Partner logo to be added</span>
+        <span className="visually-hidden">{alt || 'Partner logo to be added'}</span>
       )}
     </div>
   )
 }
 
 function PartnerCard({ partner }: { partner: Partner }) {
-  const logo = <PartnerLogo src={partner.logo} />
+  const logo = (
+    <PartnerLogo
+      src={partner.logo}
+      alt={partner.name ? `${partner.name} logo` : 'Partner logo to be added'}
+    />
+  )
 
   const body = (
     <>
@@ -59,7 +71,6 @@ function PartnerCard({ partner }: { partner: Partner }) {
         {partner.name ? <h3>{partner.name}</h3> : null}
         {partner.type ? <p className="partners-card__type">{partner.type}</p> : null}
         {partner.year ? <p className="partners-card__type">{partner.year}</p> : null}
-        {partner.description ? <p>{partner.description}</p> : null}
       </div>
     </>
   )
@@ -76,8 +87,70 @@ function PartnerCard({ partner }: { partner: Partner }) {
   return <article className="partners-card">{body}</article>
 }
 
+function FeaturedPartner({ partner }: { partner: Partner }) {
+  const logoAlt = `${partner.name} logo`
+  const logo = <PartnerLogo src={partner.logo} alt={logoAlt} />
+  const showLogo = Boolean(partner.logo)
+
+  return (
+    <article className="partners-featured">
+      {showLogo ? (
+        partner.url ? (
+          <a
+            className="partners-featured__mark"
+            href={partner.url}
+            target="_blank"
+            rel="noreferrer"
+          >
+            {logo}
+            <span className="visually-hidden">
+              {partner.name} (opens in a new tab)
+            </span>
+          </a>
+        ) : (
+          <div className="partners-featured__mark">{logo}</div>
+        )
+      ) : null}
+      <div className="partners-featured__copy">
+        {partner.type ? (
+          <p className="partners-featured__type">{partner.type}</p>
+        ) : null}
+        <h3>
+          {partner.url ? (
+            <a href={partner.url} target="_blank" rel="noreferrer">
+              {partner.name}
+              <span className="visually-hidden"> (opens in a new tab)</span>
+            </a>
+          ) : (
+            partner.name
+          )}
+        </h3>
+        {partner.description ? <p>{partner.description}</p> : null}
+        {partner.url ? (
+          <a
+            className="partners-featured__cta"
+            href={partner.url}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Visit {partner.name}
+            <span className="visually-hidden"> (opens in a new tab)</span>
+          </a>
+        ) : null}
+      </div>
+    </article>
+  )
+}
+
 export function Partners() {
-  const currentPartners = getActivePartners()
+  const featuredPartners = getFeaturedPartners()
+  const gridPartners = getCurrentGridPartners()
+  const remainingPlaceholders = Math.max(
+    0,
+    pastPartnerPagePlaceholderCount -
+      featuredPartners.length -
+      gridPartners.length,
+  )
 
   useEffect(() => {
     document.title = 'Partners & Sponsors | GEMA'
@@ -130,15 +203,19 @@ export function Partners() {
       <section className="partners-current">
         <Container>
           <h2>Current Partners</h2>
-          {currentPartners.length > 0 ? (
-            <div className="partners-current__grid">
-              {currentPartners.map((partner) => (
-                <PartnerCard key={partner.id} partner={partner} />
+          {featuredPartners.length > 0 ? (
+            <div className="partners-featured-list">
+              {featuredPartners.map((partner) => (
+                <FeaturedPartner key={partner.id} partner={partner} />
               ))}
             </div>
-          ) : (
+          ) : null}
+          {gridPartners.length > 0 || remainingPlaceholders > 0 ? (
             <div className="partners-current__grid">
-              {Array.from({ length: pastPartnerPagePlaceholderCount }, (_, index) => (
+              {gridPartners.map((partner) => (
+                <PartnerCard key={partner.id} partner={partner} />
+              ))}
+              {Array.from({ length: remainingPlaceholders }, (_, index) => (
                 <div
                   key={`partner-placeholder-${index}`}
                   className="partners-card"
@@ -149,7 +226,7 @@ export function Partners() {
                 </div>
               ))}
             </div>
-          )}
+          ) : null}
         </Container>
       </section>
 

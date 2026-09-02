@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Container } from '../components/Container'
 import { EventCard } from '../components/EventCard'
 import { EventsCalendar } from '../components/EventsCalendar'
+import { EventRecapCard } from '../components/EventRecapCard'
 import {
   featuredPlaceholderCount,
   featuredPlaceholderNote,
@@ -10,6 +11,7 @@ import {
   getFeaturedSectionCopy,
   getFeaturedSectionTitle,
 } from '../data/events'
+import { eventRecapEmptyCopy, getEventRecaps } from '../data/eventRecaps'
 import './Events.css'
 
 export function Events() {
@@ -20,6 +22,7 @@ export function Events() {
     0,
     featuredPlaceholderCount - featuredEvents.length,
   )
+  const eventRecaps = getEventRecaps()
 
   useEffect(() => {
     document.title = 'Events | GEMA'
@@ -86,6 +89,23 @@ export function Events() {
             </p>
           </div>
           <EventsCalendar />
+        </Container>
+      </section>
+
+      <section className="events-recaps" id="past-event-recaps">
+        <Container>
+          <h2>Past Event Recaps</h2>
+          {eventRecaps.length > 0 ? (
+            <div className="events-recaps__list">
+              {eventRecaps.map((recap) => (
+                <EventRecapCard key={recap.id} recap={recap} />
+              ))}
+            </div>
+          ) : (
+            <p className="events-section-copy events-recaps__empty">
+              {eventRecapEmptyCopy}
+            </p>
+          )}
         </Container>
       </section>
 

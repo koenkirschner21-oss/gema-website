@@ -16,18 +16,18 @@ export const homeMedia = {
 
 export const homeIntroPoints = [
   {
-    title: 'Student representation',
-    copy: 'Helping make sure GEM students have a voice within their program community.',
+    title: 'Inspire',
+    copy: 'Future leaders to take action toward their goals.',
     accent: 'red' as const,
   },
   {
-    title: 'Community',
-    copy: 'Creating more opportunities for students to meet, connect and feel part of GEM.',
+    title: 'Engage',
+    copy: 'The interests of U of G students in all things GEM.',
     accent: 'gold' as const,
   },
   {
-    title: 'Experience beyond the classroom',
-    copy: 'Giving students access to events, initiatives and professional development opportunities.',
+    title: 'Build',
+    copy: 'Networks and create connections for U of G students.',
     accent: 'blue' as const,
   },
 ]
