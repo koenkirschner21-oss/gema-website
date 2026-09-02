@@ -18,7 +18,7 @@ export const partners: Partner[] = [
   {
     id: 'apply-yourself-global',
     name: 'Apply Yourself Global',
-    logo: null,
+    logo: '/apply-yourself-global-logo.png',
     url: 'https://www.applyyourselfglobal.com/',
     description:
       'Apply Yourself Global (AYG) supports students pursuing graduate and professional programs through admissions-test preparation, application strategy, personal-statement coaching, and interview support. AYG regularly joins GEMA events to share practical guidance with students exploring their academic and professional next steps.',

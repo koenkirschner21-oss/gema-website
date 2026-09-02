@@ -88,9 +88,17 @@ function PartnerCard({ partner }: { partner: Partner }) {
 }
 
 function FeaturedPartner({ partner }: { partner: Partner }) {
-  const logoAlt = `${partner.name} logo`
-  const logo = <PartnerLogo src={partner.logo} alt={logoAlt} />
-  const showLogo = Boolean(partner.logo)
+  const [logoFailed, setLogoFailed] = useState(false)
+  const logoAlt = 'Apply Yourself Global logo'
+  const showLogo = Boolean(partner.logo) && !logoFailed
+
+  const mark = showLogo ? (
+    <img
+      src={partner.logo ?? undefined}
+      alt={logoAlt}
+      onError={() => setLogoFailed(true)}
+    />
+  ) : null
 
   return (
     <article className="partners-featured">
@@ -102,13 +110,13 @@ function FeaturedPartner({ partner }: { partner: Partner }) {
             target="_blank"
             rel="noreferrer"
           >
-            {logo}
+            {mark}
             <span className="visually-hidden">
-              {partner.name} (opens in a new tab)
+              Apply Yourself Global (opens in a new tab)
             </span>
           </a>
         ) : (
-          <div className="partners-featured__mark">{logo}</div>
+          <div className="partners-featured__mark">{mark}</div>
         )
       ) : null}
       <div className="partners-featured__copy">
@@ -133,7 +141,7 @@ function FeaturedPartner({ partner }: { partner: Partner }) {
             target="_blank"
             rel="noreferrer"
           >
-            Visit {partner.name}
+            Visit Apply Yourself Global
             <span className="visually-hidden"> (opens in a new tab)</span>
           </a>
         ) : null}
@@ -211,7 +219,8 @@ export function Partners() {
             </div>
           ) : null}
           {gridPartners.length > 0 || remainingPlaceholders > 0 ? (
-            <div className="partners-current__grid">
+            <div className="partners-current__more">
+              <div className="partners-current__grid">
               {gridPartners.map((partner) => (
                 <PartnerCard key={partner.id} partner={partner} />
               ))}
@@ -225,6 +234,7 @@ export function Partners() {
                   </div>
                 </div>
               ))}
+              </div>
             </div>
           ) : null}
         </Container>
