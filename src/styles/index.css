@@ -57,8 +57,7 @@ figure {
 .navbar__brand img,
 .footer__brand img,
 .partners-logo img,
-.partners-featured__mark img,
-.home-partners__logo img {
+.partners-featured__mark img {
   object-fit: contain;
 }
 

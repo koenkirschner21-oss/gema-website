@@ -41,8 +41,7 @@
 .home-lede,
 .home-intro__copy p,
 .home-events__intro p,
-.home-partners__copy,
-.home-partners__note {
+.home-partners__copy {
   color: var(--color-text-secondary);
 }
 
@@ -403,68 +402,16 @@
 
 .home-partners__copy {
   max-width: 42rem;
-  margin: 0 0 var(--space-3);
+  margin: 0 0 var(--space-5);
   font-size: 1.08rem;
 }
 
-.home-partners__note {
-  max-width: 42rem;
+.home-partners .partners-featured {
   margin: 0 0 var(--space-5);
-  font-size: 0.98rem;
 }
 
-.home-partners__empty {
-  margin-bottom: var(--space-4);
-  padding: 0;
-  border: 0;
-}
-
-.home-partners__empty-label {
-  margin: 0 0 var(--space-3);
-  color: var(--color-text);
-  font-family: var(--font-heading);
-  font-size: 1.05rem;
-  font-weight: 700;
-}
-
-.home-partners__logos {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: var(--space-3);
-  margin-bottom: var(--space-5);
-}
-
-.home-partners__empty .home-partners__logos {
-  margin-bottom: 0;
-}
-
-.home-partners__logo {
-  display: grid;
-  place-items: center;
-  min-width: 0;
-  aspect-ratio: 8 / 5;
-  padding: 0.4rem;
-  background: var(--color-white);
-  border: 1px solid var(--color-border);
-}
-
-.home-partners__logo img {
-  display: block;
-  max-width: 78%;
-  max-height: 64%;
-  object-fit: contain;
-}
-
-.home-partners__logo.is-placeholder {
-  background: var(--color-placeholder);
-}
-
-.home-partners__logo.is-placeholder span {
-  color: var(--color-text-secondary);
-  font-size: 0.82rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+.home-partners__actions {
+  margin-top: 0;
 }
 
 .home-cta {
@@ -620,10 +567,6 @@
   .home-events__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-
-  .home-partners__logos {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
 }
 
 @media (max-width: 860px) {
@@ -660,10 +603,6 @@
     padding: var(--space-6) var(--space-5);
   }
 
-  .home-partners__logos {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .home-cta {
     min-height: 0;
     padding: 2.75rem 0;
@@ -674,10 +613,6 @@
   .home-do__grid,
   .home-events__grid {
     grid-template-columns: 1fr;
-  }
-
-  .home-partners__logos {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .home-intro h2,
@@ -711,6 +646,7 @@
 
   .home-hero__actions,
   .home-involve__actions,
+  .home-partners__actions,
   .home-cta__actions {
     display: grid;
   }
@@ -718,10 +654,6 @@
   .home-cta {
     min-height: 0;
     padding: 2.75rem 0;
-  }
-
-  .home-partners__empty {
-    padding: 0;
   }
 }
 

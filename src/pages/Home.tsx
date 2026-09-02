@@ -2,15 +2,15 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Container } from '../components/Container'
 import { EventCard } from '../components/EventCard'
+import { FeaturedPartner } from '../components/FeaturedPartner'
 import { getHomepageEvents } from '../data/events'
 import {
   homeIntroPoints,
   homeMedia,
   homePillars,
   homepageEventPlaceholderCount,
-  pastPartnerPlaceholderCount,
 } from '../data/home'
-import { getPastPartnersWithLogos } from '../data/partners'
+import { getFeaturedPartners } from '../data/partners'
 import './Home.css'
 
 function HomeMedia({
@@ -36,29 +36,13 @@ function HomeMedia({
   )
 }
 
-function HomePartnerLogo({
-  src,
-  name,
-}: {
-  src: string
-  name: string
-}) {
-  const [failed, setFailed] = useState(false)
-
-  if (failed) {
-    return <span className="visually-hidden">{name}</span>
-  }
-
-  return <img src={src} alt={name} onError={() => setFailed(true)} />
-}
-
 export function Home() {
   const homepageEvents = getHomepageEvents(homepageEventPlaceholderCount)
   const remainingEventPlaceholders = Math.max(
     0,
     homepageEventPlaceholderCount - homepageEvents.length,
   )
-  const pastPartnerLogos = getPastPartnersWithLogos()
+  const featuredPartners = getFeaturedPartners()
 
   useEffect(() => {
     document.title = 'GEMA | Government, Economics & Management Association'
@@ -235,53 +219,18 @@ export function Home() {
         <Container>
           <h2>Creating more opportunities together.</h2>
           <p className="home-partners__copy">
-            GEMA has worked with organizations and community partners to support
+            GEMA works with organizations and community partners to support
             student programming, professional development and experiences for
             the GEM community.
           </p>
-          <p className="home-partners__note">
-            The organizations recognized here are previous partners and
-            sponsors.
-          </p>
-          {pastPartnerLogos.length > 0 ? (
-            <div className="home-partners__logos">
-              {pastPartnerLogos.map((partner) =>
-                partner.url ? (
-                  <a
-                    key={partner.id}
-                    className="home-partners__logo"
-                    href={partner.url}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <HomePartnerLogo src={partner.logo} name={partner.name} />
-                    <span className="visually-hidden"> (opens in a new tab)</span>
-                  </a>
-                ) : (
-                  <div key={partner.id} className="home-partners__logo">
-                    <HomePartnerLogo src={partner.logo} name={partner.name} />
-                  </div>
-                ),
-              )}
-            </div>
-          ) : (
-            <div className="home-partners__empty">
-              <p className="home-partners__empty-label">Past partners</p>
-              <div className="home-partners__logos">
-                {Array.from({ length: pastPartnerPlaceholderCount }, (_, index) => (
-                  <div
-                    key={`past-partner-placeholder-${index}`}
-                    className="home-partners__logo is-placeholder"
-                  >
-                    <span className="visually-hidden">Partner logo to be added</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-          <Link className="home-button home-button--primary" to="/partners">
-            Partner With GEMA
-          </Link>
+          {featuredPartners.map((partner) => (
+            <FeaturedPartner key={partner.id} partner={partner} />
+          ))}
+          <div className="home-partners__actions">
+            <Link className="home-button home-button--primary" to="/partners">
+              Partner With GEMA
+            </Link>
+          </div>
         </Container>
       </section>
 

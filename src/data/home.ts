@@ -56,4 +56,3 @@ export const homePillars = [
 ]
 
 export const homepageEventPlaceholderCount = 3
-export const pastPartnerPlaceholderCount = 8

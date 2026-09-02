@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Container } from '../components/Container'
+import { FeaturedPartner } from '../components/FeaturedPartner'
 import {
   getCurrentGridPartners,
   getFeaturedPartners,
   partnerBenefits,
   partnerMedia,
   partnerSupport,
-  pastPartnerPagePlaceholderCount,
   type Partner,
 } from '../data/partners'
 import './Partners.css'
@@ -87,78 +87,9 @@ function PartnerCard({ partner }: { partner: Partner }) {
   return <article className="partners-card">{body}</article>
 }
 
-function FeaturedPartner({ partner }: { partner: Partner }) {
-  const [logoFailed, setLogoFailed] = useState(false)
-  const logoAlt = 'Apply Yourself Global logo'
-  const showLogo = Boolean(partner.logo) && !logoFailed
-
-  const mark = showLogo ? (
-    <img
-      src={partner.logo ?? undefined}
-      alt={logoAlt}
-      onError={() => setLogoFailed(true)}
-    />
-  ) : null
-
-  return (
-    <article className="partners-featured">
-      {showLogo ? (
-        partner.url ? (
-          <a
-            className="partners-featured__mark"
-            href={partner.url}
-            target="_blank"
-            rel="noreferrer"
-          >
-            {mark}
-            <span className="visually-hidden">
-              Apply Yourself Global (opens in a new tab)
-            </span>
-          </a>
-        ) : (
-          <div className="partners-featured__mark">{mark}</div>
-        )
-      ) : null}
-      <div className="partners-featured__copy">
-        {partner.type ? (
-          <p className="partners-featured__type">{partner.type}</p>
-        ) : null}
-        <h3>
-          {partner.url ? (
-            <a href={partner.url} target="_blank" rel="noreferrer">
-              {partner.name}
-              <span className="visually-hidden"> (opens in a new tab)</span>
-            </a>
-          ) : (
-            partner.name
-          )}
-        </h3>
-        {partner.description ? <p>{partner.description}</p> : null}
-        {partner.url ? (
-          <a
-            className="partners-featured__cta"
-            href={partner.url}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Visit Apply Yourself Global
-            <span className="visually-hidden"> (opens in a new tab)</span>
-          </a>
-        ) : null}
-      </div>
-    </article>
-  )
-}
-
 export function Partners() {
   const featuredPartners = getFeaturedPartners()
   const gridPartners = getCurrentGridPartners()
-  const remainingPlaceholders = Math.max(
-    0,
-    pastPartnerPagePlaceholderCount -
-      featuredPartners.length -
-      gridPartners.length,
-  )
 
   useEffect(() => {
     document.title = 'Partners & Sponsors | GEMA'
@@ -218,22 +149,12 @@ export function Partners() {
               ))}
             </div>
           ) : null}
-          {gridPartners.length > 0 || remainingPlaceholders > 0 ? (
+          {gridPartners.length > 0 ? (
             <div className="partners-current__more">
               <div className="partners-current__grid">
-              {gridPartners.map((partner) => (
-                <PartnerCard key={partner.id} partner={partner} />
-              ))}
-              {Array.from({ length: remainingPlaceholders }, (_, index) => (
-                <div
-                  key={`partner-placeholder-${index}`}
-                  className="partners-card"
-                >
-                  <div className="partners-logo is-placeholder">
-                    <span className="visually-hidden">Partner logo to be added</span>
-                  </div>
-                </div>
-              ))}
+                {gridPartners.map((partner) => (
+                  <PartnerCard key={partner.id} partner={partner} />
+                ))}
               </div>
             </div>
           ) : null}
