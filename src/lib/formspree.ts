@@ -5,7 +5,8 @@ export type FormspreeDevMock = 'success' | 'error'
 
 /**
  * Public Formspree form URL from VITE_FORMSPREE_ENDPOINT.
- * Empty until the real endpoint is provided. Never invent a fallback URL.
+ * Keep the URL in environment config so it can be changed without code edits.
+ * Never hardcode a fallback form URL in application code.
  */
 export function getFormspreeEndpoint() {
   const configured = import.meta.env.VITE_FORMSPREE_ENDPOINT

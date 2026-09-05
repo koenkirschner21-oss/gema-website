@@ -3,7 +3,8 @@
  *
  * The Formspree endpoint is read from `VITE_FORMSPREE_ENDPOINT`.
  * Do not hardcode a form URL here. Formspree form IDs are public endpoints,
- * not secrets, but the value still belongs in environment config.
+ * not secrets, but the value still belongs in environment config so GEMA
+ * can point the form at another account later without a code rewrite.
  * Do not expose the Corporate Partnership Package as a public download.
  */
 
