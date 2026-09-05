@@ -71,7 +71,7 @@ export const team: TeamMember[] = [
     name: 'Simran Aujla',
     role: 'Director of Events',
     portfolio: 'Events',
-    image: null,
+    image: '/team/simran-aujla.webp',
     linkedin: null,
     level: 'director',
   },
