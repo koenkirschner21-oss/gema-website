@@ -2,7 +2,9 @@ import { aboutMedia } from './about'
 
 export const homeMedia = {
   hero: {
-    // Temporary: reuse the About GEMA hero until a dedicated homepage photo is supplied.
+    // Temporary: reuse the About GEMA hero until the official full-team
+    // photo is supplied. Then set `src` to that file (for example
+    // `/home-hero.webp`) and update `label` / `alt`. Do not change layout.
     src: aboutMedia.hero.src,
     label: aboutMedia.hero.label,
     alt: aboutMedia.hero.alt,

@@ -149,6 +149,12 @@ export function EventDetailsDialog({
                 <dd>{event.location}</dd>
               </div>
             ) : null}
+            {event.cost ? (
+              <div>
+                <dt>Cost</dt>
+                <dd>{event.cost}</dd>
+              </div>
+            ) : null}
           </dl>
 
           {description ? (

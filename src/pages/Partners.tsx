@@ -6,6 +6,8 @@ import { SiteImage } from '../components/SiteImage'
 import {
   getCurrentGridPartners,
   getFeaturedPartners,
+  getPastFeaturedPartners,
+  getPastGridPartners,
   partnerBenefits,
   partnerMedia,
   partnerSupport,
@@ -110,6 +112,10 @@ function PartnerCard({ partner }: { partner: Partner }) {
 export function Partners() {
   const featuredPartners = getFeaturedPartners()
   const gridPartners = getCurrentGridPartners()
+  const pastFeaturedPartners = getPastFeaturedPartners()
+  const pastGridPartners = getPastGridPartners()
+  const hasPastPartners =
+    pastFeaturedPartners.length > 0 || pastGridPartners.length > 0
 
   return (
     <article className="partners">
@@ -179,6 +185,30 @@ export function Partners() {
           ) : null}
         </Container>
       </section>
+
+      {hasPastPartners ? (
+        <section className="partners-past">
+          <Container>
+            <h2>Past Partners</h2>
+            {pastFeaturedPartners.length > 0 ? (
+              <div className="partners-featured-list">
+                {pastFeaturedPartners.map((partner) => (
+                  <FeaturedPartner key={partner.id} partner={partner} />
+                ))}
+              </div>
+            ) : null}
+            {pastGridPartners.length > 0 ? (
+              <div className="partners-current__more">
+                <div className="partners-current__grid">
+                  {pastGridPartners.map((partner) => (
+                    <PartnerCard key={partner.id} partner={partner} />
+                  ))}
+                </div>
+              </div>
+            ) : null}
+          </Container>
+        </section>
+      ) : null}
 
       <section className="partners-support">
         <Container>

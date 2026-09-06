@@ -2,7 +2,14 @@
  * Team roster for /about/team.
  *
  * Team portraits live in `public/team/`. Keep `image: null` until an
- * official headshot is supplied.
+ * official headshot is supplied. When a photo arrives, add the file and
+ * set only that member's `image` path. Do not change names, titles, or
+ * card order.
+ *
+ * Remaining director files:
+ * - `/team/eivina-stavickyte.webp`
+ * - `/team/reshawn-norbert.webp`
+ * - `/team/lilian-lorenzo-rebollar.webp`
  *
  * The public page renders Co-Presidents (`leadership`) and Directors
  * only. `level: 'manager'` may remain in this file for future use and

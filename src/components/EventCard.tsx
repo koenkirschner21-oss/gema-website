@@ -102,11 +102,9 @@ export function EventCard({
           <p className="event-card__category">{event.category}</p>
         ) : null}
         <h3>{event.title}</h3>
-        {time || event.location ? (
+        {time || event.location || event.cost ? (
           <p className="event-card__meta">
-            {time}
-            {time && event.location ? ' · ' : null}
-            {event.location}
+            {[time, event.location, event.cost].filter(Boolean).join(' · ')}
           </p>
         ) : null}
         {description || readMoreDetails || readMoreTo ? (

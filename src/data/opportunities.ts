@@ -5,8 +5,10 @@ export type Opportunity = {
   title: string
   category: string
   description: string
+  eligibility: string | null
   applicationUrl: string | null
   deadline: string | null
+  ctaLabel: string | null
   status: OpportunityStatus
   active: boolean
 }
@@ -14,21 +16,22 @@ export type Opportunity = {
 /**
  * Opportunity data for /get-involved.
  *
- * The Current Opportunities section is currently omitted from the
- * rendered page. Restore it in GetInvolved.tsx when real roles exist.
- * Add entries with `active: true` and `status: 'open'`. Empty-state
- * copy and opening-card styles remain in getInvolved.ts / GetInvolved.css.
+ * Current Opportunities stays hidden while this array is empty.
+ * Add a confirmed role with `active: true` and `status: 'open'` to
+ * show it. Do not invent eligibility, deadlines, or apply links.
  *
  * Brand Ambassador is currently filled. Do not list it as open.
  *
  * Example:
  * {
- *   id: 'example-role',
- *   title: 'Role title',
+ *   id: 'first-year-rep',
+ *   title: 'First Year Representative',
  *   category: 'Executive',
  *   description: 'One or two sentences about the role.',
+ *   eligibility: 'Open to first-year GEM students.',
  *   applicationUrl: 'https://example.com/apply',
  *   deadline: 'September 15, 2026',
+ *   ctaLabel: 'Apply Now',
  *   status: 'open',
  *   active: true,
  * }

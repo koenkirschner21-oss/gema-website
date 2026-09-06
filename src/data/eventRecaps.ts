@@ -18,8 +18,9 @@ export type EventRecap = {
  * Past event recaps shown on /events.
  *
  * Add confirmed recaps here after events have taken place.
- * Use ISO dates (`YYYY-MM-DD`). Include 2–4 featured photos and a
- * Google Drive or gallery URL when available.
+ * Use ISO dates (`YYYY-MM-DD`). Include 2–4 featured photos in
+ * `public/recaps/` and a Google Drive or gallery URL when available.
+ * The Past Event Recaps empty state stays until this array has entries.
  *
  * Example:
  * {

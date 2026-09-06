@@ -12,7 +12,10 @@ export type Partner = {
 /**
  * Confirmed current partners and sponsors.
  * Do not invent organization names, logos, or website URLs.
- * Set `active: true` for current relationships shown on /partners.
+ * Set `active: true` and `type: 'Current Partner'` for current
+ * relationships shown on /partners and Home.
+ * Partners with a description use the featured block; logo-only
+ * partners use the current-partner grid.
  */
 export const partners: Partner[] = [
   {
@@ -49,12 +52,22 @@ export function getPartnersWithLogos() {
 /**
  * Confirmed past partners and sponsors. These are previous relationships,
  * not a current sponsorship cycle. Add organization names, logos, website
- * URLs, and optional year/initiative details when assets are supplied.
+ * URLs, optional descriptions, and optional year/initiative details only
+ * when assets are supplied. The Past Partners section stays hidden while
+ * this array is empty.
  */
 export const pastPartners: Partner[] = []
 
 export function getPastPartners() {
   return pastPartners
+}
+
+export function getPastFeaturedPartners() {
+  return pastPartners.filter((item) => Boolean(item.description))
+}
+
+export function getPastGridPartners() {
+  return pastPartners.filter((item) => !item.description)
 }
 
 export function getPastPartnersWithLogos() {
@@ -63,7 +76,7 @@ export function getPastPartnersWithLogos() {
   )
 }
 
-/** Neutral logo slots shown on /partners until confirmed past partners are added. */
+/** Unused on purpose. Do not render empty past-partner slots. */
 export const pastPartnerPagePlaceholderCount = 8
 
 export const partnerMedia = {

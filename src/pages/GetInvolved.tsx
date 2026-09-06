@@ -8,6 +8,7 @@ import {
   involvementPaths,
   involveSocial,
 } from '../data/getInvolved'
+import { getActiveOpportunities } from '../data/opportunities'
 import { site } from '../data/site'
 import './GetInvolved.css'
 
@@ -130,6 +131,9 @@ function SocialIcon({ platform }: { platform: (typeof involveSocial)[number]['pl
 }
 
 export function GetInvolved() {
+  const openings = getActiveOpportunities()
+  const hasOpenings = openings.length > 0
+
   return (
     <article className="involve">
       <section className="involve-hero">
@@ -174,17 +178,71 @@ export function GetInvolved() {
         <Container>
           <h2>Ways to Get Involved</h2>
           <ul className="involve-ways__grid">
-            {involvementPaths.map((item) => (
-              <li key={item.title}>
-                <Link to={item.to} data-accent={item.accent}>
-                  <h3>{item.title}</h3>
-                  <p>{item.copy}</p>
-                </Link>
-              </li>
-            ))}
+            {involvementPaths.map((item) => {
+              const to =
+                item.title === 'Join the Executive Team' && hasOpenings
+                  ? '#current-opportunities'
+                  : item.to
+
+              return (
+                <li key={item.title}>
+                  <Link to={to} data-accent={item.accent}>
+                    <h3>{item.title}</h3>
+                    <p>{item.copy}</p>
+                  </Link>
+                </li>
+              )
+            })}
           </ul>
         </Container>
       </section>
+
+      {hasOpenings ? (
+        <section className="involve-openings" id="current-opportunities">
+          <Container>
+            <h2>Current Opportunities</h2>
+            <ul className="involve-openings__grid">
+              {openings.map((opening) => (
+                <li key={opening.id}>
+                  <article className="involve-openings__card">
+                    {opening.category ? (
+                      <p className="involve-openings__category">
+                        {opening.category}
+                      </p>
+                    ) : null}
+                    <h3>{opening.title}</h3>
+                    <p>{opening.description}</p>
+                    {opening.eligibility ? (
+                      <p className="involve-openings__eligibility">
+                        {opening.eligibility}
+                      </p>
+                    ) : null}
+                    {opening.deadline ? (
+                      <p className="involve-openings__deadline">
+                        Deadline: {opening.deadline}
+                      </p>
+                    ) : null}
+                    {opening.applicationUrl ? (
+                      <a
+                        className="involve-button involve-button--primary"
+                        href={opening.applicationUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {opening.ctaLabel || 'Apply Now'}
+                        <span className="visually-hidden">
+                          {' '}
+                          for {opening.title} (opens in a new tab)
+                        </span>
+                      </a>
+                    ) : null}
+                  </article>
+                </li>
+              ))}
+            </ul>
+          </Container>
+        </section>
+      ) : null}
 
       <section className="involve-why">
         <Container>

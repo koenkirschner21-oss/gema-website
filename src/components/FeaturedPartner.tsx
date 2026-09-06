@@ -5,7 +5,7 @@ import './FeaturedPartner.css'
 
 export function FeaturedPartner({ partner }: { partner: Partner }) {
   const [logoFailed, setLogoFailed] = useState(false)
-  const logoAlt = 'Apply Yourself Global logo'
+  const logoAlt = `${partner.name} logo`
   const showLogo = Boolean(partner.logo) && !logoFailed
 
   const mark = showLogo ? (
@@ -34,7 +34,7 @@ export function FeaturedPartner({ partner }: { partner: Partner }) {
           >
             {mark}
             <span className="visually-hidden">
-              Apply Yourself Global (opens in a new tab)
+              {partner.name} (opens in a new tab)
             </span>
           </a>
         ) : (
@@ -63,7 +63,7 @@ export function FeaturedPartner({ partner }: { partner: Partner }) {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Visit Apply Yourself Global
+            Visit {partner.name}
             <span className="visually-hidden"> (opens in a new tab)</span>
           </a>
         ) : null}

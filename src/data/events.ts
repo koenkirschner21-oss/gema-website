@@ -12,6 +12,7 @@ export type GemaEvent = {
   shortDescription: string
   fullDescription: string | null
   category: string
+  cost: string | null
   registrationUrl: string | null
   image: string | null
   featured: boolean
@@ -38,6 +39,7 @@ export const featuredEventsMode: FeaturedEventsMode = 'standard'
  * Times and locations can be plain display strings.
  * Set `status: 'upcoming'` to publish an event.
  * Past and cancelled events are excluded from upcoming lists.
+ * Leave unused fields `null`. Do not invent missing details.
  *
  * Example:
  * {
@@ -50,6 +52,7 @@ export const featuredEventsMode: FeaturedEventsMode = 'standard'
  *   shortDescription: 'One or two sentences.',
  *   fullDescription: null,
  *   category: 'Networking',
+ *   cost: null,
  *   registrationUrl: null,
  *   image: null,
  *   featured: true,
@@ -70,6 +73,7 @@ export const events: GemaEvent[] = [
     fullDescription:
       'Join GEMA during Orientation Week for a free custom tote bag decorating event. Plain tote bags are provided for customization, along with materials such as stickers, glitter pens, rhinestones, and non-scented fabric markers. All students are welcome to meet new people, learn more about GEMA, and personalize a tote.',
     category: 'Orientation Week',
+    cost: 'Free',
     registrationUrl:
       'https://uoguelph.campusgroups.com/gema/rsvp_boot?id=375495',
     image: '/custom-tote-bag-decorating.webp',
