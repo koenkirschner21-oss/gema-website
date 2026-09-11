@@ -7,7 +7,6 @@
  * card order.
  *
  * Remaining director files:
- * - `/team/eivina-stavickyte.webp`
  * - `/team/reshawn-norbert.webp`
  * - `/team/lilian-lorenzo-rebollar.webp`
  *
@@ -51,7 +50,7 @@ export const team: TeamMember[] = [
     name: 'Eivina Stavickyte',
     role: 'Director of Marketing',
     portfolio: 'Marketing',
-    image: null,
+    image: '/team/eivina-stavickyte.webp',
     linkedin: null,
     level: 'director',
   },
