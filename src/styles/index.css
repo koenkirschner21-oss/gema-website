@@ -65,7 +65,9 @@ figure {
 .navbar__brand img,
 .footer__brand img,
 .partners-logo img,
-.partners-featured__mark img {
+.partners-featured__mark img,
+.brand-mark,
+.brand-lockup {
   object-fit: contain;
 }
 

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { BrandMark } from '../components/BrandMark'
 import { Container } from '../components/Container'
 import { SiteImage } from '../components/SiteImage'
 import {
@@ -303,6 +304,7 @@ export function GetInvolved() {
               />
             </div>
             <div className="involve-social__panel">
+              <BrandMark size="sm" className="involve-social__mark" />
               <h2>Stay Connected</h2>
               <p>
                 Follow GEMA for event updates, recruitment news, and community

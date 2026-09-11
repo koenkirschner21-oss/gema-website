@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
+import { BrandMark } from '../components/BrandMark'
 import { Container } from '../components/Container'
 import {
   contactDirect,
@@ -242,6 +243,7 @@ export function Contact() {
       <section className="contact-hero">
         <Container>
           <div className="contact-hero__content">
+            <BrandMark size="hero" />
             <p className="contact-hero__label">{contactHero.eyebrow}</p>
             <span className="contact-hero__accent" aria-hidden="true" />
             <h1>{contactHero.headline}</h1>

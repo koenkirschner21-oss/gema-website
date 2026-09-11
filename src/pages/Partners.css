@@ -370,6 +370,11 @@ a.partners-card:focus-visible {
   text-transform: uppercase;
 }
 
+.partners-cta__mark {
+  align-self: flex-start;
+  margin-bottom: var(--space-3);
+}
+
 .partners-cta h2 {
   max-width: 16ch;
   margin-bottom: var(--space-3);

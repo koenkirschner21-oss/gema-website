@@ -27,8 +27,8 @@
 .navbar__brand img {
   display: block;
   width: auto;
-  height: 4rem;
-  max-width: 19rem;
+  height: 4.65rem;
+  max-width: 21.5rem;
   object-fit: contain;
 }
 
@@ -211,13 +211,17 @@
 }
 
 @media (max-width: 640px) {
+  :root {
+    --nav-height: 4.9rem;
+  }
+
   .navbar__nav {
     padding-inline: 1.375rem;
   }
 
   .navbar__brand img {
-    height: 3.35rem;
-    max-width: 16rem;
+    height: 3.7rem;
+    max-width: 17.25rem;
   }
 }
 

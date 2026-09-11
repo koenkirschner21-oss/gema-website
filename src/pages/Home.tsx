@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { BrandMark } from '../components/BrandMark'
 import { Container } from '../components/Container'
 import { EventCard } from '../components/EventCard'
 import { FeaturedPartner } from '../components/FeaturedPartner'
@@ -64,9 +65,12 @@ export function Home() {
         <Container>
           <div className="home-hero__grid">
             <div className="home-hero__copy">
-              <p className="home-eyebrow">
-                Government • Economics • Management
-              </p>
+              <div className="home-hero__identity">
+                <BrandMark size="sm" />
+                <p className="home-eyebrow">
+                  Government • Economics • Management
+                </p>
+              </div>
               <h1>Connecting the GEM community beyond the classroom.</h1>
               <p className="home-lede">
                 The Government, Economics & Management Association (GEMA)

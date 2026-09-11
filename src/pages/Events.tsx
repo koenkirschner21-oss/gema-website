@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { BrandMark } from '../components/BrandMark'
 import { Container } from '../components/Container'
 import { EventCard } from '../components/EventCard'
 import { EventsCalendar } from '../components/EventsCalendar'
@@ -28,6 +29,7 @@ export function Events() {
       <section className="events-hero">
         <Container>
           <div className="events-hero__content">
+            <BrandMark size="hero" />
             <p className="events-hero__label">Events</p>
             <span className="events-hero__accent" aria-hidden="true" />
             <h1>Connect, learn, and get involved.</h1>

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { BrandMark } from '../components/BrandMark'
 import { Container } from '../components/Container'
 import { FeaturedPartner } from '../components/FeaturedPartner'
 import { SiteImage } from '../components/SiteImage'
@@ -260,6 +261,7 @@ export function Partners() {
         <Container>
           <div className="partners-cta__grid">
             <div className="partners-cta__copy">
+              <BrandMark size="sm" className="partners-cta__mark" />
               <p className="partners-cta__label">Work With GEMA</p>
               <h2>Let’s create something valuable for GEM students.</h2>
               <p>

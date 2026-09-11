@@ -135,6 +135,10 @@
   border-left: 3px solid var(--color-red);
 }
 
+.about-who__lockup {
+  margin-bottom: var(--space-4);
+}
+
 .about-who__copy h2,
 .about-values__intro h2,
 .about-work h2,

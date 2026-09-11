@@ -1,6 +1,6 @@
 .home-eyebrow {
   display: inline-block;
-  margin-bottom: var(--space-4);
+  margin: 0;
   padding: 0.22rem 0.6rem;
   background: var(--color-red);
   color: var(--color-white);
@@ -9,6 +9,18 @@
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
+}
+
+.home-hero__identity {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: var(--space-4);
+}
+
+.home-hero__identity .brand-mark {
+  height: 2.55rem;
 }
 
 .home h1,
@@ -619,6 +631,10 @@
 
   .home-hero__media {
     padding: 0 0.18rem 0.32rem 0.32rem;
+  }
+
+  .home-hero__identity .brand-mark {
+    height: 2.2rem;
   }
 
   .home-hero__media::before {

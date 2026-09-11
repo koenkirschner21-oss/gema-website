@@ -476,6 +476,11 @@
   color: var(--color-white);
 }
 
+.involve-social__mark {
+  align-self: flex-start;
+  margin-bottom: 0.85rem;
+}
+
 .involve-social__panel h2 {
   max-width: none;
   margin: 0 0 0.7rem;

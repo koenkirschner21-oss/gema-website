@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { BrandLockup } from '../components/BrandMark'
 import { Container } from '../components/Container'
 import { SiteImage } from '../components/SiteImage'
 import { aboutMedia, aboutValues, aboutWork } from '../data/about'
@@ -93,6 +94,7 @@ export function About() {
               />
             </div>
             <div className="about-who__copy">
+              <BrandLockup className="about-who__lockup" />
               <h2>Who We Are</h2>
               <p>
                 GEMA represents students in the Government, Economics &
