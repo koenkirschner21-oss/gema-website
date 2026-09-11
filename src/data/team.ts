@@ -8,7 +8,6 @@
  *
  * Remaining director files:
  * - `/team/reshawn-norbert.webp`
- * - `/team/lilian-lorenzo-rebollar.webp`
  *
  * The public page renders Co-Presidents (`leadership`) and Directors
  * only. `level: 'manager'` may remain in this file for future use and
@@ -68,7 +67,7 @@ export const team: TeamMember[] = [
     name: 'Lilian Lorenzo Rebollar',
     role: 'Director of Finance',
     portfolio: 'Finance',
-    image: null,
+    image: '/team/lilian-lorenzo-rebollar.webp',
     linkedin: null,
     level: 'director',
   },
