@@ -25,6 +25,7 @@ function RecapPhoto({ image }: { image: EventRecapImage }) {
 export function EventRecapCard({ recap }: { recap: EventRecap }) {
   const photos = recap.featuredImages.slice(0, 4)
   const photoCount = photos.length
+  const meta = [recap.time, recap.location, recap.cost].filter(Boolean).join(' · ')
 
   return (
     <article className="event-recap">
@@ -34,9 +35,7 @@ export function EventRecapCard({ recap }: { recap: EventRecap }) {
           <p className="event-recap__category">{recap.category}</p>
         ) : null}
         <h3>{recap.title}</h3>
-        {recap.location ? (
-          <p className="event-recap__meta">{recap.location}</p>
-        ) : null}
+        {meta ? <p className="event-recap__meta">{meta}</p> : null}
         <p className="event-recap__body">{recap.shortRecap}</p>
         {recap.galleryUrl ? (
           <a

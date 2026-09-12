@@ -149,7 +149,15 @@
 }
 
 .events-cal__dot {
-  display: none;
+  display: block;
+  width: 0.38rem;
+  height: 0.38rem;
+  background: var(--color-gold);
+  border-radius: 50%;
+}
+
+.events-cal__day.has-events .events-cal__dot {
+  background: var(--color-gold);
 }
 
 .events-cal__empty-copy {

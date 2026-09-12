@@ -61,14 +61,25 @@
   font-size: 1.08rem;
 }
 
-.events-featured,
+.events-section-note {
+  max-width: 40rem;
+  margin: -0.35rem 0 var(--space-5);
+  color: var(--color-text-secondary);
+  font-size: 0.98rem;
+}
+
+.events-list,
 .events-calendar,
 .events-recaps {
   padding: 5rem 0;
   border-top: 1px solid var(--color-border);
 }
 
-.events-featured h2,
+.events-list + .events-list {
+  padding-top: 3.25rem;
+}
+
+.events-list h2,
 .events-calendar h2,
 .events-recaps h2,
 .events-new__panel h2,
@@ -81,7 +92,7 @@
   scroll-margin-top: calc(var(--nav-height) + 1rem);
 }
 
-.events-featured__grid {
+.events-list__grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   align-items: stretch;
@@ -216,7 +227,7 @@
 }
 
 @media (max-width: 1080px) {
-  .events-featured__grid {
+  .events-list__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -237,10 +248,14 @@
     font-size: clamp(1.75rem, 6vw, 2.2rem);
   }
 
-  .events-featured,
+  .events-list,
   .events-calendar,
   .events-recaps {
     padding: 3.5rem 0;
+  }
+
+  .events-list + .events-list {
+    padding-top: 2.5rem;
   }
 
   .events-new {
@@ -265,11 +280,11 @@
     padding: 2.5rem 0;
   }
 
-  .events-featured__grid {
+  .events-list__grid {
     grid-template-columns: 1fr;
   }
 
-  .events-featured h2,
+  .events-list h2,
   .events-calendar h2,
   .events-recaps h2,
   .events-partner h2 {

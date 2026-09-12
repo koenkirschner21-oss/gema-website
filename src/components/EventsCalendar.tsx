@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import { EventCard } from './EventCard'
+import { EventDetailsDialog } from './EventDetailsDialog'
 import {
   formatMonthLabel,
   getEventDateSet,
@@ -7,6 +8,7 @@ import {
   getVisibleEvents,
   parseISODate,
   toISODate,
+  type GemaEvent,
 } from '../data/events'
 import './EventsCalendar.css'
 
@@ -33,10 +35,10 @@ function getCalendarStart(today: Date) {
   const month = today.getMonth()
   const monthPrefix = `${year}-${String(month + 1).padStart(2, '0')}`
   const inThisMonth = upcoming.filter((event) =>
-    event.date.startsWith(monthPrefix),
+    Boolean(event.date && event.date.startsWith(monthPrefix)),
   )
 
-  if (inThisMonth.length > 0) {
+  if (inThisMonth.length > 0 && inThisMonth[0].date) {
     return {
       year,
       month,
@@ -44,12 +46,13 @@ function getCalendarStart(today: Date) {
     }
   }
 
-  if (upcoming.length > 0) {
-    const next = parseISODate(upcoming[0].date)
+  const nextEvent = upcoming.find((event) => event.date)
+  if (nextEvent?.date) {
+    const next = parseISODate(nextEvent.date)
     return {
       year: next.getFullYear(),
       month: next.getMonth(),
-      selectedDate: upcoming[0].date,
+      selectedDate: nextEvent.date,
     }
   }
 
@@ -66,6 +69,7 @@ export function EventsCalendar() {
   const [selectedDate, setSelectedDate] = useState<string | null>(
     start.selectedDate,
   )
+  const [dialogEvent, setDialogEvent] = useState<GemaEvent | null>(null)
 
   const visibleEvents = getVisibleEvents()
   const eventDates = getEventDateSet()
@@ -84,6 +88,14 @@ export function EventsCalendar() {
 
   function isoForDay(day: number) {
     return toISODate(new Date(monthCursor.year, monthCursor.month, day))
+  }
+
+  function selectDate(iso: string) {
+    setSelectedDate(iso)
+    const datedEvents = getEventsByDate(iso)
+    if (datedEvents.length === 1) {
+      setDialogEvent(datedEvents[0])
+    }
   }
 
   return (
@@ -117,9 +129,11 @@ export function EventsCalendar() {
           }
 
           const iso = isoForDay(day)
+          const dayEvents = getEventsByDate(iso)
           const hasEvents = eventDates.has(iso)
           const isToday = iso === todayISO
           const isSelected = iso === selectedDate
+          const eventNames = dayEvents.map((event) => event.title).join(', ')
           const className = [
             'events-cal__day',
             hasEvents ? 'has-events' : '',
@@ -135,8 +149,8 @@ export function EventsCalendar() {
               type="button"
               className={className}
               aria-pressed={isSelected}
-              aria-label={`${day} ${monthLabel}${isToday ? ', today' : ''}${hasEvents ? ', has events' : ''}`}
-              onClick={() => setSelectedDate(iso)}
+              aria-label={`${day} ${monthLabel}${isToday ? ', today' : ''}${hasEvents ? `, ${eventNames}` : ''}`}
+              onClick={() => selectDate(iso)}
             >
               <span>{day}</span>
               {hasEvents ? <span className="events-cal__dot" /> : null}
@@ -147,7 +161,7 @@ export function EventsCalendar() {
 
       {visibleEvents.length === 0 ? (
         <p className="events-cal__empty-copy events-cal__empty-copy--note">
-          No events are currently scheduled.
+          No upcoming events are currently scheduled.
         </p>
       ) : selectedDate ? (
         <div className="events-cal__selected">
@@ -158,6 +172,7 @@ export function EventsCalendar() {
                 event={event}
                 compact
                 readMoreDetails
+                onOpenDetails={setDialogEvent}
               />
             ))
           ) : (
@@ -169,6 +184,13 @@ export function EventsCalendar() {
           Select a highlighted date to see event details.
         </p>
       )}
+
+      {dialogEvent ? (
+        <EventDetailsDialog
+          event={dialogEvent}
+          onClose={() => setDialogEvent(null)}
+        />
+      ) : null}
     </div>
   )
 }

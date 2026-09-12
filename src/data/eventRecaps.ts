@@ -1,3 +1,5 @@
+import { formatEventTime, getPastDatedEvents, type GemaEvent } from './events'
+
 export type EventRecapImage = {
   src: string
   alt: string
@@ -12,6 +14,8 @@ export type EventRecap = {
   galleryUrl: string | null
   category: string | null
   location: string | null
+  time: string | null
+  cost: string | null
 }
 
 /**
@@ -20,7 +24,9 @@ export type EventRecap = {
  * Add confirmed recaps here after events have taken place.
  * Use ISO dates (`YYYY-MM-DD`). Include 2–4 featured photos in
  * `public/recaps/` and a Google Drive or gallery URL when available.
- * The Past Event Recaps empty state stays until this array has entries.
+ *
+ * Dated events that have already occurred are also listed automatically
+ * from `src/data/events.ts` until a matching recap id is added here.
  *
  * Example:
  * {
@@ -35,6 +41,8 @@ export type EventRecap = {
  *   galleryUrl: 'https://drive.google.com/drive/folders/example',
  *   category: 'Networking',
  *   location: 'Location',
+ *   time: '6:00 PM – 8:00 PM',
+ *   cost: null,
  * }
  */
 export const eventRecaps: EventRecap[] = []
@@ -42,6 +50,33 @@ export const eventRecaps: EventRecap[] = []
 export const eventRecapEmptyCopy =
   'Event recaps and photo galleries from the 2026–27 year will be added here throughout the semester.'
 
+function recapFromEvent(event: GemaEvent): EventRecap {
+  return {
+    id: event.id,
+    title: event.title,
+    date: event.date as string,
+    shortRecap: event.shortDescription,
+    featuredImages: event.image
+      ? [
+          {
+            src: event.image,
+            alt: `${event.title} promotional graphic`,
+          },
+        ]
+      : [],
+    galleryUrl: null,
+    category: event.category || null,
+    location: event.location,
+    time: formatEventTime(event),
+    cost: event.cost,
+  }
+}
+
 export function getEventRecaps() {
-  return [...eventRecaps].sort((a, b) => b.date.localeCompare(a.date))
+  const manual = eventRecaps
+  const fromEvents = getPastDatedEvents()
+    .filter((event) => !manual.some((recap) => recap.id === event.id))
+    .map(recapFromEvent)
+
+  return [...manual, ...fromEvents].sort((a, b) => b.date.localeCompare(a.date))
 }

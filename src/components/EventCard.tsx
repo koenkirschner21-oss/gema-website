@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom'
 import { EventDetailsDialog } from './EventDetailsDialog'
 import { SiteImage } from './SiteImage'
 import {
-  formatEventDate,
+  formatEventDateLabel,
   formatEventTime,
+  isPastEvent,
   type GemaEvent,
 } from '../data/events'
 import './EventCard.css'
@@ -16,6 +17,7 @@ type EventCardProps = {
   placeholder?: boolean
   readMoreTo?: string
   readMoreDetails?: boolean
+  onOpenDetails?: (event: GemaEvent) => void
 }
 
 function EventPhoto({ src, alt }: { src: string; alt: string }) {
@@ -41,6 +43,7 @@ export function EventCard({
   placeholder = false,
   readMoreTo,
   readMoreDetails = false,
+  onOpenDetails,
 }: EventCardProps) {
   const [detailsOpen, setDetailsOpen] = useState(false)
   const closeDetails = useCallback(() => setDetailsOpen(false), [])
@@ -67,9 +70,11 @@ export function EventCard({
   }
 
   const time = formatEventTime(event)
+  const dateLabel = formatEventDateLabel(event)
   const description = detailed
     ? event.fullDescription || event.shortDescription
     : event.shortDescription
+  const showRegistration = Boolean(event.registrationUrl) && !isPastEvent(event)
   const className = [
     'event-card',
     compact ? 'event-card--compact' : '',
@@ -79,25 +84,28 @@ export function EventCard({
     .join(' ')
 
   function openDetails() {
+    if (onOpenDetails && event) {
+      onOpenDetails(event)
+      return
+    }
+
     setDetailsOpen(true)
   }
 
   return (
     <article className={className}>
-      {compact ? null : (
+      {compact || !event.image ? null : (
         <div className="event-card__media">
-          {event.image ? (
-            <EventPhoto
-              src={event.image}
-              alt={`${event.title} promotional graphic`}
-            />
-          ) : (
-            <span className="visually-hidden">Event photo to be added</span>
-          )}
+          <EventPhoto
+            src={event.image}
+            alt={`${event.title} promotional graphic`}
+          />
         </div>
       )}
       <div className="event-card__body">
-        <p className="event-card__date">{formatEventDate(event.date)}</p>
+        {dateLabel ? (
+          <p className="event-card__date">{dateLabel}</p>
+        ) : null}
         {event.category ? (
           <p className="event-card__category">{event.category}</p>
         ) : null}
@@ -138,10 +146,10 @@ export function EventCard({
             ) : null}
           </p>
         ) : null}
-        {event.registrationUrl ? (
+        {showRegistration ? (
           <a
             className="event-card__cta"
-            href={event.registrationUrl}
+            href={event.registrationUrl ?? undefined}
             target="_blank"
             rel="noopener noreferrer"
           >

@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import {
-  formatEventDate,
   formatEventTime,
+  formatPublicEventDate,
+  isPastEvent,
   type GemaEvent,
 } from '../data/events'
 import { SiteImage } from './SiteImage'
@@ -22,6 +23,7 @@ export function EventDetailsDialog({
   const [imageFailed, setImageFailed] = useState(false)
   const time = formatEventTime(event)
   const description = event.fullDescription || event.shortDescription
+  const showRegistration = Boolean(event.registrationUrl) && !isPastEvent(event)
   const titleId = `event-dialog-title-${event.id}`
 
   const descriptionId = `event-dialog-desc-${event.id}`
@@ -133,10 +135,17 @@ export function EventDetailsDialog({
           </div>
 
           <dl className="event-dialog__facts">
-            <div>
-              <dt>Date</dt>
-              <dd>{formatEventDate(event.date)}</dd>
-            </div>
+            {event.date ? (
+              <div>
+                <dt>Date</dt>
+                <dd>{formatPublicEventDate(event.date)}</dd>
+              </div>
+            ) : event.approximateTiming ? (
+              <div>
+                <dt>Timing</dt>
+                <dd>{event.approximateTiming}</dd>
+              </div>
+            ) : null}
             {time ? (
               <div>
                 <dt>Time</dt>
@@ -161,10 +170,10 @@ export function EventDetailsDialog({
             <p className="event-dialog__copy" id={descriptionId}>{description}</p>
           ) : null}
 
-          {event.registrationUrl ? (
+          {showRegistration ? (
             <a
               className="event-dialog__rsvp"
-              href={event.registrationUrl}
+              href={event.registrationUrl ?? undefined}
               target="_blank"
               rel="noopener noreferrer"
             >

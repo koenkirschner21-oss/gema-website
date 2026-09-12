@@ -1,27 +1,21 @@
 import { Link } from 'react-router-dom'
 import { BrandMark } from '../components/BrandMark'
 import { Container } from '../components/Container'
-import { EventCard } from '../components/EventCard'
 import { EventsCalendar } from '../components/EventsCalendar'
 import { EventRecapCard } from '../components/EventRecapCard'
+import { EventsCarousel } from '../components/EventsCarousel'
 import {
-  featuredPlaceholderCount,
-  featuredPlaceholderNote,
-  getFeaturedEvents,
-  getFeaturedSectionCopy,
+  featuredEmptyState,
   getFeaturedSectionTitle,
+  getPublicUpcomingEvents,
+  upcomingEventsNote,
 } from '../data/events'
 import { eventRecapEmptyCopy, getEventRecaps } from '../data/eventRecaps'
 import './Events.css'
 
 export function Events() {
-  const featuredEvents = getFeaturedEvents()
-  const featuredTitle = getFeaturedSectionTitle()
-  const featuredCopy = getFeaturedSectionCopy()
-  const remainingPlaceholders = Math.max(
-    0,
-    featuredPlaceholderCount - featuredEvents.length,
-  )
+  const upcomingEvents = getPublicUpcomingEvents()
+  const upcomingTitle = getFeaturedSectionTitle()
   const eventRecaps = getEventRecaps()
 
   return (
@@ -42,36 +36,16 @@ export function Events() {
         </Container>
       </section>
 
-      <section className="events-featured" id="featured-events">
+      <section className="events-list" id="featured-events">
         <Container>
-          <h2>{featuredTitle}</h2>
-          {featuredEvents.length > 0 ? (
+          <h2>{upcomingTitle}</h2>
+          {upcomingEvents.length > 0 ? (
             <>
-              <p className="events-section-copy">{featuredCopy}</p>
-              <div className="events-featured__grid">
-                {featuredEvents.map((event) => (
-                  <EventCard key={event.id} event={event} readMoreDetails />
-                ))}
-                {Array.from({ length: remainingPlaceholders }, (_, index) => (
-                  <EventCard
-                    key={`event-placeholder-${index}`}
-                    placeholder
-                  />
-                ))}
-              </div>
+              <p className="events-section-note">{upcomingEventsNote}</p>
+              <EventsCarousel events={upcomingEvents} />
             </>
           ) : (
-            <>
-              <p className="events-section-copy">{featuredPlaceholderNote}</p>
-              <div className="events-featured__grid">
-                {Array.from({ length: featuredPlaceholderCount }, (_, index) => (
-                  <EventCard
-                    key={`event-placeholder-${index}`}
-                    placeholder
-                  />
-                ))}
-              </div>
-            </>
+            <p className="events-section-copy">{featuredEmptyState.copy}</p>
           )}
         </Container>
       </section>
@@ -82,7 +56,7 @@ export function Events() {
             <h2>Events Calendar</h2>
             <p className="events-section-copy">
               View upcoming GEMA programming at a glance and plan ahead for
-              events throughout the semester.
+              events throughout the year.
             </p>
           </div>
           <EventsCalendar />

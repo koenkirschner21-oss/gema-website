@@ -5,7 +5,10 @@ import { Container } from '../components/Container'
 import { EventCard } from '../components/EventCard'
 import { FeaturedPartner } from '../components/FeaturedPartner'
 import { SiteImage } from '../components/SiteImage'
-import { getHomepageEvents } from '../data/events'
+import {
+  getHomepageEvents,
+  upcomingEventsNote,
+} from '../data/events'
 import {
   homeIntroPoints,
   homeMedia,
@@ -52,11 +55,9 @@ function HomeMedia({
 }
 
 export function Home() {
-  const homepageEvents = getHomepageEvents(homepageEventPlaceholderCount)
-  const remainingEventPlaceholders = Math.max(
-    0,
-    homepageEventPlaceholderCount - homepageEvents.length,
-  )
+  const homepageEvents = getHomepageEvents(2)
+  const remainingEventPlaceholders =
+    homepageEvents.length === 0 ? homepageEventPlaceholderCount : 0
   const featuredPartners = getFeaturedPartners()
 
   return (
@@ -180,6 +181,9 @@ export function Home() {
               From professional development and networking to community events,
               there are plenty of ways to connect throughout the year.
             </p>
+            {homepageEvents.length > 0 ? (
+              <p className="home-events__note">{upcomingEventsNote}</p>
+            ) : null}
           </div>
           <div className="home-events__grid">
             {homepageEvents.map((event) => (
