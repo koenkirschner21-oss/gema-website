@@ -60,6 +60,12 @@ function TikTokIcon() {
   )
 }
 
+const socialIcons = {
+  Instagram: InstagramIcon,
+  LinkedIn: LinkedInIcon,
+  TikTok: TikTokIcon,
+} as const
+
 export function Footer() {
   const year = new Date().getFullYear()
   const socials = [site.instagram, site.linkedin, site.tiktok]
@@ -67,17 +73,26 @@ export function Footer() {
   return (
     <footer className="footer">
       <Container>
-        <div className="footer__grid">
+        <div className="footer__main">
           <div className="footer__brand">
-            <img src={gemaCrest} alt="" width={205} height={256} decoding="async" loading="lazy" />
-            <p className="footer__full-name">{site.fullName}</p>
-            <p className="footer__meta">{site.school}</p>
-            <p className="footer__meta">{site.university}</p>
+            <img
+              src={gemaCrest}
+              alt=""
+              width={205}
+              height={256}
+              decoding="async"
+              loading="lazy"
+            />
+            <div className="footer__identity">
+              <p className="footer__full-name">{site.fullName}</p>
+              <p className="footer__meta">{site.school}</p>
+              <p className="footer__meta">{site.university}</p>
+            </div>
           </div>
 
           <nav className="footer__nav" aria-label="Footer">
             <h2 className="footer__heading">Quick Links</h2>
-            <ul>
+            <ul className="footer__links">
               {footerLinks.map((item) => (
                 <li key={item.to}>
                   <Link to={item.to}>{item.label}</Link>
@@ -88,31 +103,30 @@ export function Footer() {
 
           <div className="footer__connect">
             <h2 className="footer__heading">Connect</h2>
-            <ul>
-              {socials.map((item) => (
-                <li key={item.label}>
-                  <a
-                    className="footer__social"
-                    href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {item.label === 'Instagram' ? <InstagramIcon /> : null}
-                    {item.label === 'LinkedIn' ? <LinkedInIcon /> : null}
-                    {item.label === 'TikTok' ? <TikTokIcon /> : null}
-                    <span>{item.label}</span>
-                    <span className="visually-hidden"> (opens in a new tab)</span>
-                  </a>
-                </li>
-              ))}
-              {site.email ? (
-                <li>
-                  <a className="footer__email" href={`mailto:${site.email}`}>
-                    {site.email}
-                  </a>
-                </li>
-              ) : null}
+            <ul className="footer__socials">
+              {socials.map((item) => {
+                const Icon = socialIcons[item.label as keyof typeof socialIcons]
+
+                return (
+                  <li key={item.label}>
+                    <a
+                      className="footer__social"
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${item.label} (opens in a new tab)`}
+                    >
+                      {Icon ? <Icon /> : null}
+                    </a>
+                  </li>
+                )
+              })}
             </ul>
+            {site.email ? (
+              <a className="footer__email" href={`mailto:${site.email}`}>
+                {site.email}
+              </a>
+            ) : null}
           </div>
         </div>
 
