@@ -171,7 +171,7 @@ export function EventsCarousel({ events }: { events: GemaEvent[] }) {
             className="events-carousel__slide"
             aria-label={`${event.title}, ${index + 1} of ${events.length}`}
           >
-            <EventCard event={event} readMoreDetails />
+            <EventCard event={event} readMoreDetails showGraphicPlaceholder />
           </div>
         ))}
       </div>

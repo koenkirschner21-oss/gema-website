@@ -17,7 +17,21 @@ type EventCardProps = {
   placeholder?: boolean
   readMoreTo?: string
   readMoreDetails?: boolean
+  showGraphicPlaceholder?: boolean
   onOpenDetails?: (event: GemaEvent) => void
+}
+
+function EventGraphicPlaceholder() {
+  return (
+    <div className="event-card__media event-card__media--placeholder" aria-hidden="true">
+      <span className="event-card__media-mark">
+        <span />
+        <span />
+        <span />
+      </span>
+      <span className="event-card__media-label">Event Graphic</span>
+    </div>
+  )
 }
 
 function EventPhoto({ src, alt }: { src: string; alt: string }) {
@@ -43,6 +57,7 @@ export function EventCard({
   placeholder = false,
   readMoreTo,
   readMoreDetails = false,
+  showGraphicPlaceholder = false,
   onOpenDetails,
 }: EventCardProps) {
   const [detailsOpen, setDetailsOpen] = useState(false)
@@ -53,7 +68,7 @@ export function EventCard({
         className="event-card event-card--placeholder"
         aria-label="Event details coming soon"
       >
-        <div className="event-card__media" aria-hidden="true" />
+        <EventGraphicPlaceholder />
         <div className="event-card__body">
           <h3>More Fall events are coming soon</h3>
           <p className="event-card__copy">
@@ -75,6 +90,7 @@ export function EventCard({
     ? event.fullDescription || event.shortDescription
     : event.shortDescription
   const showRegistration = Boolean(event.registrationUrl) && !isPastEvent(event)
+  const showMedia = Boolean(event.image) || showGraphicPlaceholder
   const className = [
     'event-card',
     compact ? 'event-card--compact' : '',
@@ -94,13 +110,15 @@ export function EventCard({
 
   return (
     <article className={className}>
-      {compact || !event.image ? null : (
+      {compact || !showMedia ? null : event.image ? (
         <div className="event-card__media">
           <EventPhoto
             src={event.image}
             alt={`${event.title} promotional graphic`}
           />
         </div>
+      ) : (
+        <EventGraphicPlaceholder />
       )}
       <div className="event-card__body">
         {dateLabel ? (

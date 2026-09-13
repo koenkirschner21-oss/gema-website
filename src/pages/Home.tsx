@@ -187,7 +187,12 @@ export function Home() {
           </div>
           <div className="home-events__grid">
             {homepageEvents.map((event) => (
-              <EventCard key={event.id} event={event} readMoreDetails />
+              <EventCard
+                key={event.id}
+                event={event}
+                readMoreDetails
+                showGraphicPlaceholder
+              />
             ))}
             {Array.from({ length: remainingEventPlaceholders }, (_, index) => (
               <EventCard key={`event-placeholder-${index}`} placeholder />
