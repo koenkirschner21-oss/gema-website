@@ -19,6 +19,7 @@
 
 .gem-hero {
   padding: 5.5rem 0 5rem;
+  background: var(--color-charcoal);
 }
 
 .gem-hero__grid {
@@ -31,6 +32,7 @@
 .gem-hero h1 {
   max-width: 22ch;
   margin-bottom: var(--space-4);
+  color: var(--color-white);
   font-size: clamp(1.85rem, 3vw, 2.55rem);
   line-height: 1.12;
   text-wrap: pretty;
@@ -47,6 +49,10 @@
   max-width: 36rem;
   margin-bottom: var(--space-5);
   font-size: 1.08rem;
+}
+
+.gem-hero .gem-lede {
+  color: var(--color-on-dark);
 }
 
 .gem-hero__actions {

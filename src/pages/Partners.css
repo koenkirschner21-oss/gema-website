@@ -19,6 +19,7 @@
 
 .partners-hero {
   padding: 5.5rem 0 5rem;
+  background: var(--color-charcoal);
 }
 
 .partners-hero__grid {
@@ -31,6 +32,7 @@
 .partners-hero h1 {
   max-width: 18ch;
   margin-bottom: var(--space-4);
+  color: var(--color-white);
   font-size: clamp(1.85rem, 3vw, 2.55rem);
   line-height: 1.12;
 }
@@ -43,6 +45,10 @@
 .partners-lede {
   max-width: 36rem;
   font-size: 1.08rem;
+}
+
+.partners-hero .partners-lede {
+  color: var(--color-on-dark);
 }
 
 .partners-lede + .partners-lede {

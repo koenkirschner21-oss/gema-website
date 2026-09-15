@@ -19,6 +19,8 @@
 
 .involve-hero {
   padding: 5.5rem 0 5rem;
+  background: var(--color-charcoal);
+  border-bottom: 3px solid var(--color-gold);
 }
 
 .involve-hero__grid {
@@ -31,6 +33,7 @@
 .involve-hero h1 {
   max-width: 16ch;
   margin-bottom: var(--space-4);
+  color: var(--color-white);
   font-size: clamp(1.85rem, 3vw, 2.55rem);
   line-height: 1.12;
 }
@@ -46,6 +49,10 @@
   max-width: 36rem;
   margin-bottom: var(--space-5);
   font-size: 1.08rem;
+}
+
+.involve-hero .involve-lede {
+  color: var(--color-on-dark);
 }
 
 .involve-hero__actions {
@@ -571,6 +578,22 @@
 .involve-button--secondary:hover {
   border-color: var(--color-red);
   color: var(--color-red);
+}
+
+.involve-hero .involve-button--secondary {
+  background: transparent;
+  border: 1px solid var(--color-white);
+  color: var(--color-white);
+}
+
+.involve-hero .involve-button--secondary:hover {
+  background: var(--color-white);
+  border-color: var(--color-white);
+  color: var(--color-text);
+}
+
+.involve-hero .involve-button:focus-visible {
+  outline-color: var(--color-white);
 }
 
 .involve-button--muted {
