@@ -6,9 +6,6 @@
  * set only that member's `image` path. Do not change names, titles, or
  * card order.
  *
- * Remaining director files:
- * - `/team/reshawn-norbert.webp`
- *
  * The public page renders Co-Presidents (`leadership`) and Directors
  * only. `level: 'manager'` may remain in this file for future use and
  * is not shown on /about/team.
@@ -58,7 +55,7 @@ export const team: TeamMember[] = [
     name: 'Reshawn Norbert',
     role: 'Director of Brand Ambassadors',
     portfolio: 'Brand Ambassadors',
-    image: null,
+    image: '/team/reshawn-norbert.webp',
     linkedin: null,
     level: 'director',
   },
