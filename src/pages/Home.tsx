@@ -56,8 +56,10 @@ function HomeMedia({
 
 export function Home() {
   const homepageEvents = getHomepageEvents(2)
-  const remainingEventPlaceholders =
-    homepageEvents.length === 0 ? homepageEventPlaceholderCount : 0
+  const remainingEventPlaceholders = Math.max(
+    0,
+    homepageEventPlaceholderCount - homepageEvents.length,
+  )
   const featuredPartners = getFeaturedPartners()
 
   return (
