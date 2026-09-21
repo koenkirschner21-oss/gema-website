@@ -108,7 +108,7 @@ export const events: GemaEvent[] = [
     endTime: null,
     location: null,
     shortDescription:
-      'A chance for students to connect with professors, learn more about their courses, and hear about their academic and professional perspectives.',
+      'An interactive evening with GEM professors featuring rapid-fire questions, real-world scenarios, discussion, Q&A, and advice from faculty.',
     fullDescription: null,
     category: '',
     cost: null,
