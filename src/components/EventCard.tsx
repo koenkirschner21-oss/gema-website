@@ -1,11 +1,13 @@
 import { useCallback, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { EventDetailsDialog } from './EventDetailsDialog'
+import { BrandMark } from './BrandMark'
 import { SiteImage } from './SiteImage'
 import {
   formatEventDateLabel,
   formatEventTime,
   isPastEvent,
+  parseISODate,
   type GemaEvent,
 } from '../data/events'
 import './EventCard.css'
@@ -21,32 +23,59 @@ type EventCardProps = {
   onOpenDetails?: (event: GemaEvent) => void
 }
 
-function EventGraphicPlaceholder() {
+function formatCoverDate(event: GemaEvent) {
+  if (!event.date) {
+    return null
+  }
+
+  return parseISODate(event.date).toLocaleDateString('en-CA', {
+    month: 'long',
+    day: 'numeric',
+  })
+}
+
+function EventCoverFallback({ event }: { event?: GemaEvent }) {
+  const dateLabel = event ? formatCoverDate(event) : null
+
   return (
-    <div className="event-card__media event-card__media--placeholder" aria-hidden="true">
-      <span className="event-card__media-mark">
-        <span />
-        <span />
-        <span />
-      </span>
-      <span className="event-card__media-label">Event Graphic</span>
+    <div
+      className="event-card__media event-card__media--fallback"
+      aria-hidden="true"
+    >
+      <div className="event-card__fallback">
+        <BrandMark size="sm" />
+        <span className="event-card__fallback-accents">
+          <span />
+          <span />
+          <span />
+        </span>
+        {event ? (
+          <p className="event-card__fallback-title">{event.title}</p>
+        ) : null}
+        {dateLabel ? (
+          <p className="event-card__fallback-date">{dateLabel}</p>
+        ) : null}
+      </div>
     </div>
   )
 }
 
-function EventPhoto({ src, alt }: { src: string; alt: string }) {
+function EventMedia({ event }: { event: GemaEvent }) {
   const [failed, setFailed] = useState(false)
+  const showImage = Boolean(event.image) && !failed
 
-  if (failed) {
-    return <span className="visually-hidden">Event photo to be added</span>
+  if (!showImage) {
+    return <EventCoverFallback event={event} />
   }
 
   return (
-    <SiteImage
-      src={src}
-      alt={alt}
-      onError={() => setFailed(true)}
-    />
+    <div className="event-card__media">
+      <SiteImage
+        src={event.image ?? undefined}
+        alt={`${event.title} promotional graphic`}
+        onError={() => setFailed(true)}
+      />
+    </div>
   )
 }
 
@@ -68,7 +97,7 @@ export function EventCard({
         className="event-card event-card--placeholder"
         aria-label="Event details coming soon"
       >
-        <EventGraphicPlaceholder />
+        <EventCoverFallback />
         <div className="event-card__body">
           <h3>More Fall events are coming soon</h3>
           <p className="event-card__copy">
@@ -110,16 +139,7 @@ export function EventCard({
 
   return (
     <article className={className}>
-      {compact || !showMedia ? null : event.image ? (
-        <div className="event-card__media">
-          <EventPhoto
-            src={event.image}
-            alt={`${event.title} promotional graphic`}
-          />
-        </div>
-      ) : (
-        <EventGraphicPlaceholder />
-      )}
+      {compact || !showMedia ? null : <EventMedia event={event} />}
       <div className="event-card__body">
         {dateLabel ? (
           <p className="event-card__date">{dateLabel}</p>

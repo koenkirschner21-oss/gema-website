@@ -56,5 +56,3 @@ export const homePillars = [
     accent: 'dark' as const,
   },
 ]
-
-export const homepageEventPlaceholderCount = 3

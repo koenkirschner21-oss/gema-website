@@ -13,7 +13,6 @@ import {
   homeIntroPoints,
   homeMedia,
   homePillars,
-  homepageEventPlaceholderCount,
 } from '../data/home'
 import { getFeaturedPartners } from '../data/partners'
 import './Home.css'
@@ -56,10 +55,6 @@ function HomeMedia({
 
 export function Home() {
   const homepageEvents = getHomepageEvents(2)
-  const remainingEventPlaceholders = Math.max(
-    0,
-    homepageEventPlaceholderCount - homepageEvents.length,
-  )
   const featuredPartners = getFeaturedPartners()
 
   return (
@@ -195,9 +190,6 @@ export function Home() {
                 readMoreDetails
                 showGraphicPlaceholder
               />
-            ))}
-            {Array.from({ length: remainingEventPlaceholders }, (_, index) => (
-              <EventCard key={`event-placeholder-${index}`} placeholder />
             ))}
           </div>
           <Link className="home-text-link home-events__all" to="/events">
