@@ -22,7 +22,7 @@ export const homeSeo: PageSeo = {
   path: '/',
   title: 'GEMA | Government, Economics & Management Association',
   description:
-    'GEMA is the student association for Government, Economics & Management at the University of Guelph’s Gordon S. Lang School of Business and Economics.',
+    'The Government, Economics & Management Association represents and connects GEM students at the University of Guelph through events, professional development, leadership, and community.',
 }
 
 export const publicPageSeo: PageSeo[] = [

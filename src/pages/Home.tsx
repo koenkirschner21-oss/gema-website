@@ -70,13 +70,17 @@ export function Home() {
                 </p>
               </div>
               <h1>Connecting the GEM community beyond the classroom.</h1>
-              <p className="home-lede">
+              <p className="home-lede home-lede--desktop">
                 The Government, Economics & Management Association (GEMA)
                 represents GEM students at the University of Guelph’s Gordon S.
                 Lang School of Business and Economics. Through events,
                 professional development, leadership opportunities and community
                 initiatives, GEMA helps students make more of their university
                 experience.
+              </p>
+              <p className="home-lede home-lede--mobile">
+                GEMA connects GEM students through events, professional
+                development, leadership, and community.
               </p>
               <div className="home-hero__actions">
                 <Link className="home-button home-button--primary" to="/get-involved">
