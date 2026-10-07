@@ -9,6 +9,21 @@
   border-top: 3px solid var(--color-red);
 }
 
+.event-recap--photos {
+  align-items: center;
+}
+
+.event-recap--photos .event-recap__copy {
+  display: grid;
+  gap: 0.55rem;
+  align-content: center;
+  min-width: 0;
+}
+
+.event-recap--photos .event-recap__media {
+  min-width: 0;
+}
+
 .event-recap__date {
   margin: 0 0 0.25rem;
   color: var(--color-red);
@@ -33,6 +48,13 @@
   overflow-wrap: break-word;
 }
 
+.event-recap__subtitle {
+  margin: 0 0 0.35rem;
+  color: var(--color-text);
+  font-size: 0.98rem;
+  font-weight: 600;
+}
+
 .event-recap__meta {
   margin: 0 0 0.55rem;
   color: var(--color-text);
@@ -40,10 +62,42 @@
   font-weight: 600;
 }
 
+.event-recap--photos .event-recap__meta {
+  margin-bottom: 0;
+}
+
+.event-recap__body-block {
+  display: grid;
+  gap: 0.45rem;
+}
+
 .event-recap__body {
   margin: 0;
   color: var(--color-text-secondary);
   font-size: 1.02rem;
+}
+
+.event-recap__more {
+  justify-self: start;
+  min-height: 2.5rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--color-red);
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.event-recap__more:hover {
+  text-decoration: underline;
+}
+
+.event-recap__more:focus-visible {
+  outline: 2px solid var(--color-red);
+  outline-offset: 3px;
 }
 
 .event-recap__gallery {
@@ -82,8 +136,12 @@
   background: var(--color-placeholder);
 }
 
-.event-recap__photos[data-count='1'] .event-recap__photo img {
+.event-recap__photos--graphic[data-count='1'] .event-recap__photo img {
   object-fit: contain;
+}
+
+.event-recap__photos--photos[data-count='1'] .event-recap__photo img {
+  object-fit: cover;
 }
 
 .event-recap__photo {
@@ -100,16 +158,146 @@
   object-fit: cover;
 }
 
+.event-recap__slideshow {
+  min-width: 0;
+}
+
+.event-recap__slideshow-frame {
+  position: relative;
+  aspect-ratio: 2 / 1;
+  overflow: hidden;
+  background: var(--color-placeholder);
+}
+
+.event-recap__slideshow-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 220ms ease;
+  pointer-events: none;
+}
+
+.event-recap__slideshow-slide.is-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.event-recap__slideshow-slide .event-recap__photo {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+}
+
+.event-recap__slideshow-nav {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0.55rem;
+  pointer-events: none;
+}
+
+.event-recap__slideshow-arrow {
+  pointer-events: auto;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 999px;
+  background: rgba(20, 20, 20, 0.42);
+  color: var(--color-white);
+  font-size: 1.55rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.event-recap__slideshow-arrow:hover {
+  background: rgba(20, 20, 20, 0.62);
+}
+
+.event-recap__slideshow-arrow:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+.event-recap__slideshow-dots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  justify-content: center;
+  margin-top: 0.65rem;
+}
+
+.event-recap__slideshow-dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-text-secondary) 45%, transparent);
+  cursor: pointer;
+}
+
+.event-recap__slideshow-dot.is-active {
+  background: var(--color-red);
+}
+
+.event-recap__slideshow-dot:focus-visible {
+  outline: 2px solid var(--color-red);
+  outline-offset: 3px;
+}
+
 @media (max-width: 860px) {
   .event-recap {
     grid-template-columns: 1fr;
     gap: var(--space-5);
     padding: var(--space-5);
   }
+
+  .event-recap--photos {
+    gap: var(--space-4);
+  }
+
+  .event-recap--photos .event-recap__copy {
+    display: contents;
+  }
+
+  .event-recap--photos .event-recap__intro {
+    order: 1;
+  }
+
+  .event-recap--photos .event-recap__media {
+    order: 2;
+  }
+
+  .event-recap--photos .event-recap__details {
+    order: 3;
+  }
+
+  .event-recap--photos .event-recap__meta {
+    margin-bottom: 0;
+  }
 }
 
 @media (max-width: 640px) {
   .event-recap {
     padding: var(--space-5) var(--space-4);
+  }
+
+  .event-recap__slideshow-arrow {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  .event-recap--photos .event-recap__photos[data-count='1'] .event-recap__photo {
+    aspect-ratio: 16 / 10;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .event-recap__slideshow-slide {
+    transition: none;
   }
 }
