@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useState, type CSSProperties } from 'react'
 import { Link } from 'react-router-dom'
 import { EventDetailsDialog } from './EventDetailsDialog'
 import { BrandMark } from './BrandMark'
@@ -68,11 +68,30 @@ function EventMedia({ event }: { event: GemaEvent }) {
     return <EventCoverFallback event={event} />
   }
 
+  const fit = event.imageFit ?? 'contain'
+  const position = event.imageObjectPosition ?? 'center'
+
   return (
-    <div className="event-card__media">
+    <div
+      className={
+        fit === 'cover'
+          ? 'event-card__media event-card__media--graphic event-card__media--cover'
+          : 'event-card__media event-card__media--graphic'
+      }
+      style={
+        {
+          '--event-media-fit': fit,
+          '--event-media-position': position,
+        } as CSSProperties
+      }
+    >
       <SiteImage
         src={event.image ?? undefined}
-        alt={`${event.title} promotional graphic`}
+        alt={event.imageAlt || `${event.title} promotional graphic`}
+        style={{
+          objectFit: fit,
+          objectPosition: position,
+        }}
         onError={() => setFailed(true)}
       />
     </div>

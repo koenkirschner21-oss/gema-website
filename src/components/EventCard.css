@@ -30,14 +30,15 @@
 }
 
 .event-card__media {
-  display: grid;
-  place-items: center;
+  position: relative;
   aspect-ratio: 16 / 9;
   background: var(--color-placeholder);
   overflow: hidden;
 }
 
 .event-card__media--fallback {
+  display: grid;
+  place-items: center;
   padding: 1.05rem 1.15rem;
   background: var(--color-placeholder);
   box-shadow: inset 0 0 0 1px rgba(26, 26, 26, 0.06);
@@ -101,11 +102,23 @@
 }
 
 .event-card__media img {
+  position: absolute;
+  inset: 0;
   display: block;
   width: 100%;
   height: 100%;
   object-fit: contain;
   object-position: center;
+}
+
+/* Event graphics: per-event fit/position via CSS variables + inline styles. */
+.event-card__media--graphic {
+  background: var(--color-placeholder);
+}
+
+.event-card__media--graphic img {
+  object-fit: var(--event-media-fit, contain) !important;
+  object-position: var(--event-media-position, center) !important;
 }
 
 .event-card__body {

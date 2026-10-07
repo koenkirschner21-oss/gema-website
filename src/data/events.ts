@@ -21,7 +21,18 @@ export type GemaEvent = {
   category: string
   cost: string | null
   registrationUrl: string | null
+  /** Public event image path, or null to use the branded fallback cover. */
   image: string | null
+  /** Optional alt text for `image`. Falls back to a title-based label. */
+  imageAlt?: string | null
+  /** How the image fills the card frame. Defaults to contain for posters. */
+  imageFit?: 'cover' | 'contain'
+  /** Optional CSS object-position for intentional cropping in cards. */
+  imageObjectPosition?: string
+  /** Optional fit override for the event details dialog media frame. */
+  imageFitDialog?: 'cover' | 'contain'
+  /** Optional object-position override for the event details dialog. */
+  imageObjectPositionDialog?: string
   featured: boolean
   orientationWeek: boolean
 }
@@ -42,19 +53,21 @@ export const featuredEventsMode: FeaturedEventsMode = 'standard'
  * GEMA events shown on /events.
  *
  * `status` is the internal certainty level:
- * - confirmed: exact date/time/location/RSVP may be published
+ * - confirmed: exact date/time/location may be published
  * - tentative: a working date exists; shown publicly as upcoming
- * - planned: approximate timing only; not currently rendered publicly
+ * - planned: approximate or multi-option timing; not rendered publicly
+ * - cancelled / hidden: excluded from all public lists
  *
  * Public rendering:
  * - dated future confirmed/tentative events → Upcoming Events + calendar
- * - undated planned events → kept in data, not shown
- * - past dated events → Past Event Recaps
+ * - undated planned / multi-date events → kept in data, not shown
+ * - past dated events → Past Event Recaps (auto list)
  *
  * Use ISO dates (`YYYY-MM-DD`) for confirmed and tentative events.
  * Planned events use `approximateTiming` and leave `date` null.
  * Cancelled and hidden events are excluded from public lists.
  * Leave unused fields `null`. Do not invent missing details.
+ * Set `image` when a real graphic exists; null uses the branded fallback.
  *
  * Example (confirmed):
  * {
@@ -99,51 +112,153 @@ export const events: GemaEvent[] = [
     orientationWeek: true,
   },
   {
-    id: 'perspectives-with-professors',
-    title: 'Perspectives with Professors',
-    status: 'tentative',
+    id: 'langsgiving-pie-day-lsa',
+    title: 'Langsgiving — Pie Day x LSA',
+    status: 'confirmed',
     date: '2026-10-08',
     approximateTiming: null,
-    startTime: null,
-    endTime: null,
-    location: null,
+    startTime: '11:00 AM',
+    endTime: '3:00 PM',
+    location: 'Lang Plaza',
     shortDescription:
-      'An interactive evening with GEM professors featuring rapid-fire questions, real-world scenarios, discussion, Q&A, and advice from faculty.',
+      'A Thanksgiving fundraiser and donation-based event where GEMA and other student organizations will be selling pie at Lang Plaza.',
     fullDescription: null,
-    category: '',
+    category: 'Collaboration',
     cost: null,
     registrationUrl: null,
-    image: null,
-    featured: false,
+    image: '/events/langsgiving-pie-day-oct8.png',
+    imageAlt:
+      'Langsgiving Week 1 event graphic highlighting Pie Day on October 8 at Lang Plaza',
+    imageFit: 'cover',
+    imageObjectPosition: 'center 78%',
+    imageFitDialog: 'contain',
+    imageObjectPositionDialog: 'center center',
+    featured: true,
     orientationWeek: false,
   },
   {
-    id: 'pumpkin-painting',
-    title: 'Pumpkin Painting',
-    status: 'tentative',
+    id: '5k-for-charity-mefsa',
+    title: '5K for Charity',
+    status: 'confirmed',
+    date: '2026-10-25',
+    approximateTiming: null,
+    startTime: '10:00 AM',
+    endTime: '12:00 PM',
+    location: 'Guelph Arboretum',
+    shortDescription:
+      'A charity 5K supporting the Canadian Cancer Society and breast cancer research, with participant giveaways and raffle prizes.',
+    fullDescription: null,
+    category: 'In collaboration with MEFSA',
+    cost: null,
+    registrationUrl: null,
+    image: '/events/5k-for-charity-2026.png',
+    imageAlt:
+      '5K for Charity event graphic for October 25 at the Guelph Arboretum',
+    imageFit: 'cover',
+    imageObjectPosition: 'center 50%',
+    featured: true,
+    orientationWeek: false,
+  },
+  {
+    id: 'langsgiving-carnival-pumpkin-painting',
+    title: 'Fall Fair — Pumpkin Painting',
+    status: 'confirmed',
     date: '2026-10-28',
     approximateTiming: null,
-    startTime: null,
-    endTime: null,
-    location: null,
+    startTime: '1:00 PM',
+    endTime: '5:00 PM',
+    location: 'Johnston Green',
     shortDescription:
-      'A Halloween-themed social featuring pumpkin painting and seasonal games.',
+      'A Halloween-themed Langsgiving Carnival activity featuring pumpkin painting, pumpkin pong, and seasonal treats.',
     fullDescription: null,
     category: '',
     cost: null,
     registrationUrl: null,
-    image: null,
-    featured: false,
+    image: '/events/fall-fair-pumpkin-painting.png',
+    imageAlt: 'Fall Fair Pumpkin Painting event graphic',
+    imageFit: 'cover',
+    imageObjectPosition: 'center 46%',
+    featured: true,
+    orientationWeek: false,
+  },
+  {
+    id: 'perspectives-with-professors',
+    title: 'Perspectives with Professors',
+    status: 'confirmed',
+    date: '2026-11-09',
+    approximateTiming: null,
+    startTime: '6:00 PM',
+    endTime: '9:00 PM',
+    location: 'University Club',
+    shortDescription:
+      'Connect with Guelph professors beyond the classroom through rapid-fire questions, real-world scenarios, an interactive agree/disagree game, student Q&A, and advice from faculty.',
+    fullDescription: null,
+    category: '',
+    cost: null,
+    registrationUrl: null,
+    image: '/events/perspectives-with-professors.png',
+    imageAlt: 'Perspectives with Professors event graphic',
+    imageFit: 'contain',
+    imageObjectPosition: 'center center',
+    imageFitDialog: 'contain',
+    imageObjectPositionDialog: 'center center',
+    featured: true,
+    orientationWeek: false,
+  },
+  {
+    id: 'christmas-ornament-painting-movie-night',
+    title: 'Christmas Ornament Painting + Movie Night',
+    status: 'confirmed',
+    date: '2026-12-01',
+    approximateTiming: null,
+    startTime: '7:00 PM',
+    endTime: '9:00 PM',
+    location: 'The Lookout',
+    shortDescription:
+      'A Christmas-themed social featuring ornament painting, a movie, and seasonal snacks.',
+    fullDescription: null,
+    category: '',
+    cost: null,
+    registrationUrl: null,
+    image: '/events/christmas-ornament-painting-movie-night.png',
+    imageAlt: 'Christmas Ornament Painting and Movie Night event graphic',
+    imageFit: 'cover',
+    imageObjectPosition: 'center 48%',
+    featured: true,
+    orientationWeek: false,
+  },
+  {
+    id: 'inside-the-executive-mind',
+    title: 'Inside the Executive Mind',
+    status: 'confirmed',
+    date: '2027-03-25',
+    approximateTiming: null,
+    startTime: '6:00 PM',
+    endTime: '9:00 PM',
+    location: 'University Club',
+    shortDescription:
+      'A professional-development event featuring business leaders sharing insights from their careers and industries.',
+    fullDescription: null,
+    category: '',
+    cost: null,
+    registrationUrl: null,
+    image: '/events/inside-the-executive-mind.png',
+    imageAlt: 'Inside the Executive Mind event graphic',
+    imageFit: 'contain',
+    imageObjectPosition: 'center center',
+    imageFitDialog: 'contain',
+    imageObjectPositionDialog: 'center center',
+    featured: true,
     orientationWeek: false,
   },
   {
     id: 'legal-industry-night-gcla',
     title: 'Legal Industry Night with GCLA',
-    status: 'tentative',
-    date: '2027-01-26',
-    approximateTiming: null,
-    startTime: null,
-    endTime: null,
+    status: 'planned',
+    date: null,
+    approximateTiming: 'Jan 28 or Feb 3–4, 2027 · University Club or Peter Clark Hall',
+    startTime: '6:00 PM',
+    endTime: '9:00 PM',
     location: null,
     shortDescription:
       'A career-focused event where students can hear from professionals about their paths in the legal industry and connect with organizations supporting law-school preparation.',
@@ -151,64 +266,11 @@ export const events: GemaEvent[] = [
     category: '',
     cost: null,
     registrationUrl: null,
-    image: null,
-    featured: false,
-    orientationWeek: false,
-  },
-  {
-    id: 'inside-the-executive-mind',
-    title: 'Inside the Executive Mind',
-    status: 'tentative',
-    date: '2027-03-22',
-    approximateTiming: null,
-    startTime: null,
-    endTime: null,
-    location: null,
-    shortDescription:
-      'A professional-development event featuring business leaders sharing lessons from their careers and industries.',
-    fullDescription: null,
-    category: '',
-    cost: null,
-    registrationUrl: null,
-    image: null,
-    featured: false,
-    orientationWeek: false,
-  },
-  {
-    id: 'game-night',
-    title: 'Game Night',
-    status: 'planned',
-    date: null,
-    approximateTiming: 'Late September',
-    startTime: null,
-    endTime: null,
-    location: null,
-    shortDescription:
-      'Trivia, board games, and other competitive games designed to bring GEM students together for a casual night of fun and friendly competition.',
-    fullDescription: null,
-    category: '',
-    cost: null,
-    registrationUrl: null,
-    image: null,
-    featured: false,
-    orientationWeek: false,
-  },
-  {
-    id: 'glass-painting-movie-night',
-    title: 'Glass Painting & Movie Night',
-    status: 'planned',
-    date: null,
-    approximateTiming: 'Late November / Early December',
-    startTime: null,
-    endTime: null,
-    location: null,
-    shortDescription:
-      'A holiday-themed social featuring glass painting, a movie, and seasonal activities.',
-    fullDescription: null,
-    category: '',
-    cost: null,
-    registrationUrl: null,
-    image: null,
+    // Temporary reuse of Get Involved “Why Get Involved?” photo; stays non-public until date finalized.
+    image: '/get-involved-why.webp',
+    imageAlt: 'GEMA team or event photography',
+    imageFit: 'cover',
+    imageObjectPosition: 'center 35%',
     featured: false,
     orientationWeek: false,
   },
@@ -217,9 +279,9 @@ export const events: GemaEvent[] = [
     title: 'Candy Gram',
     status: 'planned',
     date: null,
-    approximateTiming: 'Mid-February',
-    startTime: null,
-    endTime: null,
+    approximateTiming: 'Feb 10 or 11, 2027 · University Centre',
+    startTime: '12:00 PM',
+    endTime: '2:00 PM',
     location: null,
     shortDescription:
       'A Valentine’s-themed campus activation featuring GEM-themed cards and candy.',
@@ -236,9 +298,9 @@ export const events: GemaEvent[] = [
     title: 'International Women’s Day Event',
     status: 'planned',
     date: null,
-    approximateTiming: 'Early March',
-    startTime: null,
-    endTime: null,
+    approximateTiming: 'Mar 8 or 9, 2027 · location TBD',
+    startTime: '6:00 PM',
+    endTime: '8:00 PM',
     location: null,
     shortDescription:
       'A community and wellness event planned around International Women’s Day.',
@@ -255,12 +317,31 @@ export const events: GemaEvent[] = [
     title: 'Stress Buster Goodie Bags',
     status: 'planned',
     date: null,
-    approximateTiming: 'Early April',
+    approximateTiming: 'Apr 5, 6, or 8, 2027 · University Centre',
+    startTime: '12:00 PM',
+    endTime: '2:00 PM',
+    location: null,
+    shortDescription:
+      'A pre-exam initiative offering students small wellness and study-support items heading into finals.',
+    fullDescription: null,
+    category: '',
+    cost: null,
+    registrationUrl: null,
+    image: null,
+    featured: false,
+    orientationWeek: false,
+  },
+  {
+    id: 'game-night',
+    title: 'Game Night',
+    status: 'cancelled',
+    date: null,
+    approximateTiming: null,
     startTime: null,
     endTime: null,
     location: null,
     shortDescription:
-      'A pre-exam initiative offering students small wellness and study-support items heading into finals.',
+      'Trivia, board games, and other competitive games designed to bring GEM students together for a casual night of fun and friendly competition.',
     fullDescription: null,
     category: '',
     cost: null,

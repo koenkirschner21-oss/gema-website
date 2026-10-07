@@ -26,20 +26,21 @@
 }
 
 .event-dialog__media {
-  display: grid;
-  place-items: center;
+  position: relative;
   aspect-ratio: 2 / 1;
   background: var(--color-placeholder);
   overflow: hidden;
 }
 
 .event-dialog__media img {
+  position: absolute;
+  inset: 0;
   display: block;
   max-width: none;
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  object-position: center;
+  object-fit: var(--event-media-fit, contain) !important;
+  object-position: var(--event-media-position, center) !important;
 }
 
 .event-dialog__body {

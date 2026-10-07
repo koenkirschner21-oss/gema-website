@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, type CSSProperties } from 'react'
 import { createPortal } from 'react-dom'
 import {
   formatEventTime,
@@ -105,11 +105,31 @@ export function EventDetailsDialog({
         onClick={(clickEvent) => clickEvent.stopPropagation()}
       >
         {event.image && !imageFailed ? (
-          <div className="event-dialog__media">
+          <div
+            className="event-dialog__media"
+            style={
+              {
+                '--event-media-fit':
+                  event.imageFitDialog ?? event.imageFit ?? 'contain',
+                '--event-media-position':
+                  event.imageObjectPositionDialog ??
+                  event.imageObjectPosition ??
+                  'center',
+              } as CSSProperties
+            }
+          >
             <SiteImage
               src={event.image}
-              alt={`${event.title} promotional graphic`}
+              alt={event.imageAlt || `${event.title} promotional graphic`}
               priority
+              style={{
+                objectFit:
+                  event.imageFitDialog ?? event.imageFit ?? 'contain',
+                objectPosition:
+                  event.imageObjectPositionDialog ??
+                  event.imageObjectPosition ??
+                  'center',
+              }}
               onError={() => setImageFailed(true)}
             />
           </div>

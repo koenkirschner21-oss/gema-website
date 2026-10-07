@@ -54,12 +54,15 @@ figure {
 
 .photo-placeholder img,
 .team-card__photo img,
-.event-card__media img,
 .event-recap__photo img {
   max-width: none;
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.event-card__media img {
+  max-width: none;
 }
 
 .navbar__brand img,
