@@ -174,7 +174,9 @@ export function EventCard({
         ) : null}
         {description || readMoreDetails || readMoreTo ? (
           <p className="event-card__copy">
-            {description}
+            {description ? (
+              <span className="event-card__summary">{description}</span>
+            ) : null}
             {readMoreDetails ? (
               <>
                 {description ? ' ' : null}

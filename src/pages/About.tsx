@@ -60,7 +60,7 @@ export function About() {
               </p>
               <div className="about-hero__actions">
                 <Link
-                  className="about-button about-button--primary"
+                  className="about-button about-button--on-red"
                   to="/get-involved"
                 >
                   Get Involved
@@ -124,8 +124,8 @@ export function About() {
           <div className="about-values__intro">
             <h2>Our Purpose & Values</h2>
             <p>
-              Everything GEMA does is built around creating a stronger, more
-              connected and more valuable experience for GEM students.
+              GEMA is focused on building a stronger, more connected, and more
+              valuable experience for GEM students.
             </p>
           </div>
           <ul className="about-values__grid">

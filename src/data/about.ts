@@ -19,22 +19,22 @@ export const aboutMedia = {
 export const aboutValues = [
   {
     title: 'Representation',
-    copy: 'GEMA helps represent the interests and perspectives of GEM students and provides a student voice within the broader university community.',
+    copy: 'Advocating for the interests and perspectives of GEM students.',
     accent: 'red' as const,
   },
   {
     title: 'Community',
-    copy: 'We create opportunities for students to meet, build relationships and feel connected to others within the GEM program.',
+    copy: 'Creating opportunities to connect, build relationships, and strengthen the GEM community.',
     accent: 'gold' as const,
   },
   {
     title: 'Professional Development',
-    copy: 'GEMA creates experiences that help students learn beyond the classroom, connect with new perspectives and develop skills that support their personal and professional growth.',
+    copy: 'Connecting students with experiences, speakers, and opportunities beyond the classroom.',
     accent: 'blue' as const,
   },
   {
     title: 'Leadership',
-    copy: 'We give students opportunities to contribute, collaborate, take responsibility and gain practical experience through involvement in the association.',
+    copy: 'Giving students opportunities to take ownership, contribute, and build practical leadership experience.',
     accent: 'dark' as const,
   },
 ]

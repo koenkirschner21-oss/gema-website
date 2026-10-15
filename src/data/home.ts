@@ -37,22 +37,22 @@ export const homeIntroPoints = [
 export const homePillars = [
   {
     title: 'Representation',
-    copy: 'GEMA helps represent the interests and perspectives of GEM students.',
+    copy: 'Advocating for the interests and perspectives of GEM students.',
     accent: 'red' as const,
   },
   {
     title: 'Community',
-    copy: 'GEMA creates opportunities for students to connect, build relationships, and feel part of the program community.',
+    copy: 'Creating opportunities to connect, build relationships, and strengthen the GEM community.',
     accent: 'gold' as const,
   },
   {
     title: 'Professional Development',
-    copy: 'GEMA connects students with experiences, speakers, events, and opportunities that support growth beyond the classroom.',
+    copy: 'Connecting students with experiences, speakers, and opportunities beyond the classroom.',
     accent: 'blue' as const,
   },
   {
     title: 'Leadership',
-    copy: 'GEMA gives students opportunities to take responsibility, contribute to the organization, and develop practical leadership experience.',
+    copy: 'Giving students opportunities to take ownership, contribute, and build practical leadership experience.',
     accent: 'dark' as const,
   },
 ]

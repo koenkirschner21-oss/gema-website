@@ -176,7 +176,9 @@ export function Navbar() {
     }
   }
 
-  const aboutActive = location.pathname.startsWith('/about')
+  const aboutActive =
+    location.pathname.startsWith('/about') ||
+    location.pathname.startsWith('/gem-major')
 
   return (
     <header className="navbar" ref={headerRef}>
@@ -291,10 +293,20 @@ export function Navbar() {
                       end={item.to === '/'}
                       onClick={closeMenus}
                       className={({ isActive }) =>
-                        isActive ? 'navbar__link is-active' : 'navbar__link'
+                        [
+                          'navbar__link',
+                          item.label === 'Contact' ? 'navbar__link--contact' : '',
+                          isActive ? 'is-active' : '',
+                        ]
+                          .filter(Boolean)
+                          .join(' ')
                       }
                     >
-                      {item.label}
+                      {item.label === 'Contact' ? (
+                        <span className="navbar__contact-mark">{item.label}</span>
+                      ) : (
+                        item.label
+                      )}
                     </NavLink>
                   </li>
                 )

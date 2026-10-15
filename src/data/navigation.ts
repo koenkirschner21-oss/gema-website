@@ -15,15 +15,14 @@ export function isDropdownItem(item: NavItem): item is NavDropdownItem {
 }
 
 export const navigation: NavItem[] = [
-  { label: 'Home', to: '/' },
   {
     label: 'About',
     children: [
       { label: 'About GEMA', to: '/about' },
       { label: 'Meet the Team', to: '/about/team' },
+      { label: 'GEM Major', to: '/gem-major' },
     ],
   },
-  { label: 'GEM Major', to: '/gem-major' },
   { label: 'Events', to: '/events' },
   { label: 'Get Involved', to: '/get-involved' },
   { label: 'Partner With GEMA', to: '/partners' },

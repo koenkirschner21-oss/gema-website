@@ -71,6 +71,10 @@
   transform: translateY(-7px) rotate(-45deg);
 }
 
+.navbar__nav {
+  margin-right: 1.15rem;
+}
+
 .navbar__list {
   display: flex;
   flex-wrap: nowrap;
@@ -120,6 +124,32 @@
   box-shadow: inset 0 -2px 0 var(--color-red);
 }
 
+.navbar__link--contact {
+  padding: 0.15rem 0.1rem 0.15rem 0.4rem;
+}
+
+.navbar__link--contact.is-active {
+  box-shadow: none;
+}
+
+.navbar__contact-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.2rem;
+  padding: 0.38rem 0.95rem;
+  border: 2px solid var(--color-red);
+  background: var(--color-red);
+  color: var(--color-white);
+  line-height: 1;
+}
+
+.navbar__link:hover .navbar__contact-mark,
+.navbar__link:focus-visible .navbar__contact-mark,
+.navbar__link.is-active .navbar__contact-mark {
+  color: var(--color-white);
+}
+
 .navbar__chevron {
   width: 0.7rem;
   height: 0.5rem;
@@ -159,6 +189,7 @@
 
   .navbar__nav {
     display: none;
+    margin-right: 0;
     position: absolute;
     top: 100%;
     right: 0;

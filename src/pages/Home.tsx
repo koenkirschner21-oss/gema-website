@@ -5,10 +5,7 @@ import { Container } from '../components/Container'
 import { EventCard } from '../components/EventCard'
 import { FeaturedPartner } from '../components/FeaturedPartner'
 import { SiteImage } from '../components/SiteImage'
-import {
-  getHomepageEvents,
-  upcomingEventsNote,
-} from '../data/events'
+import { getHomepageEvents } from '../data/events'
 import {
   homeIntroPoints,
   homeMedia,
@@ -133,16 +130,9 @@ export function Home() {
                 School of Business and Economics.
               </p>
               <p>
-                We exist to make the GEM experience stronger and more connected.
-                That means bringing students together, representing the program
-                community, and creating space to meet people, develop
-                professionally, and get involved beyond the classroom.
-              </p>
-              <p>
-                GEMA is student-led and built around the experiences, interests,
-                and opportunities that matter to GEM students. Whether you are
-                new to the major or already part of the community, there is a
-                place to start.
+                We bring GEM students together through community, professional
+                development, representation, and opportunities to get involved
+                beyond the classroom.
               </p>
               <Link className="home-text-link" to="/about">
                 Learn About GEMA
@@ -182,9 +172,6 @@ export function Home() {
               From professional development and networking to community events,
               there are plenty of ways to connect throughout the year.
             </p>
-            {homepageEvents.length > 0 ? (
-              <p className="home-events__note">{upcomingEventsNote}</p>
-            ) : null}
           </div>
           <div className="home-events__grid">
             {homepageEvents.map((event) => (
@@ -262,15 +249,19 @@ export function Home() {
 
       <section className="home-cta">
         <Container>
-          <h2>Have a question or want to connect?</h2>
-          <p>
-            Whether you’re a student, alumni, organization or member of the
-            University of Guelph community, we’d be happy to hear from you.
-          </p>
-          <div className="home-cta__actions">
-            <Link className="home-button home-button--primary" to="/contact">
-              Contact GEMA
-            </Link>
+          <div className="home-cta__grid">
+            <div className="home-cta__copy">
+              <h2>Have a question or want to connect?</h2>
+              <p>
+                Students, alumni, organizations, and members of the University
+                of Guelph community are always welcome to reach out.
+              </p>
+            </div>
+            <div className="home-cta__actions">
+              <Link className="home-button home-button--primary" to="/contact">
+                Contact GEMA
+              </Link>
+            </div>
           </div>
         </Container>
       </section>

@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { BrandMark } from '../components/BrandMark'
 import { Container } from '../components/Container'
 import { FeaturedPartner } from '../components/FeaturedPartner'
 import { SiteImage } from '../components/SiteImage'
@@ -127,14 +126,9 @@ export function Partners() {
               <p className="partners-eyebrow">PARTNERS & SPONSORS</p>
               <h1>Building opportunities through partnership.</h1>
               <p className="partners-lede">
-                GEMA works with organizations, professionals and community
-                partners to create meaningful opportunities for students in
-                Government, Economics & Management at the University of Guelph.
-              </p>
-              <p className="partners-lede">
-                Through sponsorships, events and collaborative initiatives, our
-                partners can support student development while connecting with
-                the GEM community.
+                GEMA partners with organizations, professionals, and community
+                groups to create meaningful opportunities for GEM students
+                through events, sponsorships, and collaborative initiatives.
               </p>
               <div className="partners-hero__actions">
                 <Link
@@ -261,14 +255,12 @@ export function Partners() {
         <Container>
           <div className="partners-cta__grid">
             <div className="partners-cta__copy">
-              <BrandMark size="sm" className="partners-cta__mark" />
               <p className="partners-cta__label">Work With GEMA</p>
-              <h2>Let’s create something valuable for GEM students.</h2>
+              <h2>Let’s build something valuable for GEM students.</h2>
               <p>
-                Whether you’re interested in sponsorship, professional
-                programming, event collaboration or another way of supporting
-                the GEM community, tell us about your organization and what you
-                have in mind.
+                Partner with GEMA through sponsorships, professional
+                programming, event collaboration, or other opportunities that
+                support the GEM community.
               </p>
             </div>
             <div className="partners-cta__action">
