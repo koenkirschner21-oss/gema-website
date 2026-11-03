@@ -1,6 +1,7 @@
 import { useLayoutEffect } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import { Footer } from './Footer'
+import { GoogleAnalytics } from './GoogleAnalytics'
 import { Navbar } from './Navbar'
 import { Seo } from './Seo'
 import './Layout.css'
@@ -64,6 +65,7 @@ export function Layout() {
   return (
     <div className="layout">
       <Seo />
+      <GoogleAnalytics />
       <a className="skip-link" href="#main-content">
         Skip to content
       </a>
