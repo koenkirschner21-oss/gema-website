@@ -82,6 +82,67 @@ export const eventRecaps: EventRecap[] = [
     ],
     galleryUrl: null,
   },
+  {
+    id: '5k-for-charity-mefsa',
+    title: '5K for Charity',
+    date: '2026-10-25',
+    category: 'In collaboration with MEFSA',
+    subtitle: 'In collaboration with MEFSA and campus partners',
+    location: 'Guelph Arboretum',
+    time: '10:00 AM – 12:00 PM',
+    cost: null,
+    shortRecap:
+      'GEMA joined MEFSA and other campus clubs for a charity 5K supporting the Canadian Cancer Society, ending with a shared cheque presentation.',
+    moreRecap:
+      'GEMA joined MEFSA and other campus clubs for a charity 5K at the Guelph Arboretum supporting the Canadian Cancer Society and breast cancer research. Students turned out for the run, giveaways, and raffle prizes, and the day closed with a group cheque presentation recognizing the funds raised together.',
+    visualMode: 'photos',
+    featuredImages: [
+      {
+        src: '/recaps/5k-for-charity-2026-group.jpg',
+        alt: 'GEMA students and campus partners presenting a Canadian Cancer Society donation cheque after the 5K for Charity',
+        objectPosition: 'center 48%',
+      },
+      {
+        src: '/recaps/5k-for-charity-2026-cheque.jpg',
+        alt: 'Two students holding the Canadian Cancer Society donation cheque at the 5K for Charity',
+        objectPosition: 'center 40%',
+      },
+    ],
+    galleryUrl: null,
+  },
+  {
+    id: 'langsgiving-carnival-pumpkin-painting',
+    title: 'Fall Fair — Pumpkin Painting',
+    date: '2026-10-28',
+    category: null,
+    subtitle: null,
+    location: 'Johnston Green',
+    time: '1:00 PM – 5:00 PM',
+    cost: null,
+    shortRecap:
+      'Students gathered with GEMA on Johnston Green for pumpkin painting, seasonal activities, and Fall Fair community programming.',
+    moreRecap:
+      'Students gathered with GEMA on Johnston Green for Fall Fair pumpkin painting, seasonal activities, and community programming. The afternoon mixed creative table activities with a lively outdoor campus atmosphere.',
+    visualMode: 'photos',
+    featuredImages: [
+      {
+        src: '/recaps/fall-fair-2026-table.jpg',
+        alt: 'GEMA students at the Fall Fair pumpkin painting table on Johnston Green',
+        objectPosition: 'center 42%',
+      },
+      {
+        src: '/recaps/fall-fair-2026-pumpkins-1.jpg',
+        alt: 'Two students holding painted pumpkins at the GEMA Fall Fair',
+        objectPosition: 'center 34%',
+      },
+      {
+        src: '/recaps/fall-fair-2026-pumpkins-2.jpg',
+        alt: 'Two students smiling with painted pumpkins at the GEMA Fall Fair',
+        objectPosition: 'center 36%',
+      },
+    ],
+    galleryUrl: null,
+  },
 ]
 
 export const eventRecapEmptyCopy =

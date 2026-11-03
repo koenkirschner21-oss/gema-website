@@ -197,9 +197,10 @@ export const events: GemaEvent[] = [
     cost: null,
     registrationUrl: null,
     image: '/events/perspectives-with-professors.png',
-    imageAlt: 'Perspectives with Professors event graphic',
-    imageFit: 'contain',
-    imageObjectPosition: 'center center',
+    imageAlt:
+      'Perspectives with Professors event graphic for November 9 at the University Club',
+    imageFit: 'cover',
+    imageObjectPosition: 'center 42%',
     imageFitDialog: 'contain',
     imageObjectPositionDialog: 'center center',
     featured: true,
