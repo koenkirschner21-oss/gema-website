@@ -126,19 +126,19 @@ export const eventRecaps: EventRecap[] = [
     visualMode: 'photos',
     featuredImages: [
       {
-        src: '/recaps/fall-fair-2026-table.jpg',
-        alt: 'GEMA students at the Fall Fair pumpkin painting table on Johnston Green',
-        objectPosition: 'center 42%',
-      },
-      {
         src: '/recaps/fall-fair-2026-pumpkins-1.jpg',
         alt: 'Two students holding painted pumpkins at the GEMA Fall Fair',
-        objectPosition: 'center 34%',
+        objectPosition: 'center center',
       },
       {
         src: '/recaps/fall-fair-2026-pumpkins-2.jpg',
         alt: 'Two students smiling with painted pumpkins at the GEMA Fall Fair',
-        objectPosition: 'center 36%',
+        objectPosition: 'center center',
+      },
+      {
+        src: '/recaps/fall-fair-2026-table.jpg',
+        alt: 'GEMA students at the Fall Fair pumpkin painting table on Johnston Green',
+        objectPosition: 'center center',
       },
     ],
     galleryUrl: null,
