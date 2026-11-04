@@ -21,6 +21,8 @@ export type GemaEvent = {
   category: string
   cost: string | null
   registrationUrl: string | null
+  /** Optional CTA label for `registrationUrl`. Defaults to "RSVP". */
+  registrationLabel?: string | null
   /** Public event image path, or null to use the branded fallback cover. */
   image: string | null
   /** Optional alt text for `image`. Falls back to a title-based label. */
@@ -195,12 +197,14 @@ export const events: GemaEvent[] = [
     fullDescription: null,
     category: '',
     cost: null,
-    registrationUrl: null,
+    registrationUrl:
+      'https://docs.google.com/forms/d/e/1FAIpQLSfI7FvgK-ZRUfds1VVv9yHh9N05fl4bp5xcGTu4idZDfM0Ksw/viewform?usp=publish-editor',
+    registrationLabel: 'Register for Perspectives',
     image: '/events/perspectives-with-professors.png',
     imageAlt:
-      'Perspectives with Professors event graphic for November 9 at the University Club',
-    imageFit: 'cover',
-    imageObjectPosition: 'center 42%',
+      'Official Perspectives with Professors event graphic for November 9 at the University Club',
+    imageFit: 'contain',
+    imageObjectPosition: 'center center',
     imageFitDialog: 'contain',
     imageObjectPositionDialog: 'center center',
     featured: true,

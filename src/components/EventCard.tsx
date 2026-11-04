@@ -138,6 +138,7 @@ export function EventCard({
     ? event.fullDescription || event.shortDescription
     : event.shortDescription
   const showRegistration = Boolean(event.registrationUrl) && !isPastEvent(event)
+  const registrationLabel = event.registrationLabel?.trim() || 'RSVP'
   const showMedia = Boolean(event.image) || showGraphicPlaceholder
   const className = [
     'event-card',
@@ -212,10 +213,11 @@ export function EventCard({
             target="_blank"
             rel="noopener noreferrer"
           >
-            RSVP
+            {registrationLabel}
             <span className="visually-hidden">
-              {' '}
-              for {event.title} (opens in a new tab)
+              {event.registrationLabel?.trim()
+                ? ' (opens in a new tab)'
+                : ` for ${event.title} (opens in a new tab)`}
             </span>
           </a>
         ) : null}
